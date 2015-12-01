@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#efefef">
+    <View
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip">
+
+    </View>
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="3"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/adapter_clientsreview_info"
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:textSize="15sp"
+                android:textColor="#6a6a6c"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="123123"/>
+            <View
+                android:background="@android:color/darker_gray"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip">
+
+            </View>
+            <TextView
+                android:id="@+id/adapter_clientsreview_address"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:textSize="15sp"
+                android:textColor="#6a6a6c"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="123123"/>
+        </LinearLayout>
+        <View
+            android:background="@android:color/darker_gray"
+            android:layout_width="0.5dip"
+            android:layout_height="match_parent">
+
+        </View>
+        <LinearLayout
+            android:layout_weight="9"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/adapter_clientsreview_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="已通过"/>
+            <TextView
+                android:id="@+id/adapter_clientsreview_recommit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:padding="5dip"
+                android:textColor="@android:color/holo_red_dark"
+                android:background="@drawable/rectangle_corner_red"
+                android:text="重新提交"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip">
+
+    </View>
+    <View
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="6dip">
+
+    </View>
+</LinearLayout>

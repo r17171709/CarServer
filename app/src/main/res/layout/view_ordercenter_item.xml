@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="60dip">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/view_ordercenter_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/order_icon9_red" />
+        <TextView
+            android:id="@+id/view_ordercenter_item_text"
+            android:text="全部"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="3dip"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/view_ordercenter_item_num"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="3dip"
+        android:layout_marginRight="3dip"
+        android:textSize="11sp"
+        android:layout_alignParentRight="true"
+        android:textColor="@android:color/holo_red_dark"
+        android:gravity="center"
+        android:text="0"
+        android:background="@drawable/circle_corner_red_point"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="#dadada">
+
+    </View>
+    <View
+        android:layout_width="0.5dip"
+        android:layout_height="match_parent"
+        android:background="#dadada">
+
+    </View>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_alignParentRight="true"
+        android:background="#dadada">
+
+    </View>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_alignParentBottom="true"
+        android:background="#dadada">
+
+    </View>
+</RelativeLayout>

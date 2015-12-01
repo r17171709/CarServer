@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#efefef">
+    <View
+        android:background="#bbbbbb"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip">
+
+    </View>
+    <TextView
+        android:id="@+id/adapter_credit_name"
+        android:layout_width="match_parent"
+        android:layout_height="28dip"
+        android:background="#efefef"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:gravity="center_vertical"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:text="123123"/>
+    <View
+        android:background="#bbbbbb"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip">
+
+    </View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3">
+            <TextView
+                android:id="@+id/adapter_credit_platforminfo"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:textSize="13sp"
+                android:textColor="#6a6a6c"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:gravity="center_vertical"
+                android:text="123123"/>
+            <TextView
+                android:id="@+id/adapter_credit_backinfo"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:textSize="13sp"
+                android:textColor="#6a6a6c"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:gravity="center_vertical"
+                android:text="123123"/>
+        </LinearLayout>
+        <View
+            android:background="#bbbbbb"
+            android:layout_width="0.5dip"
+            android:layout_height="match_parent">
+
+        </View>
+        <TextView
+            android:id="@+id/adapter_credit_change"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:textColor="#d23136"
+            android:gravity="center"
+            android:layout_weight="9"
+            android:text="变更"/>
+    </LinearLayout>
+    <View
+        android:background="#bbbbbb"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip">
+
+    </View>
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="#999999">
+
+    </View>
+    <TextView
+        android:id="@+id/customercenter_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:text="XXXX修理厂"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:gravity="center"
+            android:text="基本信息"
+            android:background="@drawable/rectangle_corner_lightgray"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:padding="5dip"
+            android:textColor="@android:color/black"
+            android:id="@+id/customercenter_info"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:gravity="center"
+            android:text="开票信息"
+            android:id="@+id/customercenter_blling"
+            android:background="@drawable/rectangle_corner_lightgray"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:textColor="@android:color/black"
+            android:padding="5dip"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:gravity="center"
+            android:text="协议价格表"
+            android:id="@+id/customercenter_price"
+            android:background="@drawable/rectangle_corner_lightgray"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:textColor="@android:color/black"
+            android:padding="5dip"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginTop="6dip"
+        android:background="#999999">
+
+    </View>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dip"
+        android:background="#efefef">
+
+    </View>
+</LinearLayout>

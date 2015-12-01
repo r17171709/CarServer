@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:text="客户名称"
+        android:textSize="15sp"
+        android:padding="7dip"
+        android:background="@android:color/holo_red_dark"
+        android:layout_weight="1"/>
+    <View
+        android:layout_width="0.5dip"
+        android:layout_height="match_parent">
+
+    </View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:text="修改前"
+        android:textSize="15sp"
+        android:padding="7dip"
+        android:background="@android:color/holo_red_dark"
+        android:layout_weight="1"/>
+    <View
+        android:layout_width="0.5dip"
+        android:layout_height="match_parent">
+
+    </View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:text="修改后"
+        android:textSize="15sp"
+        android:padding="7dip"
+        android:background="@android:color/holo_red_dark"
+        android:layout_weight="1"/>
+    <View
+        android:layout_width="0.5dip"
+        android:layout_height="match_parent">
+
+    </View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:text="审核进度"
+        android:textSize="15sp"
+        android:padding="7dip"
+        android:background="@android:color/holo_red_dark"
+        android:layout_weight="1"/>
+</LinearLayout>

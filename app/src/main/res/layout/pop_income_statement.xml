@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#a20000">
+    <TextView
+        android:text="全部"
+        android:gravity="center"
+        android:padding="10dip"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:id="@+id/pop_income_statement_all"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="@android:color/white">
+
+    </View>
+    <TextView
+        android:text="服务费"
+        android:gravity="center"
+        android:padding="10dip"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:id="@+id/pop_income_statement_service"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="@android:color/white">
+
+    </View>
+    <TextView
+        android:text="佣金"
+        android:gravity="center"
+        android:padding="10dip"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:id="@+id/pop_income_statement_commission"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="@android:color/white">
+
+    </View>
+    <TextView
+        android:text="手续费"
+        android:gravity="center"
+        android:padding="10dip"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:id="@+id/pop_income_statement_fee"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="@android:color/white">
+
+    </View>
+    <TextView
+        android:text="其他"
+        android:gravity="center"
+        android:padding="10dip"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:id="@+id/pop_income_statement_other"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content" />
+</LinearLayout>

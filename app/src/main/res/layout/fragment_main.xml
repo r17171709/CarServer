@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dip"
+        android:background="#d0121b">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@mipmap/ic_workplate_linepic"
+            android:scaleType="centerCrop"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_workplate_logo"/>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.GridLayout
+                android:id="@+id/main_top_gridlayout"
+                android:background="@android:color/white"
+                xmlns:gridlayout="http://schemas.android.com/apk/res-auto"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dip"
+                gridlayout:columnCount="2"
+                gridlayout:rowCount="1">
+            </android.support.v7.widget.GridLayout>
+            <android.support.v7.widget.GridLayout
+                android:id="@+id/main_middle_gridlayout"
+                android:background="@android:color/white"
+                xmlns:gridlayout="http://schemas.android.com/apk/res-auto"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dip"
+                gridlayout:columnCount="4"
+                gridlayout:rowCount="3">
+            </android.support.v7.widget.GridLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

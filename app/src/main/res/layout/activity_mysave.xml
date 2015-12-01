@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/view_navigationview"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:layout_marginLeft="40dip"
+        android:layout_marginRight="40dip"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mysave_avatar"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:src="@mipmap/me_normal"/>
+        <TextView
+            android:id="@+id/mysave_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="40dip"
+        android:layout_marginRight="40dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="联系电话："
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/mysave_tel"
+            android:layout_width="150dip"
+            android:layout_height="30dip"
+            android:background="@drawable/rectangle_corner_lightgray"
+            android:padding="5dip"
+            android:textSize="13sp"
+            android:enabled="false"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip" />
+        <TextView
+            android:id="@+id/mysave_tel_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="修改"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="40dip"
+        android:layout_marginRight="40dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="原始密码："
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/mysave_password"
+            android:layout_width="150dip"
+            android:layout_height="30dip"
+            android:background="@drawable/rectangle_corner_lightgray"
+            android:padding="5dip"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:inputType="textPassword" />
+        <TextView
+            android:id="@+id/mysave_password_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="修改"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="40dip"
+        android:layout_marginRight="40dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="修改密码："
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/mysave_newpass"
+            android:layout_width="150dip"
+            android:layout_height="30dip"
+            android:background="@drawable/rectangle_corner_lightgray"
+            android:padding="5dip"
+            android:textSize="13sp"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:enabled="false"
+            android:inputType="textPassword" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:visibility="invisible"
+            android:text="修改"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="40dip"
+        android:layout_marginRight="40dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="确认密码："
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/mysave_repeatnewpass"
+            android:layout_width="150dip"
+            android:layout_height="30dip"
+            android:background="@drawable/rectangle_corner_lightgray"
+            android:padding="5dip"
+            android:textSize="13sp"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:enabled="false"
+            android:inputType="textPassword" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:visibility="invisible"
+            android:text="修改"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/mysave_save"
+        android:text="确认"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dip"
+        android:background="@drawable/rectangle_background_red"
+        android:textColor="@android:color/white"
+        android:layout_width="100dip"
+        android:layout_height="40dip" />
+</LinearLayout>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e5e5e5">
+    <include layout="@layout/view_navigationview"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="5"
+            android:text="流水号"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="3"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="5"
+            android:text="项目"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="3"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="5"
+            android:text="支出"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="3"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="5"
+            android:text="支付方式"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="3"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="5"
+            android:text="时间"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="3"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="5"
+            android:text="余额"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="3"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="5"
+            android:text="备注"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="3"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

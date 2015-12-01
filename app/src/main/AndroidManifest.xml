@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.renyu.carserver">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.login.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.login.LoginActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.login.JoinActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.login.ForgetActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.login.AreaActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.MainActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.MessageCenterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.CreditLineActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.SearchCreditLineActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.FactorApplyActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.AddCustomerActivity" android:windowSoftInputMode="adjustResize" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.ClientsReviewActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.SalesNotificationActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.ShareActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.customercenter.CustomerCenterInfoActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.customercenter.CustomerCenterPriceActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.customercenter.CustomerCenterPriceListActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.customercenter.ProductDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ordercenter.OrderCenterDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ordercenter.OrderCenterSearchActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.MySaveActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.MyStatementActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.MyStatementDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.MyFeedbackActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.MyDataActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".imageUtils.ImagePreviewActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".imageUtils.CameraBeforeActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".imageUtils.CropActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".imageUtils.CameraActivity" android:screenOrientation="portrait"></activity>
+
+        <!-- QQ -->
+        <activity android:name=".qqapi.QQActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"></activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent1104982206" />
+            </intent-filter>
+        </activity>
+
+        <!-- 新浪微博 -->
+        <!-- 必须注册在微博授权，分享微博时候用到 -->
+        <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+            android:configChanges="keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" >
+        </activity>
+        <activity android:name=".sinaweiboapi.WBMainActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- weixin -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent">
+        </activity>
+        <receiver
+            android:name=".wxapi.AppRegister"
+            android:permission="com.tencent.mm.plugin.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
