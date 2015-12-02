@@ -189,4 +189,10 @@ public class MainActivity extends BaseActivity {
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        customerCenterFragment.onActivityResult(requestCode, resultCode, data);
+    }
 }

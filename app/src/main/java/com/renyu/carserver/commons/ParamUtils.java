@@ -30,6 +30,9 @@ public class ParamUtils {
     public final static int takecamera_result=10003;
     public final static int choicePic_result=10008;
     public final static int crop_result=10021;
+    public final static int customercenterinfo_result=10001;
+    public final static int customercenterprice=10002;
+    public final static int customercenterpricelist=10004;
 
     public static boolean isOpen=false;
     public static String weibo_appkey="1104982206";

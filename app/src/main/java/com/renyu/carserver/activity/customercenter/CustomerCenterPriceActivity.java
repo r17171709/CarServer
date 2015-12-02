@@ -1,5 +1,6 @@
 package com.renyu.carserver.activity.customercenter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,6 +51,8 @@ public class CustomerCenterPriceActivity extends BaseActivity {
 
     CustomerModel model=null;
 
+    boolean isChange=false;
+
     @Override
     public int initContentView() {
         return R.layout.activity_customercenterprice;
@@ -76,7 +79,7 @@ public class CustomerCenterPriceActivity extends BaseActivity {
         customercenterprice_contact2.setText(model.getContact_person());
         customercenterprice_phonenum2.setText(model.getContact_phone());
         customercenterprice_bank.setText(model.getBank_name());
-        customercenterprice_contact2.setText(model.getBank_account());
+        customercenterprice_cardnum.setText(""+model.getBank_account());
     }
 
     @OnClick({R.id.customercenterprice_commit, R.id.view_toolbar_center_back})
@@ -112,6 +115,8 @@ public class CustomerCenterPriceActivity extends BaseActivity {
                 dismissDialog();
                 if (JsonParse.getResultValue(string)!=null) {
                     showToast(JsonParse.getResultValue(string));
+
+                    isChange=true;
                 }
                 else {
                     showToast("未知错误");
@@ -125,5 +130,16 @@ public class CustomerCenterPriceActivity extends BaseActivity {
                 showToast("未知错误");
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isChange) {
+            Intent intent=new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+            return;
+        }
+        super.onBackPressed();
     }
 }

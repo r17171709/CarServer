@@ -1,8 +1,6 @@
 package com.renyu.carserver.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.renyu.carserver.R;
-import com.renyu.carserver.activity.customercenter.CustomerCenterInfoActivity;
-import com.renyu.carserver.activity.customercenter.CustomerCenterPriceActivity;
-import com.renyu.carserver.activity.customercenter.CustomerCenterPriceListActivity;
 import com.renyu.carserver.model.CustomerModel;
 
 import java.util.ArrayList;
@@ -28,9 +23,12 @@ public class CustomerCenterAdapter extends RecyclerView.Adapter<CustomerCenterAd
     ArrayList<CustomerModel> models=null;
     Context context=null;
 
-    public CustomerCenterAdapter(Context context, ArrayList<CustomerModel> models) {
+    OnJumpListener listener=null;
+
+    public CustomerCenterAdapter(Context context, ArrayList<CustomerModel> models, OnJumpListener listener) {
         this.context=context;
         this.models=models;
+        this.listener=listener;
     }
 
     @Override
@@ -45,31 +43,19 @@ public class CustomerCenterAdapter extends RecyclerView.Adapter<CustomerCenterAd
         holder.customercenter_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, CustomerCenterInfoActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("model", models.get(position));
-                intent.putExtras(bundle);
-                context.startActivity(intent);
+                listener.jumpCustomerCenterInfo(position);
             }
         });
         holder.customercenter_blling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, CustomerCenterPriceActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("model", models.get(position));
-                intent.putExtras(bundle);
-                context.startActivity(intent);
+                listener.jumpCustomerCenterPrice(position);
             }
         });
         holder.customercenter_price.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, CustomerCenterPriceListActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("model", models.get(position));
-                intent.putExtras(bundle);
-                context.startActivity(intent);
+                listener.jumpCustomerCenterPriceList(position);
             }
         });
     }
@@ -92,5 +78,11 @@ public class CustomerCenterAdapter extends RecyclerView.Adapter<CustomerCenterAd
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnJumpListener {
+        void jumpCustomerCenterInfo(int position);
+        void jumpCustomerCenterPrice(int position);
+        void jumpCustomerCenterPriceList(int position);
     }
 }

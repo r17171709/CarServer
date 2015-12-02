@@ -1,5 +1,7 @@
 package com.renyu.carserver.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,9 @@ import android.view.View;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 import com.renyu.carserver.R;
+import com.renyu.carserver.activity.customercenter.CustomerCenterInfoActivity;
+import com.renyu.carserver.activity.customercenter.CustomerCenterPriceActivity;
+import com.renyu.carserver.activity.customercenter.CustomerCenterPriceListActivity;
 import com.renyu.carserver.adapter.CustomerCenterAdapter;
 import com.renyu.carserver.base.BaseFragment;
 import com.renyu.carserver.commons.OKHttpHelper;
@@ -54,7 +59,34 @@ public class CustomerCenterFragment extends BaseFragment {
     private void initViews() {
         customercenter_rv.setHasFixedSize(true);
         customercenter_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter=new CustomerCenterAdapter(getActivity(), models);
+        adapter=new CustomerCenterAdapter(getActivity(), models, new CustomerCenterAdapter.OnJumpListener() {
+            @Override
+            public void jumpCustomerCenterInfo(int position) {
+                Intent intent=new Intent(getActivity(), CustomerCenterInfoActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("model", models.get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, ParamUtils.customercenterinfo_result);
+            }
+
+            @Override
+            public void jumpCustomerCenterPrice(int position) {
+                Intent intent=new Intent(getActivity(), CustomerCenterPriceActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("model", models.get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, ParamUtils.customercenterprice);
+            }
+
+            @Override
+            public void jumpCustomerCenterPriceList(int position) {
+                Intent intent=new Intent(getActivity(), CustomerCenterPriceListActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("model", models.get(position));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, ParamUtils.customercenterpricelist);
+            }
+        });
         customercenter_rv.setAdapter(adapter);
         customercenter_swipy.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
         customercenter_swipy.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
@@ -118,4 +150,13 @@ public class CustomerCenterFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode== Activity.RESULT_OK) {
+            customercenter_swipy.setRefreshing(true);
+            page_no=1;
+            getAllCustomerList();
+        }
+    }
 }

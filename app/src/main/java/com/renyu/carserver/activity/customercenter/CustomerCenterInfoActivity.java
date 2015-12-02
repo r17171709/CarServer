@@ -83,6 +83,8 @@ public class CustomerCenterInfoActivity extends BaseActivity {
     String pic4="";
     int imagePos=1;
 
+    boolean isChange;
+
     @Override
     public int initContentView() {
         return R.layout.activity_customercenterinfo;
@@ -300,6 +302,8 @@ public class CustomerCenterInfoActivity extends BaseActivity {
                 dismissDialog();
                 if (JsonParse.getResultValue(string)!=null) {
                     showToast(JsonParse.getResultValue(string));
+
+                    isChange=true;
                 }
                 else {
                     showToast("未知错误");
@@ -314,4 +318,15 @@ public class CustomerCenterInfoActivity extends BaseActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        if (isChange) {
+            Intent intent=new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+            return;
+        }
+        super.onBackPressed();
+    }
+
 }
