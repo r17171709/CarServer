@@ -32,6 +32,8 @@ public class ParamUtils {
     public final static int crop_result=10021;
 
     public static boolean isOpen=false;
+    public static String weibo_appkey="1104982206";
+    public static String qq_appkey="1104982206";
 
     private static String getSign(String method, String token) {
         return CommonUtils.MD5(CommonUtils.MD5(method).toUpperCase() + token).toUpperCase();

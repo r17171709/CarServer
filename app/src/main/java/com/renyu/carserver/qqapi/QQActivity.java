@@ -1,6 +1,6 @@
 package com.renyu.carserver.qqapi;
 
-import com.renyu.carserver.base.BaseActivity;
+import com.renyu.carserver.commons.ParamUtils;
 import com.tencent.connect.common.Constants;
 import com.tencent.connect.share.QQShare;
 import com.tencent.open.utils.ThreadManager;
@@ -8,14 +8,16 @@ import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
-public class QQActivity extends BaseActivity {
+public class QQActivity extends Activity {
 
     public Tencent mTencent;
-    public static String mAppid="1104982206";
+    public static String mAppid= ParamUtils.qq_appkey;
 
     int mExtarFlag = 0x00;
 
@@ -26,18 +28,13 @@ public class QQActivity extends BaseActivity {
 
         mTencent=Tencent.createInstance(mAppid, getApplicationContext());
         if(!mTencent.isSupportSSOLogin(QQActivity.this)) {
-            showToast("请先安装QQ手机客户端，再分享");
+            Toast.makeText(this, "请先安装QQ手机客户端，再分享", Toast.LENGTH_LONG).show();
             finish();
             return ;
         }
 
         share(getIntent().getExtras().getString("text"), getIntent().getExtras().getString("imageUrl"), getIntent().getExtras().getString("title"),
                 getIntent().getExtras().getString("url"), getIntent().getExtras().getBoolean("isQQZone"));
-    }
-
-    @Override
-    public int initContentView() {
-        return 0;
     }
 
     @Override
@@ -77,17 +74,21 @@ public class QQActivity extends BaseActivity {
         @Override
         public void onCancel() {
             Log.d("QQActivity", "onCancel");
+            Toast.makeText(QQActivity.this, "已取消", Toast.LENGTH_SHORT).show();
+            finish();
         }
         @Override
         public void onComplete(Object response) {
             // TODO Auto-generated method stub
             Log.d("QQActivity", "onComplete: " + response.toString());
+            Toast.makeText(QQActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
             finish();
         }
         @Override
         public void onError(UiError e) {
             // TODO Auto-generated method stub
             Log.d("QQActivity", "onError: " + e.errorMessage);
+            Toast.makeText(QQActivity.this, "QQ分享失败"+e.errorMessage+"，请稍后再试", Toast.LENGTH_SHORT).show();
             finish();
         }
     };

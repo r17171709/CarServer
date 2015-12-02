@@ -20,6 +20,7 @@ import com.renyu.carserver.activity.workbench.SearchCreditLineActivity;
 import com.renyu.carserver.activity.workbench.ShareActivity;
 import com.renyu.carserver.base.BaseFragment;
 import com.renyu.carserver.commons.CommonUtils;
+import com.renyu.carserver.commons.ParamUtils;
 
 import butterknife.Bind;
 
@@ -57,12 +58,12 @@ public class MainFragment extends BaseFragment {
             if (i==0) {
                 main_top_gridlayout_title.setText("今日订单数");
                 main_top_gridlayout_num1= (TextView) view.findViewById(R.id.main_top_gridlayout_num);
-                main_top_gridlayout_num1.setText("0");
+                main_top_gridlayout_num1.setText(ParamUtils.getLoginModel(getActivity()).getCount());
             }
             else if (i==1) {
                 main_top_gridlayout_title.setText("今日成交额");
                 main_top_gridlayout_num2= (TextView) view.findViewById(R.id.main_top_gridlayout_num);
-                main_top_gridlayout_num2.setText("0");
+                main_top_gridlayout_num2.setText(ParamUtils.getLoginModel(getActivity()).getSum());
             }
             LinearLayout linearLayout=new LinearLayout(getActivity());
             linearLayout.addView(view, params);
@@ -144,14 +145,16 @@ public class MainFragment extends BaseFragment {
         Intent intent=null;
         switch (position) {
             case 0:
-                intent=new Intent(getActivity(), MessageCenterActivity.class);
-                break;
+                return;
+//                intent=new Intent(getActivity(), MessageCenterActivity.class);
             case 1:
                 intent=new Intent(getActivity(), CreditLineActivity.class);
                 break;
             case 2:
                 intent=new Intent(getActivity(), SearchCreditLineActivity.class);
                 break;
+            case 3:
+                return;
             case 4:
                 intent=new Intent(getActivity(), FactorApplyActivity.class);
                 break;
@@ -173,6 +176,8 @@ public class MainFragment extends BaseFragment {
             case 10:
                 intent=new Intent(getActivity(), ShareActivity.class);
                 break;
+            case 11:
+                return;
         }
         startActivity(intent);
     }

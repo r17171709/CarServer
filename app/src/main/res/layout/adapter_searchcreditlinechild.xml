@@ -6,6 +6,7 @@
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="100dip">
         <TextView
+            android:id="@+id/searchcreditlinechild_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -20,6 +21,7 @@
 
         </View>
         <TextView
+            android:id="@+id/searchcreditlinechild_before"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -34,6 +36,7 @@
 
         </View>
         <TextView
+            android:id="@+id/searchcreditlinechild_after"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"

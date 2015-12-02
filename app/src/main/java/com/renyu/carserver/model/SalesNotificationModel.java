@@ -10,6 +10,7 @@ public class SalesNotificationModel {
     int service_id;
     int aftersales_bn;
     int cre_time;
+    String user_photo;
 
     public String getContents() {
         return contents;
@@ -57,5 +58,13 @@ public class SalesNotificationModel {
 
     public void setCre_time(int cre_time) {
         this.cre_time = cre_time;
+    }
+
+    public String getUser_photo() {
+        return user_photo;
+    }
+
+    public void setUser_photo(String user_photo) {
+        this.user_photo = user_photo;
     }
 }

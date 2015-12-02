@@ -202,4 +202,13 @@ public class CreditLineActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        if (creditline_change_layout.getVisibility()==View.VISIBLE) {
+            creditline_change_layout.setVisibility(View.GONE);
+            return;
+        }
+        super.onBackPressed();
+    }
 }

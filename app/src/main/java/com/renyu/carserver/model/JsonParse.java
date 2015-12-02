@@ -266,6 +266,7 @@ public class JsonParse {
                     model.setCre_time(jsonObject.getInt("cre_time"));
                     model.setService_id(jsonObject.getInt("service_id"));
                     model.setUser_id(jsonObject.getInt("user_id"));
+                    model.setUser_photo(jsonObject.getString("user_photo"));
                     models.add(model);
                 }
                 return models;
@@ -290,7 +291,7 @@ public class JsonParse {
                 JSONObject object=new JSONObject(string);
                 JSONObject result=object.getJSONObject("result");
                 JSONObject data1=result.getJSONObject("data");
-                JSONArray data2=data1.getJSONArray("list");
+                JSONArray data2=data1.getJSONArray("data");
                 ArrayList<FactoryApplyModel> models=new ArrayList<>();
                 for (int i=0;i<data2.length();i++) {
                     JSONObject jsonObject=data2.getJSONObject(i);
@@ -426,6 +427,41 @@ public class JsonParse {
                     model.setRepairdepot_address(jsonObject.getString("repairdepot_address"));
                     model.setRepairdepot_name(jsonObject.getString("repairdepot_name"));
                     model.setAppove_status(jsonObject.getInt("appove_status"));
+                    models.add(model);
+                }
+                return models;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        else {
+            return getErrorValue(string);
+        }
+    }
+
+    /**
+     * 授信额度变更列表
+     * @param string
+     * @return
+     */
+    public static Object getSearchCreditLineModels(String string) {
+        if (getResultInt(string)==0) {
+            try {
+                JSONObject object=new JSONObject(string);
+                JSONObject result=object.getJSONObject("result");
+                JSONObject data1=result.getJSONObject("data");
+                JSONArray data2=data1.getJSONArray("data");
+                ArrayList<SearchCreditLineModel> models=new ArrayList<>();
+                for (int i=0;i<data2.length();i++) {
+                    JSONObject jsonObject=data2.getJSONObject(i);
+                    SearchCreditLineModel model=new SearchCreditLineModel();
+                    model.setCurrent(jsonObject.getString("current"));
+                    model.setApply(jsonObject.getString("apply"));
+                    model.setResult(jsonObject.getString("result"));
+                    model.setStatus(jsonObject.getString("status"));
+                    model.setUser_id(jsonObject.getInt("user_id"));
+                    model.setRepairdepot_name(jsonObject.getString("repairdepot_name"));
                     models.add(model);
                 }
                 return models;

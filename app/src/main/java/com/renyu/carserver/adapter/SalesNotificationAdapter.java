@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.renyu.carserver.R;
 import com.renyu.carserver.commons.ParamUtils;
 import com.renyu.carserver.model.SalesNotificationModel;
@@ -43,6 +46,7 @@ public class SalesNotificationAdapter extends RecyclerView.Adapter<SalesNotifica
         holder.salesnotification_oper.setVisibility(View.INVISIBLE);
         holder.salesnotification_time.setText(ParamUtils.getFormatTime(Long.parseLong(models.get(position).getCre_time()+"000")));
         holder.salesnotification_content.setText(models.get(position).getContents());
+        ImageLoader.getInstance().displayImage(models.get(position).getUser_photo(), holder.salesnotification_image, getAvatarDisplayImageOptions());
     }
 
     @Override
@@ -67,5 +71,16 @@ public class SalesNotificationAdapter extends RecyclerView.Adapter<SalesNotifica
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public DisplayImageOptions getAvatarDisplayImageOptions() {
+        return new DisplayImageOptions.Builder()
+                .showImageOnFail(R.mipmap.ic_launcher)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.mipmap.ic_launcher)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
     }
 }
