@@ -1,10 +1,15 @@
 package com.renyu.carserver.activity.login;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.renyu.carserver.R;
 import com.renyu.carserver.activity.MainActivity;
@@ -28,6 +33,8 @@ public class LoginActivity extends BaseActivity {
     EditText login_name;
     @Bind(R.id.login_password)
     EditText login_password;
+    @Bind(R.id.login_image)
+    ImageView login_image;
 
     @Override
     public int initContentView() {
@@ -42,15 +49,45 @@ public class LoginActivity extends BaseActivity {
             finish();
             return;
         }
+        splashAnimation();
         initViews();
+    }
+
+    private void splashAnimation() {
+        ValueAnimator valueAnimator=ValueAnimator.ofInt(1000, 0);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Log.d("MainActivity", "animation.getAnimatedFraction():" + animation.getAnimatedFraction());
+                login_image.setScaleX(1+animation.getAnimatedFraction()/2);
+                login_image.setScaleY(1+animation.getAnimatedFraction()/2);
+                login_image.setAlpha(1-animation.getAnimatedFraction());
+            }
+        });
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                login_image.setVisibility(View.GONE);
+                if (!(ParamUtils.getLogin(LoginActivity.this).get("name").equals("")||ParamUtils.getLogin(LoginActivity.this).get("password").equals(""))) {
+                    login(ParamUtils.getLogin(LoginActivity.this).get("name"), ParamUtils.getLogin(LoginActivity.this).get("password"));
+                }
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                login_image.setImageResource(R.mipmap.splash_bg);
+            }
+        });
+        valueAnimator.setDuration(1000);
+        valueAnimator.setInterpolator(new AccelerateInterpolator());
+        valueAnimator.start();
     }
 
     private void initViews() {
         login_name.setText(ParamUtils.getLogin(this).get("name"));
         login_password.setText(ParamUtils.getLogin(this).get("password"));
-        if (!(ParamUtils.getLogin(this).get("name").equals("")||ParamUtils.getLogin(this).get("password").equals(""))) {
-            login(ParamUtils.getLogin(this).get("name"), ParamUtils.getLogin(this).get("password"));
-        }
     }
 
     @OnClick({R.id.login_forget, R.id.login_joinserver, R.id.login_commit})

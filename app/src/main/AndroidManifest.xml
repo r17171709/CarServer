@@ -19,14 +19,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.login.SplashActivity">
+        <activity android:name=".activity.login.SplashActivity" android:theme="@style/AppSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.login.LoginActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.login.LoginActivity" android:theme="@style/LoginTheme" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.login.JoinActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.login.ForgetActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.login.AreaActivity" android:screenOrientation="portrait"></activity>

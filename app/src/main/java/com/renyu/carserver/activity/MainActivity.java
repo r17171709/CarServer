@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.renyu.carserver.R;
@@ -27,14 +26,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.main_main)
-    LinearLayout main_main;
-    @Bind(R.id.main_ordercenter)
-    LinearLayout main_ordercenter;
-    @Bind(R.id.main_customercenter)
-    LinearLayout main_customercenter;
-    @Bind(R.id.main_my)
-    LinearLayout main_my;
     @Bind(R.id.main_image1)
     ImageView main_image1;
     @Bind(R.id.main_text1)
@@ -51,7 +42,6 @@ public class MainActivity extends BaseActivity {
     ImageView main_image4;
     @Bind(R.id.main_text4)
     TextView main_text4;
-
 
     MainFragment mainFragment=null;
     OrderCenterFragment orderCenterFragment=null;

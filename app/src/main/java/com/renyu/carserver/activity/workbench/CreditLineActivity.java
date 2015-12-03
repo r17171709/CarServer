@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,6 +60,8 @@ public class CreditLineActivity extends BaseActivity {
     EditText creditline_bank_num;
     @Bind(R.id.creditline_name)
     TextView creditline_name;
+    @Bind(R.id.createline_edit)
+    EditText createline_edit;
 
     ArrayList<CreditLineModel> models=null;
 
@@ -82,6 +86,17 @@ public class CreditLineActivity extends BaseActivity {
     private void initViews() {
         view_toolbar_center_title.setText("授信额度");
         view_toolbar_center_back.setVisibility(View.VISIBLE);
+        createline_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId== EditorInfo.IME_ACTION_SEARCH) {
+                    createline_swipy.setRefreshing(true);
+                    page_no=1;
+                    getCreditLine();
+                }
+                return false;
+            }
+        });
         createline_swipy.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
         createline_swipy.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
             @Override
@@ -127,6 +142,7 @@ public class CreditLineActivity extends BaseActivity {
     }
 
     private void getCreditLine() {
+        httpHelper.cancel("app.sysservice.appamountlist");
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.appamountlist", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("page_no", ""+page_no);
         params.put("page_size", "20");
