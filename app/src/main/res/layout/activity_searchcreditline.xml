@@ -18,6 +18,8 @@
             android:textSize="13sp"
             android:drawablePadding="5dip"
             android:padding="5dip"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:drawableLeft="@mipmap/ic_search"
             android:background="@drawable/rectangle_background_lightgray"/>
     </LinearLayout>

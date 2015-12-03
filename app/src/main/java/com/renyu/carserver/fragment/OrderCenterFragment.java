@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +56,8 @@ public class OrderCenterFragment extends BaseFragment {
     @Bind(R.id.ordercenter_lv)
     ListView ordercenter_lv;
     OrderCenterAdapter adapter=null;
+    @Bind(R.id.ordercenter_edittext)
+    EditText ordercenter_edittext;
 
     ArrayList<ParentOrderModel> shopModels=null;
 
@@ -64,6 +70,9 @@ public class OrderCenterFragment extends BaseFragment {
     int curPosition=0;
 
     ArrayList<TextView> numTextViews=null;
+
+    //阻止edittext刷新
+    boolean isNeedLoad=false;
 
     @Override
     public int initContentView() {
@@ -93,6 +102,9 @@ public class OrderCenterFragment extends BaseFragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    page_no=1;
+                    isNeedLoad=true;
+                    ordercenter_edittext.setText("");
                     changeChoice(i_);
                 }
             });
@@ -204,11 +216,47 @@ public class OrderCenterFragment extends BaseFragment {
             @Override
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 if (direction == SwipyRefreshLayoutDirection.BOTTOM) {
-                    loadOrderCenter();
+
                 } else if (direction == SwipyRefreshLayoutDirection.TOP) {
                     page_no=1;
-                    loadOrderCenter();
                 }
+                loadOrderCenter(ordercenter_edittext.getText().toString());
+            }
+        });
+        ordercenter_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (ordercenter_edittext.getText().toString().equals("")) {
+                    showToast("请输入修理厂全称或修理厂简称");
+                    return false;
+                }
+                if (actionId== EditorInfo.IME_ACTION_SEARCH) {
+                    ordercenter_swipy.setRefreshing(true);
+                    page_no=1;
+                    loadOrderCenter(ordercenter_edittext.getText().toString());
+                }
+                return false;
+            }
+        });
+        ordercenter_edittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isNeedLoad) {
+                    isNeedLoad=false;
+                    return;
+                }
+                page_no=1;
+                loadOrderCenter(s.toString());
             }
         });
         getNumber();
@@ -258,7 +306,7 @@ public class OrderCenterFragment extends BaseFragment {
                         break;
                 }
                 page_no=1;
-                loadOrderCenter();
+                loadOrderCenter(ordercenter_edittext.getText().toString());
             }
             else {
                 view_ordercenter_item_text.setTextColor(Color.BLACK);
@@ -298,11 +346,16 @@ public class OrderCenterFragment extends BaseFragment {
         }
     }
 
-    private void loadOrderCenter() {
+    private void loadOrderCenter(String repairdepot_name) {
+        hide(ordercenter_edittext);
+        httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.user.order.list", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(getActivity()).getShop_id());
         params.put("page_size", "20");
         params.put("page_no", "" + page_no);
+        if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
+            params.put("repairdepot_name", repairdepot_name);
+        }
         if (curPosition==0) {
 
         }
@@ -348,7 +401,7 @@ public class OrderCenterFragment extends BaseFragment {
         }, new OKHttpHelper.RequestListener() {
             @Override
             public void onSuccess(String string) {
-                Log.d("OrderCenterFragment", string);
+               Log.d("OrderCenterFragment", string);
                 ordercenter_swipy.setRefreshing(false);
                 if (JsonParse.getResultInt(string) == 1) {
                     showToast(JsonParse.getErrorValue(string));

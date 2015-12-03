@@ -46,13 +46,13 @@ public class FactorApplyAdapter extends RecyclerView.Adapter<FactorApplyAdapter.
         }
         address+=models.get(position).getAddrs();
         holder.adapter_factoryapplyaddress.setText(address);
-        if (models.get(position).getStatus()==2) {
+        if (models.get(position).getStatus()==3) {
             holder.adapter_factoryapplystate.setText("已处理");
             holder.adapter_factoryapplystate.setTextColor(Color.parseColor("#efefef"));
             holder.adapter_factoryapplyinfo.setTextColor(Color.parseColor("#efefef"));
             holder.adapter_factoryapplyaddress.setTextColor(Color.parseColor("#efefef"));
         }
-        else if (models.get(position).getStatus()==1) {
+        else if (models.get(position).getStatus()==2) {
             holder.adapter_factoryapplystate.setText("确认处理");
             holder.adapter_factoryapplystate.setTextColor(Color.parseColor("#a20000"));
             holder.adapter_factoryapplyinfo.setTextColor(Color.BLACK);

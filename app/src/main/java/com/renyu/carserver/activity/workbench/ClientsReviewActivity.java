@@ -4,7 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,6 +53,8 @@ public class ClientsReviewActivity extends BaseActivity {
     RecyclerView clientsreview_rv;
     ClientsReviewAdapter adapter_left=null;
     ClientsReviewAdapter adapter_right=null;
+    @Bind(R.id.clientsreview_edit)
+    EditText clientsreview_edit;
 
     ArrayList<ClientsReviewModel> models_left=null;
     ArrayList<ClientsReviewModel> models_right=null;
@@ -55,6 +62,9 @@ public class ClientsReviewActivity extends BaseActivity {
     int page_no_left=1;
     int page_no_right=1;
     boolean isLeft=true;
+
+    //阻止edittext刷新
+    boolean isNeedLoad=false;
 
     @Override
     public int initContentView() {
@@ -83,7 +93,7 @@ public class ClientsReviewActivity extends BaseActivity {
             @Override
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 if (direction == SwipyRefreshLayoutDirection.BOTTOM) {
-                    getStatusAudit();
+                    getStatusAudit(clientsreview_edit.getText().toString());
                 } else if (direction == SwipyRefreshLayoutDirection.TOP) {
                     if (isLeft) {
                         page_no_left=1;
@@ -91,7 +101,7 @@ public class ClientsReviewActivity extends BaseActivity {
                     else {
                         page_no_right=1;
                     }
-                    getStatusAudit();
+                    getStatusAudit(clientsreview_edit.getText().toString());
                 }
             }
         });
@@ -100,31 +110,83 @@ public class ClientsReviewActivity extends BaseActivity {
         adapter_left=new ClientsReviewAdapter(this, models_left);
         adapter_right=new ClientsReviewAdapter(this, models_right);
         clientsreview_examining.performClick();
+        clientsreview_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (clientsreview_edit.getText().toString().equals("")) {
+                    showToast("请输入修理厂全称或修理厂简称");
+                    return false;
+                }
+                if (actionId== EditorInfo.IME_ACTION_SEARCH) {
+                    clientsreview_swipy.setRefreshing(true);
+                    if (isLeft) {
+                        page_no_left=1;
+                    }
+                    else {
+                        page_no_right=1;
+                    }
+                    getStatusAudit(clientsreview_edit.getText().toString());
+                }
+                return false;
+            }
+        });
+        clientsreview_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isNeedLoad) {
+                    isNeedLoad=false;
+                    return;
+                }
+                if (isLeft) {
+                    page_no_left=1;
+                }
+                else {
+                    page_no_right=1;
+                }
+                getStatusAudit(s.toString());
+            }
+        });
     }
 
     @OnClick({R.id.clientsreview_examining, R.id.clientsreview_result, R.id.view_toolbar_center_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.clientsreview_examining:
+                hide(clientsreview_edit);
                 isLeft=true;
                 clientsreview_examining.setBackgroundColor(Color.RED);
                 clientsreview_examining.setTextColor(Color.WHITE);
                 clientsreview_result.setBackgroundColor(Color.WHITE);
                 clientsreview_result.setTextColor(Color.BLACK);
                 clientsreview_rv.setAdapter(adapter_left);
+                isNeedLoad=true;
+                clientsreview_edit.setText("");
                 if (models_left.size()==0) {
-                    getStatusAudit();
+                    getStatusAudit(null);
                 }
                 break;
             case R.id.clientsreview_result:
+                hide(clientsreview_edit);
                 isLeft=false;
                 clientsreview_result.setBackgroundColor(Color.RED);
                 clientsreview_result.setTextColor(Color.WHITE);
                 clientsreview_examining.setBackgroundColor(Color.WHITE);
                 clientsreview_examining.setTextColor(Color.BLACK);
                 clientsreview_rv.setAdapter(adapter_right);
+                isNeedLoad=true;
+                clientsreview_edit.setText("");
                 if (models_right.size()==0) {
-                    getStatusAudit();
+                    getStatusAudit(null);
                 }
                 break;
             case R.id.view_toolbar_center_back:
@@ -133,7 +195,7 @@ public class ClientsReviewActivity extends BaseActivity {
         }
     }
 
-    private void getStatusAudit() {
+    private void getStatusAudit(String repairdepot_name) {
         httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.account.sysservice.statusAudit", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
@@ -145,6 +207,9 @@ public class ClientsReviewActivity extends BaseActivity {
         else {
             params.put("page_no", ""+page_no_right);
             params.put("appove_status", "2,3");
+        }
+        if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
+            params.put("repairdepot_name", repairdepot_name);
         }
         httpHelper.commonPostRequest(ParamUtils.api, params, null, new OKHttpHelper.RequestListener() {
             @Override

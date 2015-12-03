@@ -13,6 +13,7 @@
             android:background="#efefef"
             android:layout_height="60dip">
             <EditText
+                android:id="@+id/ordercenter_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="40dip"
                 android:layout_marginLeft="50dip"
@@ -21,6 +22,8 @@
                 android:textSize="13sp"
                 android:drawablePadding="5dip"
                 android:padding="5dip"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:drawableLeft="@mipmap/ic_search"
                 android:background="@drawable/rectangle_background_lightgray"/>
         </LinearLayout>

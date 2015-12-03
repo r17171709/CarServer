@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -89,12 +91,33 @@ public class CreditLineActivity extends BaseActivity {
         createline_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (createline_edit.getText().toString().equals("")) {
+                    showToast("请输入修理厂全称或修理厂简称");
+                    return false;
+                }
                 if (actionId== EditorInfo.IME_ACTION_SEARCH) {
                     createline_swipy.setRefreshing(true);
                     page_no=1;
-                    getCreditLine();
+                    getCreditLine(createline_edit.getText().toString());
                 }
                 return false;
+            }
+        });
+        createline_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                page_no=1;
+                getCreditLine(s.toString());
             }
         });
         createline_swipy.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
@@ -107,7 +130,7 @@ public class CreditLineActivity extends BaseActivity {
                 else if (direction==SwipyRefreshLayoutDirection.BOTTOM) {
 
                 }
-                getCreditLine();
+                getCreditLine(createline_edit.getText().toString());
             }
         });
         createline_rv.setHasFixedSize(true);
@@ -126,7 +149,7 @@ public class CreditLineActivity extends BaseActivity {
         });
         createline_rv.setAdapter(adapter);
 
-        getCreditLine();
+        getCreditLine(null);
     }
 
     @OnClick({R.id.view_toolbar_center_back, R.id.creditline_commit})
@@ -141,11 +164,14 @@ public class CreditLineActivity extends BaseActivity {
         }
     }
 
-    private void getCreditLine() {
-        httpHelper.cancel("app.sysservice.appamountlist");
+    private void getCreditLine(String repairdepot_name) {
+        httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.appamountlist", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("page_no", ""+page_no);
         params.put("page_size", "20");
+        if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
+            params.put("repairdepot_name", repairdepot_name);
+        }
         httpHelper.commonPostRequest(ParamUtils.api, params, null, new OKHttpHelper.RequestListener() {
             @Override
             public void onSuccess(String string) {
@@ -207,7 +233,7 @@ public class CreditLineActivity extends BaseActivity {
                         creditline_change_layout.setVisibility(View.GONE);
 
                         createline_swipy.setRefreshing(true);
-                        getCreditLine();
+                        getCreditLine(createline_edit.getText().toString());
                     }
                 });
             }

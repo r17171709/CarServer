@@ -5,8 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
@@ -36,6 +42,8 @@ public class CustomerCenterFragment extends BaseFragment {
     @Bind(R.id.customercenter_swipy)
     SwipyRefreshLayout customercenter_swipy;
     CustomerCenterAdapter adapter=null;
+    @Bind(R.id.customercenter_edittext)
+    EditText customercenter_edittext;
 
     ArrayList<CustomerModel> models=null;
 
@@ -98,18 +106,54 @@ public class CustomerCenterFragment extends BaseFragment {
                 else if (direction==SwipyRefreshLayoutDirection.TOP) {
                     page_no=1;
                 }
-                getAllCustomerList();
+                getAllCustomerList(customercenter_edittext.getText().toString());
+            }
+        });
+        customercenter_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (customercenter_edittext.getText().toString().equals("")) {
+                    showToast("请输入修理厂全称或修理厂简称");
+                    return false;
+                }
+                if (actionId== EditorInfo.IME_ACTION_SEARCH) {
+                    customercenter_swipy.setRefreshing(true);
+                    page_no=1;
+                    getAllCustomerList(customercenter_edittext.getText().toString());
+                }
+                return false;
+            }
+        });
+        customercenter_edittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                page_no=1;
+                getAllCustomerList(s.toString());
             }
         });
 
-        getAllCustomerList();
+        getAllCustomerList(null);
     }
 
-    private void getAllCustomerList() {
+    private void getAllCustomerList(String repairdepot_name) {
+        httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.account.sysservice.xiuliuser.list", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(getActivity()).getShop_id());
         params.put("page_no", ""+page_no);
         params.put("page_size", "20");
+        if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
+            params.put("repairdepot_name", repairdepot_name);
+        }
         httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {
@@ -156,7 +200,7 @@ public class CustomerCenterFragment extends BaseFragment {
         if (resultCode== Activity.RESULT_OK) {
             customercenter_swipy.setRefreshing(true);
             page_no=1;
-            getAllCustomerList();
+            getAllCustomerList(customercenter_edittext.getText().toString());
         }
     }
 }

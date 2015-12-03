@@ -19,6 +19,8 @@
             android:hint="输入修理厂全称|修理厂简称"
             android:textSize="13sp"
             android:drawablePadding="5dip"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:padding="5dip"
             android:drawableLeft="@mipmap/ic_search"
             android:background="@drawable/rectangle_background_lightgray"/>

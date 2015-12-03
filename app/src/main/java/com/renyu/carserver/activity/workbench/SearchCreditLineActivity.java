@@ -4,8 +4,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -44,6 +49,8 @@ public class SearchCreditLineActivity extends BaseActivity {
     @Bind(R.id.searchcreateline_rv)
     RecyclerView searchcreateline_rv;
     SearchCreditLineAdapter adapter=null;
+    @Bind(R.id.searchcreateline_edit)
+    EditText searchcreateline_edit;
 
     ArrayList<SearchCreditLineModel> models=null;
 
@@ -80,7 +87,7 @@ public class SearchCreditLineActivity extends BaseActivity {
                 else if (direction==SwipyRefreshLayoutDirection.BOTTOM) {
 
                 }
-                getSearchCreditLine();
+                getSearchCreditLine(searchcreateline_edit.getText().toString());
             }
         });
         searchcreateline_rv.setHasFixedSize(true);
@@ -92,15 +99,51 @@ public class SearchCreditLineActivity extends BaseActivity {
             }
         });
         searchcreateline_rv.setAdapter(adapter);
+        searchcreateline_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (searchcreateline_edit.getText().toString().equals("")) {
+                    showToast("请输入修理厂全称或修理厂简称");
+                    return false;
+                }
+                if (actionId== EditorInfo.IME_ACTION_SEARCH) {
+                    searchcreateline_swipy.setRefreshing(true);
+                    page_no=1;
+                    getSearchCreditLine(searchcreateline_edit.getText().toString());
+                }
+                return false;
+            }
+        });
+        searchcreateline_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        getSearchCreditLine();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                page_no=1;
+                getSearchCreditLine(s.toString());
+            }
+        });
+
+        getSearchCreditLine(null);
     }
 
-    public void getSearchCreditLine() {
+    public void getSearchCreditLine(String repairdepot_name) {
+        httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.appamountChange", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         params.put("page_size", "20");
         params.put("page_no", ""+page_no);
+        if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
+            params.put("repairdepot_name", repairdepot_name);
+        }
         httpHelper.commonPostRequest(ParamUtils.api, params, null, new OKHttpHelper.RequestListener() {
             @Override
             public void onSuccess(String string) {

@@ -2,10 +2,13 @@ package com.renyu.carserver.base;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.renyu.carserver.commons.OKHttpHelper;
@@ -96,5 +99,25 @@ public abstract class BaseActivity extends AppCompatActivity {
         bundle.putString("path", path);
         intent.putExtras(bundle);
         startActivityForResult(intent, ParamUtils.crop_result);
+    }
+
+    /**
+     * 关闭键盘
+     * @param view
+     */
+    public void hide(View view) {
+        InputMethodManager inputmethodmanager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputmethodmanager != null)
+            inputmethodmanager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    /**
+     * 打开键盘
+     * @param view
+     */
+    public void show(View view) {
+        InputMethodManager inputmethodmanager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputmethodmanager != null)
+            inputmethodmanager.showSoftInput(view, 0);
     }
 }
