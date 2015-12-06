@@ -18,6 +18,7 @@ import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 import com.renyu.carserver.R;
 import com.renyu.carserver.adapter.ClientsReviewAdapter;
+import com.renyu.carserver.adapter.FactorApplyAdapter;
 import com.renyu.carserver.base.BaseActivity;
 import com.renyu.carserver.commons.OKHttpHelper;
 import com.renyu.carserver.commons.ParamUtils;
@@ -107,8 +108,18 @@ public class ClientsReviewActivity extends BaseActivity {
         });
         clientsreview_rv.setHasFixedSize(true);
         clientsreview_rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter_left=new ClientsReviewAdapter(this, models_left);
-        adapter_right=new ClientsReviewAdapter(this, models_right);
+        adapter_left=new ClientsReviewAdapter(this, models_left, new ClientsReviewAdapter.OnReCheckStateListener() {
+            @Override
+            public void recheck(int position) {
+
+            }
+        });
+        adapter_right=new ClientsReviewAdapter(this, models_right, new ClientsReviewAdapter.OnReCheckStateListener() {
+            @Override
+            public void recheck(int position) {
+                recheckState(models_right.get(position).getUser_id(), position);
+            }
+        });
         clientsreview_examining.performClick();
         clientsreview_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -257,6 +268,40 @@ public class ClientsReviewActivity extends BaseActivity {
             public void onError() {
                 clientsreview_swipy.setRefreshing(false);
                 showToast("未知错误");
+            }
+        });
+    }
+
+    private void recheckState(String user_id, final int position) {
+        HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.RepairDepotApply", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        params.put("user_id", user_id);
+        httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
+            @Override
+            public void onStart() {
+                showDialog("提示", "正在提交");
+            }
+        }, new OKHttpHelper.RequestListener() {
+            @Override
+            public void onSuccess(String string) {
+                dismissDialog();
+                if (JsonParse.getResultValue(string)!=null) {
+                    showToast(JsonParse.getResultValue(string));
+
+                    models_left.clear();
+                    adapter_left.notifyDataSetChanged();
+
+                    models_right.clear();
+                    adapter_right.notifyDataSetChanged();
+                    clientsreview_result.performClick();
+                }
+                else {
+                    showToast("未知错误");
+                }
+            }
+
+            @Override
+            public void onError() {
+                dismissDialog();
             }
         });
     }

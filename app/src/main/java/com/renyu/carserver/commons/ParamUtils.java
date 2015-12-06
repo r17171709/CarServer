@@ -37,6 +37,7 @@ public class ParamUtils {
     public static boolean isOpen=false;
     public static String weibo_appkey="1104982206";
     public static String qq_appkey="1104982206";
+    public static String weixin_appkey="wxbe79db819e9877c6";
 
     private static String getSign(String method, String token) {
         return CommonUtils.MD5(CommonUtils.MD5(method).toUpperCase() + token).toUpperCase();

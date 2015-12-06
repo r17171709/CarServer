@@ -11,6 +11,7 @@ public class ClientsReviewModel {
     String areaframe;
     String contact_tel;
     int appove_status;
+    String user_id;
 
     public String getContact_person() {
         return contact_person;
@@ -58,5 +59,13 @@ public class ClientsReviewModel {
 
     public void setAppove_status(int appove_status) {
         this.appove_status = appove_status;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }

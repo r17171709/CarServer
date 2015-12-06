@@ -120,73 +120,53 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"/>
             </LinearLayout>
-            <LinearLayout
+            <TextView
+                android:id="@+id/ordercenterdetail_createtime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dip"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/ordercenterdetail_createtime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:text="创建时间："
-                    android:layout_marginLeft="10dip"
-                    android:lineSpacingExtra="2dip"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/ordercenterdetail_paytime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:text="付款时间："
-                    android:lineSpacingExtra="2dip"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-            <LinearLayout
+                android:textColor="@android:color/black"
+                android:text="创建时间："
+                android:layout_marginLeft="15dip"
+                android:lineSpacingExtra="2dip" />
+            <TextView
+                android:id="@+id/ordercenterdetail_paytime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="付款时间："
+                android:layout_marginLeft="15dip"
                 android:layout_marginTop="5dip"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/ordercenterdetail_shippedtime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:text="发货时间："
-                    android:layout_marginLeft="10dip"
-                    android:lineSpacingExtra="2dip"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/ordercenterdetail_receivetime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:text="收货时间："
-                    android:lineSpacingExtra="2dip"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-            <LinearLayout
+                android:lineSpacingExtra="2dip" />
+            <TextView
+                android:id="@+id/ordercenterdetail_shippedtime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="发货时间："
+                android:layout_marginLeft="15dip"
                 android:layout_marginTop="5dip"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/ordercenterdetail_needpaytime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:text="应付款时间："
-                    android:layout_marginLeft="10dip"
-                    android:lineSpacingExtra="2dip"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:lineSpacingExtra="2dip"
-                    android:layout_weight="1"/>
-            </LinearLayout>
+                android:lineSpacingExtra="2dip"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/ordercenterdetail_receivetime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="收货时间："
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="5dip"
+                android:lineSpacingExtra="2dip"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/ordercenterdetail_needpaytime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="应付款时间："
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="5dip"
+                android:lineSpacingExtra="2dip"
+                android:layout_weight="1"/>
             <LinearLayout
                 android:id="@+id/ordercenterdetail_detail"
                 android:layout_width="match_parent"
@@ -197,5 +177,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

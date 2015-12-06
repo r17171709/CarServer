@@ -3,6 +3,7 @@ package com.renyu.carserver.wxapi;
 import android.os.Bundle;
 
 import com.renyu.carserver.base.BaseActivity;
+import com.renyu.carserver.commons.ParamUtils;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -16,7 +17,7 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		api=WXAPIFactory.createWXAPI(this, "wx437d0c8be3e42d4f", false);
+		api=WXAPIFactory.createWXAPI(this, ParamUtils.weixin_appkey, false);
 		api.handleIntent(getIntent(), this);
 	}
 

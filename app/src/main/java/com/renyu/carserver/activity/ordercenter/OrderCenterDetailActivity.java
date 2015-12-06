@@ -1,5 +1,8 @@
 package com.renyu.carserver.activity.ordercenter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -87,21 +90,14 @@ public class OrderCenterDetailActivity extends BaseActivity {
         view_toolbar_center_back.setImageResource(R.mipmap.ic_back_gray);
         ordercenterdetail_address.setText(model.getReceiver_name() + " " + model.getReceiver_mobile() + "\n" +
                 model.getReceiver_state() + " " + model.getReceiver_city() + " " + model.getReceiver_district() + model.getReceiver_address());
-        ordercenterdetail_message.setText(model.getBuyer_message());
-        String invoke="";
-        invoke+=model.getNeed_invoice().equals("1")?"需要开票":"不开票";
-        invoke+="\r\n";
-        if (model.getInvoice_type().equals("normal")) {
-            invoke+="普通增值税发票："+model.getInvoice_main();
-        }
-        else if (model.getInvoice_type().equals("dedicated")) {
-            invoke+="专用增值税发票：（见开票信息）";
-        }
-        ordercenterdetail_idinfo.setText(invoke);
+        ordercenterdetail_message.setText(ParamUtils.converNull(model.getBuyer_message()));
+        ordercenterdetail_idinfo.setText(model.getMessage());
         ordercenterdetail_remark.setText(model.getShop_memo());
         ordercenterdetail_createtime.setText("创建时间：\n" + ParamUtils.getFormatTime(ParamUtils.converLong(model.getCreated_time() + "000")));
         ordercenterdetail_paytime.setText("付款时间：\n"+ParamUtils.getFormatTime(ParamUtils.converLong(model.getPay_time() + "000")));
         ordercenterdetail_shippedtime.setText("发货时间：\n"+ParamUtils.getFormatTime(ParamUtils.converLong(model.getConsign_time()+"000")));
+        ordercenterdetail_receivetime.setText("收货时间：\n"+ParamUtils.getFormatTime(ParamUtils.converLong(model.getReceiver_time()+"000")));
+        ordercenterdetail_needpaytime.setText("应付款时间：\n"+ParamUtils.getFormatTime(ParamUtils.converLong(model.getNeedpaytime()+"000")));
 
         View convertView= LayoutInflater.from(this).inflate(R.layout.adapter_ordercenterpending, null, false);
         LinearLayout adapter_ordercenterpending_detail= (LinearLayout) convertView.findViewById(R.id.adapter_ordercenterpending_detail);
@@ -110,10 +106,19 @@ public class OrderCenterDetailActivity extends BaseActivity {
         TextView adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
         TextView ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
         TextView ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+        TextView ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
         adapter_ordercenterpending_cancel.setVisibility(View.GONE);
         ordercenterpending_tid.setText(model.getTid());
         getItemViewType(ordercenterpending_state);
         ordercenterpending_num.setText("共"+model.getItemnum()+"件商品");
+        ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager cmb = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("value", model.getTid());
+                cmb.setPrimaryClip(clip);
+            }
+        });
         if ((int) Double.parseDouble(model.getTotal_fee())==0) {
             ordercenterpending_price.setText("0");
         }

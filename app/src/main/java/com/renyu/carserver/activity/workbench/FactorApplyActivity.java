@@ -80,7 +80,7 @@ public class FactorApplyActivity extends BaseActivity {
 
     private void initViews() {
         view_toolbar_center_layout.setBackgroundColor(Color.parseColor("#efefef"));
-        view_toolbar_center_title.setText("修理厂申请");
+        view_toolbar_center_title.setText("会员申请");
         view_toolbar_center_title.setTextColor(Color.BLACK);
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
@@ -100,7 +100,12 @@ public class FactorApplyActivity extends BaseActivity {
         });
         factorapply_rv.setHasFixedSize(true);
         factorapply_rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new FactorApplyAdapter(this, models);
+        adapter=new FactorApplyAdapter(this, models, new FactorApplyAdapter.OnReCheckStateListener() {
+            @Override
+            public void recheck(int position) {
+                recheckState(models.get(position).getUser_id(), position);
+            }
+        });
         factorapply_rv.setAdapter(adapter);
         factorapply_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -211,6 +216,35 @@ public class FactorApplyActivity extends BaseActivity {
             @Override
             public void onError() {
                 factorapply_swipy.setRefreshing(false);
+            }
+        });
+    }
+
+    private void recheckState(String user_id, final int position) {
+        HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.RepairDepotApply", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        params.put("user_id", user_id);
+        httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
+            @Override
+            public void onStart() {
+                showDialog("提示", "正在提交");
+            }
+        }, new OKHttpHelper.RequestListener() {
+            @Override
+            public void onSuccess(String string) {
+                dismissDialog();
+                if (JsonParse.getResultValue(string)!=null) {
+                    showToast(JsonParse.getResultValue(string));
+                    models.get(position).setStatus(3);
+                    adapter.notifyDataSetChanged();
+                }
+                else {
+                    showToast("未知错误");
+                }
+            }
+
+            @Override
+            public void onError() {
+                dismissDialog();
             }
         });
     }

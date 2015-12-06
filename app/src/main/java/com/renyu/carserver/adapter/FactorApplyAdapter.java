@@ -26,9 +26,12 @@ public class FactorApplyAdapter extends RecyclerView.Adapter<FactorApplyAdapter.
     ArrayList<FactoryApplyModel> models=null;
     Context context=null;
 
-    public FactorApplyAdapter(Context context, ArrayList<FactoryApplyModel> models) {
+    OnReCheckStateListener listener=null;
+
+    public FactorApplyAdapter(Context context, ArrayList<FactoryApplyModel> models, OnReCheckStateListener listener) {
         this.context=context;
         this.models=models;
+        this.listener=listener;
     }
 
     @Override
@@ -39,6 +42,7 @@ public class FactorApplyAdapter extends RecyclerView.Adapter<FactorApplyAdapter.
 
     @Override
     public void onBindViewHolder(FactorApplyHolder holder, int position) {
+        final int position_=position;
         holder.adapter_factoryapplyinfo.setText(models.get(position).getRepair_name()+"，"+models.get(position).getContact_person()+"，"+models.get(position).getContact_tel());
         String address="";
         for (int i=0;i<models.get(position).getAreaframe().split("/").length;i++) {
@@ -48,9 +52,9 @@ public class FactorApplyAdapter extends RecyclerView.Adapter<FactorApplyAdapter.
         holder.adapter_factoryapplyaddress.setText(address);
         if (models.get(position).getStatus()==3) {
             holder.adapter_factoryapplystate.setText("已处理");
-            holder.adapter_factoryapplystate.setTextColor(Color.parseColor("#efefef"));
-            holder.adapter_factoryapplyinfo.setTextColor(Color.parseColor("#efefef"));
-            holder.adapter_factoryapplyaddress.setTextColor(Color.parseColor("#efefef"));
+            holder.adapter_factoryapplystate.setTextColor(Color.parseColor("#8e8e8e"));
+            holder.adapter_factoryapplyinfo.setTextColor(Color.parseColor("#8e8e8e"));
+            holder.adapter_factoryapplyaddress.setTextColor(Color.parseColor("#8e8e8e"));
         }
         else if (models.get(position).getStatus()==2) {
             holder.adapter_factoryapplystate.setText("确认处理");
@@ -58,6 +62,14 @@ public class FactorApplyAdapter extends RecyclerView.Adapter<FactorApplyAdapter.
             holder.adapter_factoryapplyinfo.setTextColor(Color.BLACK);
             holder.adapter_factoryapplyaddress.setTextColor(Color.BLACK);
         }
+        holder.adapter_factoryapplystate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (models.get(position_).getStatus()==2) {
+                    listener.recheck(position_);
+                }
+            }
+        });
     }
 
     @Override
@@ -78,5 +90,9 @@ public class FactorApplyAdapter extends RecyclerView.Adapter<FactorApplyAdapter.
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnReCheckStateListener {
+        void recheck(int position);
     }
 }

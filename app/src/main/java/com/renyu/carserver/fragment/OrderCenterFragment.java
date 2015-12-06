@@ -183,6 +183,11 @@ public class OrderCenterFragment extends BaseFragment {
             public void showChange(String oid, String price, String tid, int position, int i) {
                 priceRemind(oid, price, tid, position, i);
             }
+
+            @Override
+            public void cancel(int position) {
+                cancelTrade(position);
+            }
         });
         ordercenter_lv.setAdapter(adapter);
         ordercenter_lv.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -259,8 +264,40 @@ public class OrderCenterFragment extends BaseFragment {
                 loadOrderCenter(s.toString());
             }
         });
-        getNumber();
         changeChoice(0);
+        getNumber();
+    }
+
+    private void cancelTrade(int position) {
+        HashMap<String, String> params= ParamUtils.getSignParams("app.user.order.cancel", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        params.put("tid", shopModels.get(position).getTid());
+        httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
+            @Override
+            public void onStart() {
+                showDialog("提示", "正在提交");
+            }
+        }, new OKHttpHelper.RequestListener() {
+            @Override
+            public void onSuccess(String string) {
+                dismissDialog();
+                if (JsonParse.getResultValue(string)!=null) {
+                    showToast(JsonParse.getResultValue(string));
+                    if (JsonParse.getResultInt(string)==0) {
+                        page_no=1;
+                        loadOrderCenter(ordercenter_edittext.getText().toString());
+                    }
+                }
+                else {
+                    showToast("未知错误");
+                }
+            }
+
+            @Override
+            public void onError() {
+                dismissDialog();
+                showToast("未知错误");
+            }
+        });
     }
 
     public void changeChoice(int position) {
@@ -554,7 +591,8 @@ public class OrderCenterFragment extends BaseFragment {
                     int TRADE_FINISHED=Integer.parseInt(map.get("TRADE_FINISHED"));
                     int TRADE_CANCEL=Integer.parseInt(map.get("TRADE_CANCEL"));
                     int TRADE_CLOSED=Integer.parseInt(map.get("TRADE_CLOSED"));
-                    int all=WAIT_CONFRIM+WAIT_APPROVE+DELIVER_GOODS+WAIT_GOODS+RECEIVE_GOODS+TRADE_FINISHED+TRADE_CANCEL+TRADE_CLOSED;
+                    int AFTERSALES=Integer.parseInt(map.get("AFTERSALES"));
+                    int all=WAIT_CONFRIM+WAIT_APPROVE+DELIVER_GOODS+WAIT_GOODS+RECEIVE_GOODS+TRADE_FINISHED+TRADE_CANCEL+TRADE_CLOSED+AFTERSALES;
                     numTextViews.get(0).setText(""+all);
                     numTextViews.get(1).setText(""+WAIT_CONFRIM);
                     numTextViews.get(2).setText(""+WAIT_APPROVE);
@@ -563,7 +601,7 @@ public class OrderCenterFragment extends BaseFragment {
                     numTextViews.get(5).setText(""+RECEIVE_GOODS);
                     numTextViews.get(6).setText(""+TRADE_FINISHED);
                     numTextViews.get(7).setText(""+TRADE_CANCEL);
-                    numTextViews.get(8).setText(""+0);
+                    numTextViews.get(8).setText(""+AFTERSALES);
                     numTextViews.get(9).setText(""+TRADE_CLOSED);
                 }
             }

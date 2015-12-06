@@ -69,7 +69,7 @@ public class CustomerCenterPriceActivity extends BaseActivity {
 
     private void initViews() {
         view_toolbar_center_layout.setBackgroundColor(Color.parseColor("#efefef"));
-        view_toolbar_center_title.setText("修理厂开票资料");
+        view_toolbar_center_title.setText("会员开票资料");
         view_toolbar_center_title.setTextColor(Color.BLACK);
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);

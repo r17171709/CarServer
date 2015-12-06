@@ -180,6 +180,9 @@ public class JsonParse {
                     pmodel.setShop_memo(ParamUtils.converNull(data2.getJSONObject(i).getString("shop_memo")));
                     pmodel.setPay_time(ParamUtils.converNull(data2.getJSONObject(i).getString("pay_time")));
                     pmodel.setTotal_fee(ParamUtils.converNull(data2.getJSONObject(i).getString("total_fee")));
+                    pmodel.setReceiver_time(ParamUtils.converNull(data2.getJSONObject(i).getString("receiver_time")));
+                    pmodel.setMessage(ParamUtils.converNull(data2.getJSONObject(i).getString("message")));
+                    pmodel.setNeedpaytime(ParamUtils.converNull(data2.getJSONObject(i).getString("needpaytime")));
                     ArrayList<ChildOrderModel> cModels=new ArrayList<>();
                     JSONArray order=new JSONArray(data2.getJSONObject(i).getString("order"));
                     for (int j=0;j<order.length();j++) {
@@ -396,6 +399,7 @@ public class JsonParse {
                 map.put("TRADE_CLOSED", data2.getString("TRADE_CLOSED"));
                 map.put("WAIT_CONFRIM", data2.getString("WAIT_CONFRIM"));
                 map.put("RECEIVE_GOODS", data2.getString("RECEIVE_GOODS"));
+                map.put("AFTERSALES", data2.getString("AFTERSALES"));
                 return map;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -427,6 +431,7 @@ public class JsonParse {
                     model.setRepairdepot_address(jsonObject.getString("repairdepot_address"));
                     model.setRepairdepot_name(jsonObject.getString("repairdepot_name"));
                     model.setAppove_status(jsonObject.getInt("appove_status"));
+                    model.setUser_id(jsonObject.getString("user_id"));
                     models.add(model);
                 }
                 return models;

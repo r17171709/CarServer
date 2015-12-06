@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/feedback_edit"
             android:layout_marginTop="15dip"
             android:textSize="16sp"
             android:text="1323123"
@@ -26,6 +27,7 @@
             android:layout_height="170dip"
             android:background="@drawable/rectangle_background_lightgray"/>
         <Button
+            android:id="@+id/feedback_commit"
             android:textColor="@android:color/white"
             android:layout_marginTop="40dip"
             android:gravity="center"

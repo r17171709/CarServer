@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.renyu.carserver.R;
+import com.renyu.carserver.commons.ParamUtils;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
@@ -16,10 +17,10 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 public class SendWeixin {
 
 	public static String sendWeixin(Context context, String text, String url, String title, boolean isFriend) {
-		IWXAPI api=WXAPIFactory.createWXAPI(context, "wx437d0c8be3e42d4f");
+		IWXAPI api=WXAPIFactory.createWXAPI(context, ParamUtils.weixin_appkey);
 		int wxSdkVersion = api.getWXAppSupportAPI();
 		if (wxSdkVersion >= 0x21020001) {
-			api.registerApp("wx437d0c8be3e42d4f");
+			api.registerApp(ParamUtils.weixin_appkey);
 			WXWebpageObject webpage=new WXWebpageObject();
 			webpage.webpageUrl=url;
 			WXMediaMessage msg=new WXMediaMessage(webpage);

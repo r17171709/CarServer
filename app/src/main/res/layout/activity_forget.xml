@@ -46,12 +46,13 @@
                 android:textColor="@android:color/black"
                 android:text="请输入手机号："/>
             <EditText
-                android:id="@+id/forget_password"
+                android:id="@+id/forget_phone"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:layout_width="match_parent"
                 android:layout_height="40dip"
-                android:inputType="number"
+                android:inputType="phone"
+                android:maxLength="11"
                 android:background="@drawable/rectangle_corner_black" />
         </LinearLayout>
         <RelativeLayout

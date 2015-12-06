@@ -33,6 +33,9 @@ public class ParentOrderModel implements Serializable {
     String timeout_action_time;
     String shop_memo;
     String total_fee;
+    String receiver_time;
+    String message;
+    String needpaytime;
 
     public String getPay_time() {
         return pay_time;
@@ -251,5 +254,30 @@ public class ParentOrderModel implements Serializable {
 
     public void setTotal_fee(String total_fee) {
         this.total_fee = total_fee;
+    }
+
+    public String getReceiver_time() {
+        return receiver_time;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setReceiver_time(String receiver_time) {
+        this.receiver_time = receiver_time;
+
+    }
+
+    public String getNeedpaytime() {
+        return needpaytime;
+    }
+
+    public void setNeedpaytime(String needpaytime) {
+        this.needpaytime = needpaytime;
     }
 }

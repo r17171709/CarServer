@@ -101,7 +101,7 @@ public class CustomerCenterInfoActivity extends BaseActivity {
 
     private void initViews() {
         view_toolbar_center_layout.setBackgroundColor(Color.parseColor("#efefef"));
-        view_toolbar_center_title.setText("修理厂基本信息");
+        view_toolbar_center_title.setText("会员基本信息");
         view_toolbar_center_title.setTextColor(Color.BLACK);
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);

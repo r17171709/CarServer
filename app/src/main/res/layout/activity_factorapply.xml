@@ -15,7 +15,7 @@
             android:layout_height="40dip"
             android:layout_weight="1"
             android:layout_marginLeft="50dip"
-            android:hint="输入修理厂全称|申请时间"
+            android:hint="输入会员全称|申请时间"
             android:textSize="13sp"
             android:drawablePadding="5dip"
             android:padding="5dip"

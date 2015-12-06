@@ -1,5 +1,7 @@
 package com.renyu.carserver.adapter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -56,6 +58,7 @@ public class OrderCenterAdapter extends BaseAdapter {
     public interface TobepaidChangePriceListener {
         void getTag(String tag);
         void showChange(String oid, String price, String tid, int position, int i);
+        void cancel(int position);
     }
 
     @Override
@@ -86,6 +89,8 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.ordercentertobepaid_tid= (TextView) convertView.findViewById(R.id.ordercentertobepaid_tid);
                 holder.ordercentertobepaid_num= (TextView) convertView.findViewById(R.id.ordercentertobepaid_num);
                 holder.ordercentertobepaid_price= (TextView) convertView.findViewById(R.id.ordercentertobepaid_price);
+                holder.adapter_ordercentertobepaid_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercentertobepaid_cancel);
+                holder.ordercentertobepaid_copy= (TextView) convertView.findViewById(R.id.ordercentertobepaid_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -97,6 +102,21 @@ public class OrderCenterAdapter extends BaseAdapter {
             drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
             holder.ordercentertobepaid_state.setCompoundDrawables(drawable, null, null, null);
             holder.ordercentertobepaid_num.setText("共"+models.get(position).getItemnum()+"件商品");
+            holder.adapter_ordercentertobepaid_cancel.setText("取消订单");
+            holder.adapter_ordercentertobepaid_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.cancel(position_);
+                }
+            });
+            holder.ordercentertobepaid_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
+                }
+            });
             if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
                 holder.ordercentertobepaid_price.setText("0");
             }
@@ -212,6 +232,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
                 holder.adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
                 holder.ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+                holder.ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -222,7 +243,15 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.adapter_ordercenterpending_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    listener.cancel(position_);
+                }
+            });
+            holder.ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
                 }
             });
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
@@ -296,6 +325,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
                 holder.adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
                 holder.ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+                holder.ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -306,7 +336,15 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.adapter_ordercenterpending_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    listener.cancel(position_);
+                }
+            });
+            holder.ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
                 }
             });
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
@@ -380,6 +418,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
                 holder.ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
                 holder.ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+                holder.ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -395,6 +434,14 @@ public class OrderCenterAdapter extends BaseAdapter {
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
             }
+            holder.ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
+                }
+            });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon5_red);
             drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
             holder.ordercenterpending_state.setCompoundDrawables(drawable, null, null, null);
@@ -458,6 +505,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
                 holder.adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
                 holder.ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+                holder.ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -469,6 +517,14 @@ public class OrderCenterAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
 
+                }
+            });
+            holder.ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
                 }
             });
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
@@ -541,6 +597,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
                 holder.ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
                 holder.ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+                holder.ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -556,6 +613,14 @@ public class OrderCenterAdapter extends BaseAdapter {
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
             }
+            holder.ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
+                }
+            });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon7_red);
             drawable.setBounds(0, 0, drawable.getMinimumWidth()/2, drawable.getMinimumHeight()/2);
             holder.ordercenterpending_state.setCompoundDrawables(drawable, null, null, null);
@@ -619,6 +684,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
                 holder.ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
                 holder.ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+                holder.ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -634,6 +700,14 @@ public class OrderCenterAdapter extends BaseAdapter {
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
             }
+            holder.ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
+                }
+            });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon8_red);
             drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
             holder.ordercenterpending_state.setCompoundDrawables(drawable, null, null, null);
@@ -698,6 +772,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.adapter_ordercentertobepaid_commit= (TextView) convertView.findViewById(R.id.adapter_ordercentertobepaid_commit);
                 holder.adapter_ordercentertobepaid_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercentertobepaid_cancel);
                 holder.ordercentertobepaid_price= (TextView) convertView.findViewById(R.id.ordercentertobepaid_price);
+                holder.ordercentertobepaid_copy= (TextView) convertView.findViewById(R.id.ordercentertobepaid_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -728,6 +803,14 @@ public class OrderCenterAdapter extends BaseAdapter {
             else {
                 holder.ordercentertobepaid_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
             }
+            holder.ordercentertobepaid_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
+                }
+            });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon9_red);
             drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
             holder.ordercentertobepaid_state.setCompoundDrawables(drawable, null, null, null);
@@ -790,6 +873,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.adapter_ordercenterpending_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercenterpending_cancel);
                 holder.ordercenterpending_num= (TextView) convertView.findViewById(R.id.ordercenterpending_num);
                 holder.ordercenterpending_price= (TextView) convertView.findViewById(R.id.ordercenterpending_price);
+                holder.ordercenterpending_copy= (TextView) convertView.findViewById(R.id.ordercenterpending_copy);
                 convertView.setTag(holder);
             }
             else {
@@ -805,6 +889,14 @@ public class OrderCenterAdapter extends BaseAdapter {
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
             }
+            holder.ordercenterpending_copy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
+                    cmb.setPrimaryClip(clip);
+                }
+            });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon10_red);
             drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
             holder.ordercenterpending_state.setCompoundDrawables(drawable, null, null, null);
