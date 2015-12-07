@@ -94,7 +94,7 @@ public class MyDataActivity extends BaseActivity {
         getMyData();
     }
 
-    @OnClick({R.id.mydata_commit, R.id.mydata_area, R.id.mydata_avatar})
+    @OnClick({R.id.mydata_commit, R.id.mydata_area, R.id.mydata_avatar, R.id.view_toolbar_center_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mydata_commit:
@@ -112,6 +112,9 @@ public class MyDataActivity extends BaseActivity {
                     }
                 }
                 openChoiceImage();
+                break;
+            case R.id.view_toolbar_center_back:
+                finish();
                 break;
         }
     }

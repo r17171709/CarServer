@@ -1,11 +1,15 @@
 package com.renyu.carserver.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +46,8 @@ public class MainActivity extends BaseActivity {
     ImageView main_image4;
     @Bind(R.id.main_text4)
     TextView main_text4;
+    @Bind(R.id.main_image)
+    ImageView main_image;
 
     MainFragment mainFragment=null;
     OrderCenterFragment orderCenterFragment=null;
@@ -60,14 +66,20 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (getIntent().getExtras().getBoolean("isNeedAnimation")) {
+            setTheme(R.style.LoginTheme);
+        }
+
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
         initViews(savedInstanceState);
-
     }
 
     private void initViews(Bundle savedInstanceState) {
+        if (getIntent().getExtras().getBoolean("isNeedAnimation")) {
+            splashAnimation();
+        }
         //隐藏全部缓存fragment
         List<Fragment> fragmentList=getSupportFragmentManager().getFragments();
         if (fragmentList!=null) {
@@ -184,5 +196,33 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         customerCenterFragment.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void splashAnimation() {
+        ValueAnimator valueAnimator=ValueAnimator.ofInt(1000, 0);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                main_image.setScaleX(1+animation.getAnimatedFraction()/2);
+                main_image.setScaleY(1+animation.getAnimatedFraction()/2);
+                main_image.setAlpha(1-animation.getAnimatedFraction());
+            }
+        });
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                main_image.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                main_image.setImageResource(R.mipmap.splash_bg);
+            }
+        });
+        valueAnimator.setDuration(1000);
+        valueAnimator.setInterpolator(new AccelerateInterpolator());
+        valueAnimator.start();
     }
 }

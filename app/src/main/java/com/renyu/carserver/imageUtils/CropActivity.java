@@ -81,7 +81,7 @@ public class CropActivity extends BaseActivity {
 			@Override
 			public void run() {
 				cropBmp=mCropImage.getCroppedImage();
-				String path=writeImage(cropBmp, ParamUtils.IMAGECACHE+"/temp.png", 100);
+				String path=writeImage(cropBmp, ParamUtils.IMAGECACHE+"/"+System.currentTimeMillis()+".png", 100);
 				Message m=new Message();
 				m.obj=path;
 				handler.sendMessage(m);
