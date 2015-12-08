@@ -88,6 +88,7 @@ public class OrderCenterDetailActivity extends BaseActivity {
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
         view_toolbar_center_back.setImageResource(R.mipmap.ic_back_gray);
+
         ordercenterdetail_address.setText(model.getReceiver_name() + " " + model.getReceiver_mobile() + "\n" +
                 model.getReceiver_state() + " " + model.getReceiver_city() + " " + model.getReceiver_district() + model.getReceiver_address());
         ordercenterdetail_message.setText(ParamUtils.converNull(model.getBuyer_message()));

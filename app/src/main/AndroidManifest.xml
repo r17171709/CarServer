@@ -45,6 +45,7 @@
         <activity android:name=".activity.customercenter.ProductDetailActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ordercenter.OrderCenterDetailActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ordercenter.OrderCenterSearchActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ordercenter.OrderCenterSearchResultActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.my.MySaveActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.my.MyStatementActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.my.MyStatementDetailActivity" android:screenOrientation="portrait"></activity>

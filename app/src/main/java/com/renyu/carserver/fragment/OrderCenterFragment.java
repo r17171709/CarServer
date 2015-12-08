@@ -45,6 +45,8 @@ import butterknife.OnClick;
  */
 public class OrderCenterFragment extends BaseFragment {
 
+    @Bind(R.id.view_toolbar_center_layout)
+    RelativeLayout view_toolbar_center_layout;
     @Bind(R.id.ordercenter_change_layout)
     RelativeLayout ordercenter_change_layout;
     @Bind(R.id.ordercenter_change_commit)
@@ -91,6 +93,7 @@ public class OrderCenterFragment extends BaseFragment {
     }
 
     private void initViews() {
+        view_toolbar_center_layout.setVisibility(View.GONE);
         View headview= LayoutInflater.from(getActivity()).inflate(R.layout.view_ordercenterheadview, null, false);
         GridLayout ordercenter_gridlayout= (GridLayout) headview.findViewById(R.id.ordercenter_gridlayout);
         int width= CommonUtils.getScreenWidth(getActivity())/5;
@@ -457,6 +460,8 @@ public class OrderCenterFragment extends BaseFragment {
                             shopModels.clear();
                             shopModels.addAll((ArrayList<ParentOrderModel>) model);
                             ordercenter_lv.setAdapter(adapter);
+
+                            getNumber();
                         } else {
                             shopModels.addAll((ArrayList<ParentOrderModel>) model);
                             adapter.notifyDataSetChanged();
@@ -548,8 +553,8 @@ public class OrderCenterFragment extends BaseFragment {
                 if (JsonParse.getResultValue(string)!=null) {
                     showToast(JsonParse.getResultValue(string));
                     if (JsonParse.getResultInt(string)==0) {
-                        shopModels.get(position).getModels().get(i).setSettle_price(price);
-                        adapter.notifyDataSetChanged();
+                        page_no=1;
+                        loadOrderCenter(ordercenter_edittext.getText().toString());
                     }
                 }
                 else {
