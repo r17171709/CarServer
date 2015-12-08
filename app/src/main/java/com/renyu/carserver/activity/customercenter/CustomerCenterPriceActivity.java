@@ -36,8 +36,6 @@ public class CustomerCenterPriceActivity extends BaseActivity {
     ImageView view_toolbar_center_back;
     @Bind(R.id.view_toolbar_center_image)
     ImageView view_toolbar_center_image;
-    @Bind(R.id.customercenterprice_company)
-    EditText customercenterprice_company;
     @Bind(R.id.customercenterprice_taxnum)
     EditText customercenterprice_taxnum;
     @Bind(R.id.customercenterprice_phonenum2)
@@ -46,8 +44,8 @@ public class CustomerCenterPriceActivity extends BaseActivity {
     EditText customercenterprice_bank;
     @Bind(R.id.customercenterprice_cardnum)
     EditText customercenterprice_cardnum;
-    @Bind(R.id.customercenterprice_contact2)
-    EditText customercenterprice_contact2;
+    @Bind(R.id.customercenterprice_reg_address)
+    EditText customercenterprice_reg_address;
 
     CustomerModel model=null;
 
@@ -74,12 +72,11 @@ public class CustomerCenterPriceActivity extends BaseActivity {
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
         view_toolbar_center_back.setImageResource(R.mipmap.ic_back_gray);
-        customercenterprice_company.setText(model.getRepairdepot_name());
         customercenterprice_taxnum.setText(model.getRevenues_code());
-        customercenterprice_contact2.setText(model.getContact_person());
         customercenterprice_phonenum2.setText(model.getContact_phone());
         customercenterprice_bank.setText(model.getBank_name());
         customercenterprice_cardnum.setText(""+model.getBank_account());
+        customercenterprice_reg_address.setText(""+model.getReg_address());
     }
 
     @OnClick({R.id.customercenterprice_commit, R.id.view_toolbar_center_back})
@@ -95,12 +92,11 @@ public class CustomerCenterPriceActivity extends BaseActivity {
 
     private void updateCustomer() {
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.xiuliuser.update", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
-        params.put("repairdepot_name", customercenterprice_company.getText().toString());
         params.put("revenues_code", customercenterprice_taxnum.getText().toString());
         params.put("bank_name", customercenterprice_bank.getText().toString());
         params.put("bank_account", customercenterprice_cardnum.getText().toString());
-        params.put("contact_person", customercenterprice_contact2.getText().toString());
         params.put("contact_phone", customercenterprice_phonenum2.getText().toString());
+        params.put("reg_address", customercenterprice_reg_address.getText().toString());
         params.put("user_id", ""+model.getUser_id());
         HashMap<String, File> fileHashMap=new HashMap<>();
         httpHelper.uploadFile(fileHashMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {

@@ -178,9 +178,11 @@ public class FactorApplyActivity extends BaseActivity {
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.joinapplylist", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("page_no", ""+page_no);
         params.put("page_size", "20");
-        params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
-            params.put("repairdepot_name", repairdepot_name);
+            params.put("repair_name", repairdepot_name);
+        }
+        else {
+            params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         }
         if (applytime!=0) {
             params.put("applytime", ""+applytime);
@@ -196,8 +198,12 @@ public class FactorApplyActivity extends BaseActivity {
                 }
                 else {
                     Object model=JsonParse.getFactoryApplyModel(string);
+                    //这里就是没有数据
                     if (model==null) {
-                        showToast("未知错误");
+                        if (page_no==1) {
+                            models.clear();
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                     else if (model instanceof String) {
                         showToast((String) model);

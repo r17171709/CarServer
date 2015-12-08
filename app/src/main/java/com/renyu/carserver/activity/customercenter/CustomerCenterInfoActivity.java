@@ -53,6 +53,10 @@ public class CustomerCenterInfoActivity extends BaseActivity {
     TextView customercenterinfo_id;
     @Bind(R.id.customercenterinfo_name)
     EditText customercenterinfo_name;
+    @Bind(R.id.customercenterinfo_contact)
+    EditText customercenterinfo_contact;
+    @Bind(R.id.customercenterinfo_company)
+    EditText customercenterinfo_company;
     @Bind(R.id.customercenterinfo_area)
     TextView customercenterinfo_area;
     @Bind(R.id.customercenterinfo_address)
@@ -276,6 +280,8 @@ public class CustomerCenterInfoActivity extends BaseActivity {
         params.put("corporation", customercenterinfo_legalperson.getText().toString());
         params.put("corporation_codeId", customercenterinfo_legalpersonid.getText().toString());
         params.put("business_encoding", customercenterinfo_businesslicense.getText().toString());
+        params.put("contact_person", customercenterinfo_contact.getText().toString());
+        params.put("repairdepot_name", customercenterinfo_company.getText().toString());
         params.put("user_id", ""+model.getUser_id());
         HashMap<String, File> fileHashMap=new HashMap<>();
         if (!pic1.equals("")) {

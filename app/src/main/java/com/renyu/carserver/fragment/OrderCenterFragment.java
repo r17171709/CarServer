@@ -105,6 +105,7 @@ public class OrderCenterFragment extends BaseFragment {
                     page_no=1;
                     isNeedLoad=true;
                     ordercenter_edittext.setText("");
+                    hide(ordercenter_edittext);
                     changeChoice(i_);
                 }
             });
@@ -383,15 +384,14 @@ public class OrderCenterFragment extends BaseFragment {
         }
     }
 
-    private void loadOrderCenter(String repairdepot_name) {
-        hide(ordercenter_edittext);
+    private void loadOrderCenter(String tid) {
         httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.user.order.list", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(getActivity()).getShop_id());
         params.put("page_size", "20");
         params.put("page_no", "" + page_no);
-        if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
-            params.put("repairdepot_name", repairdepot_name);
+        if (tid!=null&&!tid.equals("")) {
+            params.put("tid", tid);
         }
         if (curPosition==0) {
 
@@ -438,14 +438,18 @@ public class OrderCenterFragment extends BaseFragment {
         }, new OKHttpHelper.RequestListener() {
             @Override
             public void onSuccess(String string) {
-               Log.d("OrderCenterFragment", string);
+                Log.d("OrderCenterFragment", string);
                 ordercenter_swipy.setRefreshing(false);
                 if (JsonParse.getResultInt(string) == 1) {
                     showToast(JsonParse.getErrorValue(string));
                 } else {
                     Object model = JsonParse.getOrderModel(string);
-                    if (model == null) {
-                        showToast("未知错误");
+                    //这里就是没有数据
+                    if (model==null) {
+                        if (page_no==1) {
+                            shopModels.clear();
+                            adapter.notifyDataSetChanged();
+                        }
                     } else if (model instanceof String) {
                         showToast((String) model);
                     } else {

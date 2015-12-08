@@ -55,6 +55,7 @@ public class CropActivity extends BaseActivity {
 	private void init() {
 		view_toolbar_center_title.setText("剪裁");
 		view_toolbar_center_next.setVisibility(View.VISIBLE);
+		view_toolbar_center_next.setImageResource(R.mipmap.ic_crop);
 		view_toolbar_center_back.setVisibility(View.VISIBLE);
 		mCropImage.setFixedAspectRatio(true);
 		mCropImage.setImageBitmap(bmp);

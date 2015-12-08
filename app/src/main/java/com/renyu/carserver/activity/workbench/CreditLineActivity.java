@@ -58,12 +58,12 @@ public class CreditLineActivity extends BaseActivity {
     LinearLayout creditline_result_layout;
     @Bind(R.id.creditline_platform_num)
     EditText creditline_platform_num;
-    @Bind(R.id.creditline_bank_num)
-    EditText creditline_bank_num;
     @Bind(R.id.creditline_name)
     TextView creditline_name;
     @Bind(R.id.createline_edit)
     EditText createline_edit;
+    @Bind(R.id.creditline_result_text)
+    TextView creditline_result_text;
 
     ArrayList<CreditLineModel> models=null;
 
@@ -143,7 +143,6 @@ public class CreditLineActivity extends BaseActivity {
 
                 creditline_name.setText(models.get(position).getRepairdepot_name());
                 creditline_platform_num.setText(""+models.get(position).getInit_amount());
-                creditline_bank_num.setText("0");
                 currentPosition=position;
             }
         });
@@ -225,6 +224,7 @@ public class CreditLineActivity extends BaseActivity {
                 dismissDialog();
 
                 creditline_num_layout.setVisibility(View.GONE);
+                creditline_result_text.setText(JsonParse.getResultValue(string));
                 creditline_result_layout.setVisibility(View.VISIBLE);
                 Observable.timer(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
                     @Override

@@ -43,7 +43,7 @@ public class ShareActivity extends BaseActivity {
         view_toolbar_center_back.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.share_qq, R.id.share_qzone, R.id.share_weixin, R.id.share_pyq, R.id.share_sina, R.id.share_sms})
+    @OnClick({R.id.share_qq, R.id.share_qzone, R.id.share_weixin, R.id.share_pyq, R.id.share_sina, R.id.share_sms, R.id.view_toolbar_center_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.share_qq:
@@ -90,6 +90,8 @@ public class ShareActivity extends BaseActivity {
                 intent.putExtra("sms_body", "http://www.baidu.com");
                 startActivity(intent);
                 break;
+            case R.id.view_toolbar_center_back:
+                finish();
         }
     }
 }

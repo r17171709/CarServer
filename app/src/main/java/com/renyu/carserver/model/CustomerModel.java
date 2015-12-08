@@ -58,6 +58,7 @@ public class CustomerModel implements Serializable {
     private int experience;
     private String contact_tel;
     private String bill_info;
+    private String reg_address;
 
     public void setLogin_account(String login_account) {
         this.login_account = login_account;
@@ -473,5 +474,13 @@ public class CustomerModel implements Serializable {
 
     public String getBill_info() {
         return bill_info;
+    }
+
+    public String getReg_address() {
+        return reg_address;
+    }
+
+    public void setReg_address(String reg_address) {
+        this.reg_address = reg_address;
     }
 }

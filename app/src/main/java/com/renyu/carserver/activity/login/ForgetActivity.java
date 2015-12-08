@@ -51,6 +51,14 @@ public class ForgetActivity extends BaseActivity {
     }
 
     private void forget() {
+        if (forget_name.getText().toString().equals("")) {
+            showToast("请输入账号");
+            return;
+        }
+        if (forget_phone.getText().toString().equals("")) {
+            showToast("请输入手机号");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.user.forgotPassword", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("login_phone", forget_phone.getText().toString());
         params.put("login_name", forget_name.getText().toString());

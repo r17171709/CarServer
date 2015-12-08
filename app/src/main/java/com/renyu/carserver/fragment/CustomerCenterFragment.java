@@ -170,8 +170,12 @@ public class CustomerCenterFragment extends BaseFragment {
                 }
                 else {
                     Object model=JsonParse.getCustomerModel(string);
+                    //这里就是没有数据
                     if (model==null) {
-                        showToast("未知错误");
+                        if (page_no==1) {
+                            models.clear();
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                     else if (model instanceof String) {
                         showToast((String) model);

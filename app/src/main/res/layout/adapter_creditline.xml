@@ -46,16 +46,6 @@
                 android:paddingRight="20dip"
                 android:gravity="center_vertical"
                 android:text="123123"/>
-            <TextView
-                android:id="@+id/adapter_credit_backinfo"
-                android:layout_width="match_parent"
-                android:layout_height="30dip"
-                android:textSize="13sp"
-                android:textColor="#6a6a6c"
-                android:paddingLeft="20dip"
-                android:paddingRight="20dip"
-                android:gravity="center_vertical"
-                android:text="123123"/>
         </LinearLayout>
         <View
             android:background="#bbbbbb"
@@ -67,7 +57,7 @@
             android:id="@+id/adapter_credit_change"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="#d23136"
             android:gravity="center"
             android:layout_weight="9"

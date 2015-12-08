@@ -101,11 +101,11 @@ public class MainFragment extends BaseFragment {
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon5);
                     break;
                 case 5:
-                    main_middle_gridlayout_item_name.setText("新增客户");
+                    main_middle_gridlayout_item_name.setText("新增会员");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon6);
                     break;
                 case 6:
-                    main_middle_gridlayout_item_name.setText("新增客户审核");
+                    main_middle_gridlayout_item_name.setText("新增会员审核");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon7);
                     break;
                 case 7:

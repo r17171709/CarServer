@@ -89,6 +89,16 @@ public class AddCustomerActivity extends BaseActivity {
     EditText addcustomer_legalpersonid;
     @Bind(R.id.addcustomer_reg_address)
     EditText addcustomer_reg_address;
+    @Bind(R.id.addcustomer_creditline)
+    EditText addcustomer_creditline;
+    @Bind(R.id.addcustomer_email)
+    EditText addcustomer_email;
+    @Bind(R.id.addcustomer_zipcode)
+    EditText addcustomer_zipcode;
+    @Bind(R.id.view_toolbar_center_text_back)
+    TextView view_toolbar_center_text_back;
+    @Bind(R.id.view_toolbar_center_text_next)
+    TextView view_toolbar_center_text_next;
 
     String pic1="";
     String pic2="";
@@ -112,23 +122,23 @@ public class AddCustomerActivity extends BaseActivity {
 
     private void initViews() {
         view_toolbar_center_layout.setBackgroundColor(Color.parseColor("#efefef"));
-        view_toolbar_center_title.setText("服务商基本信息");
+        view_toolbar_center_title.setText("新增会员-基本信息");
         view_toolbar_center_title.setTextColor(Color.BLACK);
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
         view_toolbar_center_back.setImageResource(R.mipmap.ic_back_gray);
+        view_toolbar_center_text_next.setText("下一步");
+        view_toolbar_center_text_next.setTextColor(Color.parseColor("#a20000"));
+        view_toolbar_center_text_next.setVisibility(View.VISIBLE);
+        view_toolbar_center_text_back.setTextColor(Color.parseColor("#a20000"));
     }
 
-    @OnClick({R.id.addcustomer_next, R.id.addcustomer_commit, R.id.view_toolbar_center_back,
+    @OnClick({R.id.addcustomer_commit, R.id.view_toolbar_center_back,
             R.id.addcustomer_id_photo1, R.id.addcustomer_id_photo2,
             R.id.addcustomer_businesslicense_photo1, R.id.addcustomer_businesslicense_photo2,
-            R.id.addcustomer_area})
+            R.id.addcustomer_area, R.id.view_toolbar_center_text_next, R.id.view_toolbar_center_text_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.addcustomer_next:
-                addcustomer_layout1.setVisibility(View.GONE);
-                addcustomer_layout2.setVisibility(View.VISIBLE);
-                break;
             case R.id.addcustomer_commit:
                 addCustomer();
                 break;
@@ -179,7 +189,21 @@ public class AddCustomerActivity extends BaseActivity {
                 Intent intent=new Intent(AddCustomerActivity.this, AreaActivity.class);
                 startActivityForResult(intent, ParamUtils.RESULT_AREA);
                 break;
-
+            case R.id.view_toolbar_center_text_next:
+                addcustomer_layout1.setVisibility(View.GONE);
+                addcustomer_layout2.setVisibility(View.VISIBLE);
+                view_toolbar_center_text_back.setText("上一步");
+                view_toolbar_center_text_back.setVisibility(View.VISIBLE);
+                view_toolbar_center_text_next.setVisibility(View.GONE);
+                view_toolbar_center_title.setText("新增会员-开票信息");
+                break;
+            case R.id.view_toolbar_center_text_back:
+                addcustomer_layout1.setVisibility(View.VISIBLE);
+                addcustomer_layout2.setVisibility(View.GONE);
+                view_toolbar_center_text_back.setVisibility(View.GONE);
+                view_toolbar_center_text_next.setVisibility(View.VISIBLE);
+                view_toolbar_center_title.setText("新增会员-基本信息");
+                break;
         }
     }
 
@@ -188,6 +212,9 @@ public class AddCustomerActivity extends BaseActivity {
         if (addcustomer_layout2.getVisibility() == View.VISIBLE && addcustomer_layout1.getVisibility() == View.GONE) {
             addcustomer_layout1.setVisibility(View.VISIBLE);
             addcustomer_layout2.setVisibility(View.GONE);
+            view_toolbar_center_text_back.setVisibility(View.GONE);
+            view_toolbar_center_text_next.setVisibility(View.VISIBLE);
+            view_toolbar_center_title.setText("新增会员-基本信息");
         } else {
             super.onBackPressed();
         }
@@ -263,6 +290,78 @@ public class AddCustomerActivity extends BaseActivity {
     }
 
     private void addCustomer() {
+        if (addcustomer_company.getText().toString().equals("")) {
+            showToast("请填写单位全称");
+            return;
+        }
+        if (addcustomer_phonenum.getText().toString().equals("")) {
+            showToast("请填写联系电话");
+            return;
+        }
+        if (cityIds.equals("")) {
+            showToast("请选择所在地区");
+            return;
+        }
+        if (addcustomer_address.getText().toString().equals("")) {
+            showToast("请填写详细地址");
+            return;
+        }
+        if (addcustomer_businesslicense.getText().toString().equals("")) {
+            showToast("请填写营业执照号");
+            return;
+        }
+        if (addcustomer_legalperson.getText().toString().equals("")) {
+            showToast("请填写法人/经营者姓名");
+            return;
+        }
+        if (addcustomer_legalpersonid.getText().toString().equals("")) {
+            showToast("请填写身份证号码");
+            return;
+        }
+        if (addcustomer_name.getText().toString().equals("")) {
+            showToast("请填写会员名");
+            return;
+        }
+        if (addcustomer_contact.getText().toString().equals("")) {
+            showToast("请填写联系人");
+            return;
+        }
+        if (addcustomer_taxnum.getText().toString().equals("")) {
+            showToast("请填写税务登记号");
+            return;
+        }
+        if (addcustomer_bank.getText().toString().equals("")) {
+            showToast("请填写开户银行");
+            return;
+        }
+        if (addcustomer_cardnum.getText().toString().equals("")) {
+            showToast("请填写开户银行账号");
+            return;
+        }
+        if (addcustomer_phonenum2.getText().toString().equals("")) {
+            showToast("请填写联系电话");
+            return;
+        }
+        if (addcustomer_reg_address.getText().toString().equals("")) {
+            showToast("请填写企业住所");
+            return;
+        }
+        if (pic1.equals("")) {
+            showToast("请添加身份证正面照片");
+            return;
+        }
+        if (pic2.equals("")) {
+            showToast("请添加身份证背面照片");
+            return;
+        }
+        if (pic3.equals("")) {
+            showToast("请添加营业执照照片");
+            return;
+        }
+        if (pic4.equals("")) {
+            showToast("请添加门头照片照片");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.account.sysservice.xiuliuser.add", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("repairdepot_name", addcustomer_company.getText().toString());
         params.put("mobile", addcustomer_phonenum.getText().toString());
