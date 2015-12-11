@@ -179,7 +179,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onError() {
                 dismissDialog();
-                showToast("未知错误");
+
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }

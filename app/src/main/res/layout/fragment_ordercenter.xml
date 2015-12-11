@@ -24,7 +24,7 @@
                     android:layout_height="40dip"
                     android:layout_marginLeft="50dip"
                     android:layout_marginRight="50dip"
-                    android:hint="输入订单编号|商品名称"
+                    android:hint="输入商品名称"
                     android:textSize="13sp"
                     android:drawablePadding="5dip"
                     android:padding="5dip"

@@ -333,7 +333,7 @@ public class JsonParse {
      * @param string
      * @return
      */
-    public static int getPriceRemind(String string) {
+    public static int getResultCode(String string) {
         if (getResultInt(string)==0) {
             try {
                 JSONObject object=new JSONObject(string);

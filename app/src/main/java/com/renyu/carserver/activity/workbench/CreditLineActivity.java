@@ -86,7 +86,7 @@ public class CreditLineActivity extends BaseActivity {
     }
 
     private void initViews() {
-        view_toolbar_center_title.setText("授信额度");
+        view_toolbar_center_title.setText("平台授信");
         view_toolbar_center_back.setVisibility(View.VISIBLE);
         createline_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -151,7 +151,7 @@ public class CreditLineActivity extends BaseActivity {
         getCreditLine(null);
     }
 
-    @OnClick({R.id.view_toolbar_center_back, R.id.creditline_commit})
+    @OnClick({R.id.view_toolbar_center_back, R.id.creditline_commit, R.id.creditline_change_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.view_toolbar_center_back:
@@ -159,6 +159,10 @@ public class CreditLineActivity extends BaseActivity {
                 break;
             case R.id.creditline_commit:
                 update(""+models.get(currentPosition).getUser_id(), ""+models.get(currentPosition).getInit_amount(), creditline_platform_num.getText().toString());
+                break;
+            case R.id.creditline_change_layout:
+                creditline_change_layout.setVisibility(View.GONE);
+                creditline_num_layout.setVisibility(View.GONE);
                 break;
         }
     }

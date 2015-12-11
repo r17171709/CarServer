@@ -114,8 +114,8 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
             }
 
             @Override
-            public void showChange(String oid, String price, String tid, int position, int i) {
-                priceRemind(oid, price, tid, position, i);
+            public void showChange(int position) {
+                priceRemind(position);
             }
 
             @Override
@@ -180,7 +180,8 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
             @Override
             public void onError() {
                 dismissDialog();
-                showToast("未知错误");
+
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
@@ -247,8 +248,23 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
         }
     }
 
-    private void priceRemind(final String oid, final String price, final String tid, final int position, final int i) {
+    private void priceRemind(int position) {
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.priceRemind", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        final String tid=shopModels.get(position).getTid();
+        String oid="";
+        String price="";
+        for (int i=0;i<shopModels.get(position).getModels().size();i++) {
+            if (i!=shopModels.get(position).getModels().size()-1) {
+                oid+=shopModels.get(position).getModels().get(i).getOid()+",";
+                price+=shopModels.get(position).getModels().get(i).getEdit_price()+",";
+            }
+            else {
+                oid+=shopModels.get(position).getModels().get(i).getOid();
+                price+=shopModels.get(position).getModels().get(i).getEdit_price();
+            }
+        }
+        final String oid_=oid;
+        final String price_=price;
         params.put("oid", oid);
         params.put("price", price);
         httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
@@ -261,16 +277,16 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
             public void onSuccess(String string) {
                 Log.d("OrderCenterFragment", string);
                 dismissDialog();
-                if (JsonParse.getPriceRemind(string)==0) {
-                    price(oid, price, tid, position, i);
+                if (JsonParse.getResultCode(string)==0) {
+                    price(oid_, price_, tid);
                 }
-                else if (JsonParse.getPriceRemind(string)==1) {
+                else if (JsonParse.getResultCode(string)==1) {
                     ordercenter_change_layout.setVisibility(View.VISIBLE);
                     ordercenter_change_commit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             ordercenter_change_layout.setVisibility(View.GONE);
-                            price(oid, price, tid, position, i);
+                            price(oid_, price_, tid);
                         }
                     });
                     ordercenter_change_cancel.setOnClickListener(new View.OnClickListener() {
@@ -289,12 +305,12 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
             public void onError() {
                 dismissDialog();
 
-                showToast("未知错误");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
 
-    private void price(String oid, final String price, String tid, final int position, final int i) {
+    private void price(String oid, final String price, String tid) {
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.price", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("oid", oid);
         params.put("tid", tid);
@@ -312,8 +328,7 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
                 if (JsonParse.getResultValue(string)!=null) {
                     showToast(JsonParse.getResultValue(string));
                     if (JsonParse.getResultInt(string)==0) {
-                        shopModels.get(position).getModels().get(i).setSettle_price(price);
-                        adapter.notifyDataSetChanged();
+                        loadOrderCenter();
                     }
                 }
                 else {
@@ -325,9 +340,8 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
             public void onError() {
                 dismissDialog();
 
-                showToast("未知错误");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
-
 }

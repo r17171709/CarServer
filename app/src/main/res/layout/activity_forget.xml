@@ -24,7 +24,7 @@
                 android:layout_marginLeft="10dip"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:text="请输入账号："/>
+                android:text="请输入会员名："/>
             <EditText
                 android:id="@+id/forget_name"
                 android:layout_marginLeft="10dip"

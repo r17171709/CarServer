@@ -16,6 +16,7 @@ public class ChildOrderModel implements Serializable {
     String num;
     String pic_path;
     String aftersales_status;
+    double edit_price=0;
 
     public String getOid() {
         return oid;
@@ -95,5 +96,13 @@ public class ChildOrderModel implements Serializable {
 
     public void setAftersales_status(String aftersales_status) {
         this.aftersales_status = aftersales_status;
+    }
+
+    public double getEdit_price() {
+        return edit_price;
+    }
+
+    public void setEdit_price(double edit_price) {
+        this.edit_price = edit_price;
     }
 }

@@ -72,7 +72,7 @@ public class SearchCreditLineActivity extends BaseActivity {
 
     private void initViews() {
         view_toolbar_center_layout.setBackgroundColor(Color.parseColor("#efefef"));
-        view_toolbar_center_title.setText("授信额度变更查询");
+        view_toolbar_center_title.setText("平台授信变更查询");
         view_toolbar_center_title.setTextColor(Color.BLACK);
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
@@ -156,8 +156,12 @@ public class SearchCreditLineActivity extends BaseActivity {
                 }
                 else {
                     Object model=JsonParse.getSearchCreditLineModels(string);
+                    //这里就是没有数据
                     if (model==null) {
-                        showToast("未知错误");
+                        if (page_no==1) {
+                            models.clear();
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                     else if (model instanceof String) {
                         showToast((String) model);
@@ -215,7 +219,7 @@ public class SearchCreditLineActivity extends BaseActivity {
 
             @Override
             public void onError() {
-                showToast("重新申请失败");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }

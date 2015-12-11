@@ -211,7 +211,7 @@ public class JoinActivity extends BaseActivity {
             @Override
             public void onError() {
                 dismissDialog();
-                showToast("申请加盟出现异常，请重试");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }

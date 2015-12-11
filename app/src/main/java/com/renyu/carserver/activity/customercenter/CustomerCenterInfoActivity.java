@@ -112,6 +112,8 @@ public class CustomerCenterInfoActivity extends BaseActivity {
         view_toolbar_center_back.setImageResource(R.mipmap.ic_back_gray);
         customercenterinfo_id.setText(model.getLogin_account());
         customercenterinfo_name.setText(model.getAccount_name());
+        customercenterinfo_contact.setText(model.getContact_person());
+        customercenterinfo_company.setText(model.getRepairdepot_name());
         for (int i=0;i<model.getAreaframe().split("/").length;i++) {
             cityNames+= CommonUtils.getCityInfo(model.getAreaframe().split("/")[i]);
             if (i!=model.getAreaframe().split("/").length-1) {
@@ -272,6 +274,58 @@ public class CustomerCenterInfoActivity extends BaseActivity {
     }
 
     private void updateCustomer() {
+        if (customercenterinfo_name.getText().toString().equals("")) {
+            showToast("请填写会员名");
+            return;
+        }
+        if (cityIds.equals("")) {
+            showToast("请选择所在地区");
+            return;
+        }
+        if (customercenterinfo_address.getText().toString().equals("")) {
+            showToast("请填写详细地址");
+            return;
+        }
+        if (customercenterinfo_phonenum.getText().toString().equals("")) {
+            showToast("请填写联系电话");
+            return;
+        }
+        if (customercenterinfo_legalperson.getText().toString().equals("")) {
+            showToast("请填写法人/经营者姓名");
+            return;
+        }
+        if (customercenterinfo_legalpersonid.getText().toString().equals("")) {
+            showToast("请填写身份证号码");
+            return;
+        }
+        if (customercenterinfo_businesslicense.getText().toString().equals("")) {
+            showToast("请填写营业执照号");
+            return;
+        }
+        if (customercenterinfo_contact.getText().toString().equals("")) {
+            showToast("请填写联系人");
+            return;
+        }
+        if (customercenterinfo_company.getText().toString().equals("")) {
+            showToast("请填写单位全称");
+            return;
+        }
+        if (pic1.equals("")) {
+            showToast("请添加身份证正面照片");
+            return;
+        }
+        if (pic2.equals("")) {
+            showToast("请添加身份证背面照片");
+            return;
+        }
+        if (pic3.equals("")) {
+            showToast("请添加营业执照照片");
+            return;
+        }
+        if (pic4.equals("")) {
+            showToast("请添加门头照片照片");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.xiuliuser.update", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("account_name", customercenterinfo_name.getText().toString());
         params.put("area", cityIds);
@@ -320,7 +374,7 @@ public class CustomerCenterInfoActivity extends BaseActivity {
             public void onError() {
                 dismissDialog();
 
-                showToast("未知错误");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }

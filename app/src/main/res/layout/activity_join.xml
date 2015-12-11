@@ -182,6 +182,7 @@
                             android:padding="5dip"
                             android:textSize="13sp"
                             android:layout_marginLeft="10dip"
+                            android:maxLength="11"
                             android:inputType="number"
                             android:textColor="#999999"
                             android:background="@drawable/rectangle_corner_black"/>
@@ -231,6 +232,7 @@
                             android:padding="5dip"
                             android:textSize="13sp"
                             android:layout_marginLeft="10dip"
+                            android:maxLength="18"
                             android:inputType="number"
                             android:textColor="#999999"
                             android:background="@drawable/rectangle_corner_black"/>

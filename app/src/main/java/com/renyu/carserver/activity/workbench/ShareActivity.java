@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.renyu.carserver.R;
 import com.renyu.carserver.base.BaseActivity;
+import com.renyu.carserver.commons.ParamUtils;
 import com.renyu.carserver.qqapi.QQActivity;
 import com.renyu.carserver.sinaweiboapi.WBMainActivity;
 import com.renyu.carserver.wxapi.SendWeixin;
@@ -39,7 +40,18 @@ public class ShareActivity extends BaseActivity {
     }
 
     private void initViews() {
-        view_toolbar_center_title.setText("分享");
+        switch (getIntent().getExtras().getInt("type")) {
+            case ParamUtils.RESULT_CARSERVER:
+                view_toolbar_center_title.setText("服务商应用");
+                break;
+            case ParamUtils.RESULT_CARCLIENT:
+                view_toolbar_center_title.setText("修理厂应用");
+                break;
+            case ParamUtils.RESULT_CARWEIXIN:
+                view_toolbar_center_title.setText("微信公众号");
+                break;
+        }
+
         view_toolbar_center_back.setVisibility(View.VISIBLE);
     }
 

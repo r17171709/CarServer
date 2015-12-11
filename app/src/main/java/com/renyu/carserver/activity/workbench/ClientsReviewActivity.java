@@ -84,7 +84,7 @@ public class ClientsReviewActivity extends BaseActivity {
 
     private void initViews() {
         view_toolbar_center_layout.setBackgroundColor(Color.parseColor("#efefef"));
-        view_toolbar_center_title.setText("新增客户审核进度");
+        view_toolbar_center_title.setText("会员审核");
         view_toolbar_center_title.setTextColor(Color.BLACK);
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
@@ -267,7 +267,8 @@ public class ClientsReviewActivity extends BaseActivity {
             @Override
             public void onError() {
                 clientsreview_swipy.setRefreshing(false);
-                showToast("未知错误");
+
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }

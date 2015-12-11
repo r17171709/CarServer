@@ -65,11 +65,11 @@ public class OrderCenterFragment extends BaseFragment {
 
     String currentTag="";
 
-    ArrayList<View> views=null;
-
     int page_no=1;
 
     int curPosition=0;
+
+    ArrayList<View> views=null;
 
     ArrayList<TextView> numTextViews=null;
 
@@ -85,8 +85,8 @@ public class OrderCenterFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        views=new ArrayList<>();
         shopModels=new ArrayList<>();
+        views=new ArrayList<>();
         numTextViews=new ArrayList<>();
 
         initViews();
@@ -171,10 +171,13 @@ public class OrderCenterFragment extends BaseFragment {
                 }
                 TextView ordercentertobepaid_child_finalprice= (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_finalprice_"+currentTag);
                 EditText ordercentertobepaid_child_finalprice_edit= (EditText) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_finalprice_edit_"+currentTag);
-                ordercentertobepaid_child_finalprice_edit.setText("0");
                 TextView ordercentertobepaid_child_changeprice= (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_changeprice_" + currentTag);
                 TextView ordercentertobepaid_child_commit= (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_commit_" + currentTag);
                 TextView ordercentertobepaid_child_commitsync= (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_commitsync_" + currentTag);
+                if (ordercentertobepaid_child_finalprice==null||ordercentertobepaid_child_finalprice_edit==null||ordercentertobepaid_child_changeprice==null
+                        ||ordercentertobepaid_child_commit==null||ordercentertobepaid_child_commitsync==null) {
+                    return;
+                }
                 ordercentertobepaid_child_finalprice.setVisibility(View.VISIBLE);
                 ordercentertobepaid_child_finalprice_edit.setVisibility(View.GONE);
                 ordercentertobepaid_child_changeprice.setVisibility(View.VISIBLE);
@@ -184,8 +187,8 @@ public class OrderCenterFragment extends BaseFragment {
             }
 
             @Override
-            public void showChange(String oid, String price, String tid, int position, int i) {
-                priceRemind(oid, price, tid, position, i);
+            public void showChange(int position) {
+                priceRemind(position);
             }
 
             @Override
@@ -201,10 +204,13 @@ public class OrderCenterFragment extends BaseFragment {
                     if (!currentTag.equals("")) {
                         TextView ordercentertobepaid_child_finalprice = (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_finalprice_" + currentTag);
                         EditText ordercentertobepaid_child_finalprice_edit = (EditText) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_finalprice_edit_" + currentTag);
-                        ordercentertobepaid_child_finalprice_edit.setText("0");
                         TextView ordercentertobepaid_child_changeprice = (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_changeprice_" + currentTag);
                         TextView ordercentertobepaid_child_commit = (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_commit_" + currentTag);
                         TextView ordercentertobepaid_child_commitsync = (TextView) ordercenter_lv.findViewWithTag("ordercentertobepaid_child_commitsync_" + currentTag);
+                        if (ordercentertobepaid_child_finalprice==null||ordercentertobepaid_child_finalprice_edit==null||ordercentertobepaid_child_changeprice==null
+                                ||ordercentertobepaid_child_commit==null||ordercentertobepaid_child_commitsync==null) {
+                            return;
+                        }
                         ordercentertobepaid_child_finalprice.setVisibility(View.VISIBLE);
                         ordercentertobepaid_child_finalprice_edit.setVisibility(View.GONE);
                         ordercentertobepaid_child_changeprice.setVisibility(View.VISIBLE);
@@ -299,7 +305,8 @@ public class OrderCenterFragment extends BaseFragment {
             @Override
             public void onError() {
                 dismissDialog();
-                showToast("未知错误");
+
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
@@ -387,14 +394,14 @@ public class OrderCenterFragment extends BaseFragment {
         }
     }
 
-    private void loadOrderCenter(String tid) {
+    private void loadOrderCenter(String title) {
         httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.user.order.list", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(getActivity()).getShop_id());
         params.put("page_size", "20");
         params.put("page_no", "" + page_no);
-        if (tid!=null&&!tid.equals("")) {
-            params.put("tid", tid);
+        if (title!=null&&!title.equals("")) {
+            params.put("title", title);
         }
         if (curPosition==0) {
 
@@ -474,7 +481,8 @@ public class OrderCenterFragment extends BaseFragment {
             @Override
             public void onError() {
                 ordercenter_swipy.setRefreshing(false);
-                showToast("未知错误");
+
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
@@ -488,8 +496,23 @@ public class OrderCenterFragment extends BaseFragment {
         }
     }
 
-    private void priceRemind(final String oid, final String price, final String tid, final int position, final int i) {
+    private void priceRemind(int position) {
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.priceRemind", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        final String tid=shopModels.get(position).getTid();
+        String oid="";
+        String price="";
+        for (int i=0;i<shopModels.get(position).getModels().size();i++) {
+            if (i!=shopModels.get(position).getModels().size()-1) {
+                oid+=shopModels.get(position).getModels().get(i).getOid()+",";
+                price+=shopModels.get(position).getModels().get(i).getEdit_price()+",";
+            }
+            else {
+                oid+=shopModels.get(position).getModels().get(i).getOid();
+                price+=shopModels.get(position).getModels().get(i).getEdit_price();
+            }
+        }
+        final String oid_=oid;
+        final String price_=price;
         params.put("oid", oid);
         params.put("price", price);
         httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
@@ -502,16 +525,16 @@ public class OrderCenterFragment extends BaseFragment {
             public void onSuccess(String string) {
                 Log.d("OrderCenterFragment", string);
                 dismissDialog();
-                if (JsonParse.getPriceRemind(string)==0) {
-                    price(oid, price, tid, position, i);
+                if (JsonParse.getResultCode(string)==0) {
+                    price(oid_, price_, tid);
                 }
-                else if (JsonParse.getPriceRemind(string)==1) {
+                else if (JsonParse.getResultCode(string)==1) {
                     ordercenter_change_layout.setVisibility(View.VISIBLE);
                     ordercenter_change_commit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             ordercenter_change_layout.setVisibility(View.GONE);
-                            price(oid, price, tid, position, i);
+                            price(oid_, price_, tid);
                         }
                     });
                     ordercenter_change_cancel.setOnClickListener(new View.OnClickListener() {
@@ -530,12 +553,12 @@ public class OrderCenterFragment extends BaseFragment {
             public void onError() {
                 dismissDialog();
 
-                showToast("未知错误");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
 
-    private void price(String oid, final String price, String tid, final int position, final int i) {
+    private void price(String oid, final String price, String tid) {
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.price", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("oid", oid);
         params.put("tid", tid);
@@ -566,7 +589,7 @@ public class OrderCenterFragment extends BaseFragment {
             public void onError() {
                 dismissDialog();
 
-                showToast("未知错误");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
@@ -602,6 +625,16 @@ public class OrderCenterFragment extends BaseFragment {
                     int TRADE_CLOSED=Integer.parseInt(map.get("TRADE_CLOSED"));
                     int AFTERSALES=Integer.parseInt(map.get("AFTERSALES"));
                     int all=WAIT_CONFRIM+WAIT_APPROVE+DELIVER_GOODS+WAIT_GOODS+RECEIVE_GOODS+TRADE_FINISHED+TRADE_CANCEL+TRADE_CLOSED+AFTERSALES;
+                    showHideIndicator(all, numTextViews.get(0));
+                    showHideIndicator(WAIT_CONFRIM, numTextViews.get(1));
+                    showHideIndicator(WAIT_APPROVE, numTextViews.get(2));
+                    showHideIndicator(DELIVER_GOODS, numTextViews.get(3));
+                    showHideIndicator(WAIT_GOODS, numTextViews.get(4));
+                    showHideIndicator(RECEIVE_GOODS, numTextViews.get(5));
+                    showHideIndicator(TRADE_FINISHED, numTextViews.get(6));
+                    showHideIndicator(TRADE_CANCEL, numTextViews.get(7));
+                    showHideIndicator(AFTERSALES, numTextViews.get(8));
+                    showHideIndicator(TRADE_CLOSED, numTextViews.get(9));
                     numTextViews.get(0).setText(""+all);
                     numTextViews.get(1).setText(""+WAIT_CONFRIM);
                     numTextViews.get(2).setText(""+WAIT_APPROVE);
@@ -620,5 +653,14 @@ public class OrderCenterFragment extends BaseFragment {
 
             }
         });
+    }
+
+    private void showHideIndicator(int num, TextView view) {
+        if (num>0) {
+            view.setVisibility(View.VISIBLE);
+        }
+        else {
+            view.setVisibility(View.GONE);
+        }
     }
 }

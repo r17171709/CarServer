@@ -66,9 +66,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (getIntent().getExtras().getBoolean("isNeedAnimation")) {
-            setTheme(R.style.LoginTheme);
-        }
+        setTheme(R.style.LoginTheme);
 
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);

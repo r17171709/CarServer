@@ -57,7 +57,7 @@ public class OrderCenterAdapter extends BaseAdapter {
 
     public interface TobepaidChangePriceListener {
         void getTag(String tag);
-        void showChange(String oid, String price, String tid, int position, int i);
+        void showChange(int position);
         void cancel(int position);
     }
 
@@ -91,6 +91,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                 holder.ordercentertobepaid_price= (TextView) convertView.findViewById(R.id.ordercentertobepaid_price);
                 holder.adapter_ordercentertobepaid_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercentertobepaid_cancel);
                 holder.ordercentertobepaid_copy= (TextView) convertView.findViewById(R.id.ordercentertobepaid_copy);
+                holder.adapter_ordercentertobepaid_commit= (TextView) convertView.findViewById(R.id.adapter_ordercentertobepaid_commit);
                 convertView.setTag(holder);
             }
             else {
@@ -107,6 +108,12 @@ public class OrderCenterAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     listener.cancel(position_);
+                }
+            });
+            holder.adapter_ordercentertobepaid_commit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.showChange(position_);
                 }
             });
             holder.ordercentertobepaid_copy.setOnClickListener(new View.OnClickListener() {
@@ -171,8 +178,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercentertobepaid_child_state.setText("已驳回");
                 }
                 final EditText ordercentertobepaid_child_finalprice_edit= (EditText) view.findViewById(R.id.ordercentertobepaid_child_finalprice_edit);
-                ordercentertobepaid_child_finalprice_edit.setText(models.get(position).getModels().get(i).getSettle_price());
-                ordercentertobepaid_child_finalprice_edit.setSelection(models.get(position).getModels().get(i).getSettle_price().length());
+                ordercentertobepaid_child_finalprice_edit.setText(""+models.get(position).getModels().get(i).getEdit_price());
                 ordercentertobepaid_child_finalprice_edit.setTag("ordercentertobepaid_child_finalprice_edit_"+position+"_"+i);
                 final TextView ordercentertobepaid_child_changeprice= (TextView) view.findViewById(R.id.ordercentertobepaid_child_changeprice);
                 ordercentertobepaid_child_changeprice.setTag("ordercentertobepaid_child_changeprice_" + position + "_" + i);
@@ -187,12 +193,13 @@ public class OrderCenterAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         ordercentertobepaid_child_finalprice.setVisibility(View.VISIBLE);
                         ordercentertobepaid_child_finalprice_edit.setVisibility(View.GONE);
-                        ordercentertobepaid_child_finalprice_edit.setText("0");
                         ordercentertobepaid_child_changeprice.setVisibility(View.VISIBLE);
                         ordercentertobepaid_child_commit.setVisibility(View.GONE);
                         ordercentertobepaid_child_commitsync.setVisibility(View.GONE);
 
-                        listener.showChange(models.get(position_).getModels().get(i_).getOid(), ordercentertobepaid_child_finalprice_edit.getText().toString(), models.get(position_).getModels().get(i_).getTid(), position_, i_);
+                        if (!ordercentertobepaid_child_finalprice_edit.getText().toString().equals("")) {
+                            models.get(position).getModels().get(i_).setEdit_price(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString()));
+                        }
                     }
                 });
                 ordercentertobepaid_child_commitsync.setOnClickListener(new View.OnClickListener() {
@@ -200,10 +207,13 @@ public class OrderCenterAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         ordercentertobepaid_child_finalprice.setVisibility(View.VISIBLE);
                         ordercentertobepaid_child_finalprice_edit.setVisibility(View.GONE);
-                        ordercentertobepaid_child_finalprice_edit.setText("0");
                         ordercentertobepaid_child_changeprice.setVisibility(View.VISIBLE);
                         ordercentertobepaid_child_commit.setVisibility(View.GONE);
                         ordercentertobepaid_child_commitsync.setVisibility(View.GONE);
+
+                        if (!ordercentertobepaid_child_finalprice_edit.getText().toString().equals("")) {
+                            models.get(position).getModels().get(i_).setEdit_price(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString()));
+                        }
                     }
                 });
                 ordercentertobepaid_child_changeprice.setOnClickListener(new View.OnClickListener() {

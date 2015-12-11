@@ -85,11 +85,11 @@ public class MainFragment extends BaseFragment {
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon1);
                     break;
                 case 1:
-                    main_middle_gridlayout_item_name.setText("授信额度");
+                    main_middle_gridlayout_item_name.setText("平台授信");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon2);
                     break;
                 case 2:
-                    main_middle_gridlayout_item_name.setText("授信额度\n变更查询");
+                    main_middle_gridlayout_item_name.setText("平台授信\n变更查询");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon3);
                     break;
                 case 3:
@@ -105,7 +105,7 @@ public class MainFragment extends BaseFragment {
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon6);
                     break;
                 case 6:
-                    main_middle_gridlayout_item_name.setText("新增会员审核");
+                    main_middle_gridlayout_item_name.setText("会员审核");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon7);
                     break;
                 case 7:
@@ -169,12 +169,21 @@ public class MainFragment extends BaseFragment {
                 break;
             case 8:
                 intent=new Intent(getActivity(), ShareActivity.class);
+                Bundle bundle1=new Bundle();
+                bundle1.putInt("type", ParamUtils.RESULT_CARSERVER);
+                intent.putExtras(bundle1);
                 break;
             case 9:
                 intent=new Intent(getActivity(), ShareActivity.class);
+                Bundle bundle2=new Bundle();
+                bundle2.putInt("type", ParamUtils.RESULT_CARCLIENT);
+                intent.putExtras(bundle2);
                 break;
             case 10:
                 intent=new Intent(getActivity(), ShareActivity.class);
+                Bundle bundle3=new Bundle();
+                bundle3.putInt("type", ParamUtils.RESULT_CARWEIXIN);
+                intent.putExtras(bundle3);
                 break;
             case 11:
                 return;

@@ -158,7 +158,7 @@ public class MyDataActivity extends BaseActivity {
 
             @Override
             public void onError() {
-                showToast("获取我的资料失败");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
@@ -257,7 +257,7 @@ public class MyDataActivity extends BaseActivity {
             @Override
             public void onError() {
                 dismissDialog();
-                showToast("更新用户信息出现异常，请重试");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }

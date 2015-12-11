@@ -15,7 +15,8 @@
             android:layout_height="40dip"
             android:layout_weight="1"
             android:layout_marginLeft="50dip"
-            android:hint="输入会员全称|申请时间"
+            android:layout_marginRight="50dip"
+            android:hint="输入会员全称"
             android:textSize="13sp"
             android:drawablePadding="5dip"
             android:padding="5dip"
@@ -27,6 +28,7 @@
             android:id="@+id/factorapply_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="50dip"
             android:src="@mipmap/icon_calendar"/>

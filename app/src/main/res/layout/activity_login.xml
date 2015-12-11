@@ -23,9 +23,11 @@
             android:textColorHint="#a7a7a7"
             android:hint="输入手机号/会员名/会员账号"
             android:textColor="@android:color/black"
-            android:padding="5dip"
+            android:padding="10dip"
             android:textSize="13sp"
             android:drawablePadding="5dip"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:background="@drawable/rectangle_background_white"/>
         <EditText
             android:id="@+id/login_password"
@@ -37,9 +39,10 @@
             android:drawableLeft="@mipmap/ic_password"
             android:hint="输入密码"
             android:inputType="textPassword"
+            android:imeOptions="actionDone"
             android:textColorHint="#a7a7a7"
             android:textColor="@android:color/black"
-            android:padding="5dip"
+            android:padding="10dip"
             android:textSize="13sp"
             android:drawablePadding="5dip"
             android:background="@drawable/rectangle_background_white"/>

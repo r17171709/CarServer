@@ -91,6 +91,26 @@ public class CustomerCenterPriceActivity extends BaseActivity {
     }
 
     private void updateCustomer() {
+        if (customercenterprice_taxnum.getText().toString().equals("")) {
+            showToast("请填写税务登记号");
+            return;
+        }
+        if (customercenterprice_bank.getText().toString().equals("")) {
+            showToast("请填写开户银行");
+            return;
+        }
+        if (customercenterprice_cardnum.getText().toString().equals("")) {
+            showToast("请填写开户银行账号");
+            return;
+        }
+        if (customercenterprice_phonenum2.getText().toString().equals("")) {
+            showToast("请填写联系电话");
+            return;
+        }
+        if (customercenterprice_reg_address.getText().toString().equals("")) {
+            showToast("请填写企业住所");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.xiuliuser.update", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("revenues_code", customercenterprice_taxnum.getText().toString());
         params.put("bank_name", customercenterprice_bank.getText().toString());
@@ -123,7 +143,7 @@ public class CustomerCenterPriceActivity extends BaseActivity {
             public void onError() {
                 dismissDialog();
 
-                showToast("未知错误");
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }

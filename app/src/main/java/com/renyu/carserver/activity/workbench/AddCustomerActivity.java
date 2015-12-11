@@ -399,13 +399,16 @@ public class AddCustomerActivity extends BaseActivity {
                 else {
                     showToast("未知错误");
                 }
-                finish();
+                if (JsonParse.getResultCode(string)==0) {
+                    finish();
+                }
             }
 
             @Override
             public void onError() {
                 dismissDialog();
-                showToast("添加修理厂出现异常，请重试");
+
+                showToast(getResources().getString(R.string.network_error));
             }
         });
     }
