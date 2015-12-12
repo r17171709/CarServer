@@ -161,11 +161,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                 }
                 final TextView ordercentertobepaid_child_finalprice= (TextView) view.findViewById(R.id.ordercentertobepaid_child_finalprice);
                 ordercentertobepaid_child_finalprice.setTag("ordercentertobepaid_child_finalprice_" + position + "_" + i);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercentertobepaid_child_finalprice.setText("0");
                 }
                 else {
-                    ordercentertobepaid_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercentertobepaid_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercentertobepaid_child_state= (TextView) view.findViewById(R.id.ordercentertobepaid_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -295,11 +295,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -388,11 +388,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -474,11 +474,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -567,11 +567,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -653,11 +653,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -740,11 +740,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -842,11 +842,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
@@ -929,11 +929,11 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())==0) {
+                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
                     ordercenterpending_child_finalprice.setText("0");
                 }
                 else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getSettle_price())));
+                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {

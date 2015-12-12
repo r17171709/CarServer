@@ -145,11 +145,11 @@ public class OrderCenterDetailActivity extends BaseActivity {
                 ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(model.getModels().get(i).getOld_price())));
             }
             TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-            if ((int) Double.parseDouble(model.getModels().get(i).getSettle_price())==0) {
+            if ((int) Double.parseDouble(model.getModels().get(i).getPrice())==0) {
                 ordercenterpending_child_finalprice.setText("0");
             }
             else {
-                ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(model.getModels().get(i).getSettle_price())));
+                ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(model.getModels().get(i).getPrice())));
             }
             adapter_ordercenterpending_detail.addView(view);
         }

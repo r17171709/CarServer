@@ -11,7 +11,6 @@ public class ChildOrderModel implements Serializable {
     String title;
     String spec_nature_info;
     String old_price;
-    String settle_price;
     String price;
     String num;
     String pic_path;
@@ -56,14 +55,6 @@ public class ChildOrderModel implements Serializable {
 
     public void setOld_price(String old_price) {
         this.old_price = old_price;
-    }
-
-    public String getSettle_price() {
-        return settle_price;
-    }
-
-    public void setSettle_price(String settle_price) {
-        this.settle_price = settle_price;
     }
 
     public String getPrice() {

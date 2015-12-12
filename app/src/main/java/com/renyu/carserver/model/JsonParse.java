@@ -193,7 +193,6 @@ public class JsonParse {
                         cmodel.setNum(jsonObject.getString("num"));
                         cmodel.setOid(jsonObject.getString("oid"));
                         cmodel.setOld_price(jsonObject.getString("old_price"));
-                        cmodel.setSettle_price(jsonObject.getString("settle_price"));
                         cmodel.setPrice(jsonObject.getString("price"));
                         cmodel.setSpec_nature_info(ParamUtils.converNull(jsonObject.getString("spec_nature_info")));
                         cmodel.setTitle(jsonObject.getString("title"));
