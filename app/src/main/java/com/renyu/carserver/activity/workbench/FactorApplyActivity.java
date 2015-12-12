@@ -54,15 +54,26 @@ public class FactorApplyActivity extends BaseActivity {
     SwipyRefreshLayout factorapply_swipy;
     @Bind(R.id.factorapply_rv)
     RecyclerView factorapply_rv;
-    FactorApplyAdapter adapter=null;
+    FactorApplyAdapter adapter_left=null;
+    FactorApplyAdapter adapter_right=null;
     @Bind(R.id.factorapply_edit)
     EditText factorapply_edit;
+    @Bind(R.id.factorapply_examining)
+    TextView factorapply_examining;
+    @Bind(R.id.factorapply_result)
+    TextView factorapply_result;
 
-    ArrayList<FactoryApplyModel> models=null;
+    ArrayList<FactoryApplyModel> models_left=null;
+    ArrayList<FactoryApplyModel> models_right=null;
 
-    int page_no=1;
+    int page_no_left=1;
+    int page_no_right=1;
+    boolean isLeft=true;
 
     int applytime_=0;
+
+    //阻止edittext刷新
+    boolean isNeedLoad=false;
 
     @Override
     public int initContentView() {
@@ -73,7 +84,8 @@ public class FactorApplyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        models=new ArrayList<>();
+        models_left=new ArrayList<>();
+        models_right=new ArrayList<>();
 
         initViews();
     }
@@ -90,23 +102,33 @@ public class FactorApplyActivity extends BaseActivity {
             @Override
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 if (direction==SwipyRefreshLayoutDirection.TOP) {
-                    page_no=1;
+                   if (isLeft) {
+                       page_no_left=1;
+                   }
+                    else {
+                       page_no_right=1;
+                   }
                 }
                 else if (direction==SwipyRefreshLayoutDirection.BOTTOM) {
 
                 }
-                getAllFactoryApply(factorapply_edit.getText().toString(), applytime_);
+                if (isLeft) {
+                    getAllFactoryApply(factorapply_edit.getText().toString(), applytime_, 2);
+                }
+                else {
+                    getAllFactoryApply(factorapply_edit.getText().toString(), applytime_, 3);
+                }
             }
         });
         factorapply_rv.setHasFixedSize(true);
         factorapply_rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new FactorApplyAdapter(this, models, new FactorApplyAdapter.OnReCheckStateListener() {
+        adapter_left=new FactorApplyAdapter(this, models_left, new FactorApplyAdapter.OnReCheckStateListener() {
             @Override
             public void recheck(int position) {
-                recheckState(models.get(position).getUser_id(), position);
+                recheckState(models_left.get(position).getUser_id(), position);
             }
         });
-        factorapply_rv.setAdapter(adapter);
+        adapter_right=new FactorApplyAdapter(this, models_right, null);
         factorapply_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -115,10 +137,16 @@ public class FactorApplyActivity extends BaseActivity {
                     return false;
                 }
                 if (actionId== EditorInfo.IME_ACTION_SEARCH) {
-                    factorapply_swipy.setRefreshing(true);
-                    page_no=1;
                     applytime_=0;
-                    getAllFactoryApply(factorapply_edit.getText().toString(), 0);
+                    factorapply_swipy.setRefreshing(true);
+                    if (isLeft) {
+                        page_no_left=1;
+                        getAllFactoryApply(factorapply_edit.getText().toString(), applytime_, 2);
+                    }
+                    else {
+                        page_no_right=1;
+                        getAllFactoryApply(factorapply_edit.getText().toString(), applytime_, 3);
+                    }
                 }
                 return false;
             }
@@ -136,16 +164,25 @@ public class FactorApplyActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                page_no=1;
+                if (isNeedLoad) {
+                    isNeedLoad=false;
+                    return;
+                }
                 applytime_=0;
-                getAllFactoryApply(s.toString(), 0);
+                if (isLeft) {
+                    page_no_left=1;
+                    getAllFactoryApply(factorapply_edit.getText().toString(), applytime_, 2);
+                }
+                else {
+                    page_no_right=1;
+                    getAllFactoryApply(factorapply_edit.getText().toString(), applytime_, 3);
+                }
             }
         });
-
-        getAllFactoryApply(null, 0);
+        factorapply_examining.performClick();
     }
 
-    @OnClick({R.id.view_toolbar_center_back, R.id.factorapply_time})
+    @OnClick({R.id.view_toolbar_center_back, R.id.factorapply_time, R.id.factorapply_examining, R.id.factorapply_result})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.view_toolbar_center_back:
@@ -157,12 +194,22 @@ public class FactorApplyActivity extends BaseActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         // TODO Auto-generated method stub
-                        page_no=1;
+                        if (isLeft) {
+                            page_no_left=1;
+                        }
+                        else {
+                            page_no_right=1;
+                        }
                         String time=year+"-"+((month + 1) < 10 ? "0" + (month + 1) : (month + 1))+"-"+((day < 10) ? "0" + day : day);
                         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
                         try {
                             Date date=format.parse(time);
-                            getAllFactoryApply(factorapply_edit.getText().toString(), (int) date.getTime());
+                            if (isLeft) {
+                                getAllFactoryApply(factorapply_edit.getText().toString(), (int) date.getTime(), 2);
+                            }
+                            else {
+                                getAllFactoryApply(factorapply_edit.getText().toString(), (int) date.getTime(), 3);
+                            }
                             applytime_=(int) date.getTime();
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -170,13 +217,46 @@ public class FactorApplyActivity extends BaseActivity {
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
                 break;
+            case R.id.factorapply_examining:
+                hide(factorapply_edit);
+                isLeft=true;
+                factorapply_examining.setBackgroundColor(Color.RED);
+                factorapply_examining.setTextColor(Color.WHITE);
+                factorapply_result.setBackgroundColor(Color.WHITE);
+                factorapply_result.setTextColor(Color.BLACK);
+                factorapply_rv.setAdapter(adapter_left);
+                isNeedLoad=true;
+                factorapply_edit.setText("");
+                if (models_left.size()==0) {
+                    getAllFactoryApply(null, 0, 2);
+                }
+                break;
+            case R.id.factorapply_result:
+                hide(factorapply_edit);
+                isLeft=false;
+                factorapply_result.setBackgroundColor(Color.RED);
+                factorapply_result.setTextColor(Color.WHITE);
+                factorapply_examining.setBackgroundColor(Color.WHITE);
+                factorapply_examining.setTextColor(Color.BLACK);
+                factorapply_rv.setAdapter(adapter_right);
+                isNeedLoad=true;
+                factorapply_edit.setText("");
+                if (models_right.size()==0) {
+                    getAllFactoryApply(null, 0, 3);
+                }
+                break;
         }
     }
 
-    public void getAllFactoryApply(String repairdepot_name, long applytime) {
+    public void getAllFactoryApply(String repairdepot_name, long applytime, int state) {
         httpHelper.cancel(ParamUtils.api);
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.joinapplylist", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
-        params.put("page_no", ""+page_no);
+        if (isLeft) {
+            params.put("page_no", ""+page_no_left);
+        }
+        else {
+            params.put("page_no", ""+page_no_right);
+        }
         params.put("page_size", "20");
         if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
             params.put("repair_name", repairdepot_name);
@@ -187,6 +267,7 @@ public class FactorApplyActivity extends BaseActivity {
         if (applytime!=0) {
             params.put("applytime", ""+applytime);
         }
+        params.put("state", ""+state);
         httpHelper.commonPostRequest(ParamUtils.api, params, null, new OKHttpHelper.RequestListener() {
             @Override
             public void onSuccess(String string) {
@@ -200,21 +281,47 @@ public class FactorApplyActivity extends BaseActivity {
                     Object model=JsonParse.getFactoryApplyModel(string);
                     //这里就是没有数据
                     if (model==null) {
-                        if (page_no==1) {
-                            models.clear();
-                            adapter.notifyDataSetChanged();
+                        if (isLeft) {
+                            if (page_no_left==1) {
+                                models_left.clear();
+                                adapter_left.notifyDataSetChanged();
+                            }
+                        }
+                        else {
+                            if (page_no_right==1) {
+                                models_right.clear();
+                                adapter_right.notifyDataSetChanged();
+                            }
                         }
                     }
                     else if (model instanceof String) {
                         showToast((String) model);
                     }
                     else {
-                        if (page_no==1) {
-                            models.clear();
+                        if (isLeft) {
+                            if (page_no_left==1) {
+                                models_left.clear();
+                                models_left.addAll((ArrayList<FactoryApplyModel>) model);
+                                factorapply_rv.setAdapter(adapter_left);
+                            }
+                            else {
+                                models_left.addAll((ArrayList<FactoryApplyModel>) model);
+                                adapter_left.notifyDataSetChanged();
+                            }
+                            page_no_left++;
                         }
-                        models.addAll((ArrayList<FactoryApplyModel>) model);
-                        adapter.notifyDataSetChanged();
-                        page_no++;
+                        else {
+                            if (page_no_right==1) {
+                                models_right.clear();
+                                models_right.addAll((ArrayList<FactoryApplyModel>) model);
+                                factorapply_rv.setAdapter(adapter_right);
+                            }
+                            else {
+                                models_right.addAll((ArrayList<FactoryApplyModel>) model);
+                                adapter_right.notifyDataSetChanged();
+                            }
+                            page_no_right++;
+                        }
                     }
                 }
             }
@@ -240,8 +347,14 @@ public class FactorApplyActivity extends BaseActivity {
                 dismissDialog();
                 if (JsonParse.getResultValue(string)!=null) {
                     showToast(JsonParse.getResultValue(string));
-                    models.get(position).setStatus(3);
-                    adapter.notifyDataSetChanged();
+                    if (JsonParse.getResultCode(string)==0) {
+                        factorapply_swipy.setRefreshing(true);
+                        page_no_left=1;
+                        getAllFactoryApply(factorapply_edit.getText().toString(), applytime_, 2);
+
+                        models_right.clear();
+                        adapter_right.notifyDataSetChanged();
+                    }
                 }
                 else {
                     showToast("未知错误");
