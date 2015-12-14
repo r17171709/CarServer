@@ -9,12 +9,14 @@
         android:layout_weight="1">
         <ImageView
             android:id="@+id/ordercentertobepaid_child_image"
+            android:layout_centerVertical="true"
             android:layout_width="93dip"
             android:layout_height="62dip"
             android:src="@mipmap/ic_launcher"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dip"
             android:layout_marginTop="3dip"
             android:layout_toRightOf="@id/ordercentertobepaid_child_image"
@@ -61,6 +63,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginRight="15dip"
             android:layout_alignParentRight="true">
             <RelativeLayout
@@ -124,16 +127,6 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="3dip"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dip"
-                    android:paddingRight="10dip"
-                    android:paddingTop="3dip"
-                    android:paddingBottom="3dip"
-                    android:visibility="invisible"
-                    android:background="@drawable/rectangle_corner_lightgray"
-                    android:text="null"/>
                 <TextView
                     android:id="@+id/ordercentertobepaid_child_changeprice"
                     android:layout_width="wrap_content"

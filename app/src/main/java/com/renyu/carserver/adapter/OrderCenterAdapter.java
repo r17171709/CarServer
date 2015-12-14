@@ -198,7 +198,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                         ordercentertobepaid_child_commitsync.setVisibility(View.GONE);
 
                         if (!ordercentertobepaid_child_finalprice_edit.getText().toString().equals("")) {
+                            if ((int) Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())==0) {
+                                ordercentertobepaid_child_finalprice.setText("0");
+                            }
+                            else {
+                                ordercentertobepaid_child_finalprice.setText(""+df.format(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())));
+                            }
+                            models.get(position).getModels().get(i_).setPrice(ordercentertobepaid_child_finalprice_edit.getText().toString());
                             models.get(position).getModels().get(i_).setEdit_price(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString()));
+                            notifyDataSetChanged();
                         }
                     }
                 });
@@ -212,7 +220,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                         ordercentertobepaid_child_commitsync.setVisibility(View.GONE);
 
                         if (!ordercentertobepaid_child_finalprice_edit.getText().toString().equals("")) {
+                            if ((int) Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())==0) {
+                                ordercentertobepaid_child_finalprice.setText("0");
+                            }
+                            else {
+                                ordercentertobepaid_child_finalprice.setText(""+df.format(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())));
+                            }
+                            models.get(position).getModels().get(i_).setPrice(ordercentertobepaid_child_finalprice_edit.getText().toString());
                             models.get(position).getModels().get(i_).setEdit_price(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString()));
+                            notifyDataSetChanged();
                         }
                     }
                 });

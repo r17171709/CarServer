@@ -290,6 +290,10 @@ public class CustomerCenterInfoActivity extends BaseActivity {
             showToast("请填写联系电话");
             return;
         }
+        if (customercenterinfo_phonenum.getText().toString().length()<11) {
+            showToast("手机号码格式错误，请重新填写");
+            return;
+        }
         if (customercenterinfo_legalperson.getText().toString().equals("")) {
             showToast("请填写法人/经营者姓名");
             return;

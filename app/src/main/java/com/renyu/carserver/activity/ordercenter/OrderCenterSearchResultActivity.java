@@ -81,7 +81,7 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
 
     private void initViews() {
         view_toolbar_center_layout.setBackgroundColor(Color.parseColor("#efefef"));
-        view_toolbar_center_title.setText("删选结果");
+        view_toolbar_center_title.setText("筛选结果");
         view_toolbar_center_title.setTextColor(Color.BLACK);
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
@@ -221,7 +221,8 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
                 } else {
                     Object model = JsonParse.getOrderModel(string);
                     if (model==null) {
-                        showToast("未知错误");
+                        shopModels.clear();
+                        adapter.notifyDataSetChanged();
                     } else if (model instanceof String) {
                         showToast((String) model);
                     } else {
@@ -239,11 +240,14 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.ordercenter_change_cancel})
+    @OnClick({R.id.ordercenter_change_cancel, R.id.view_toolbar_center_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ordercenter_change_cancel:
                 ordercenter_change_layout.setVisibility(View.GONE);
+                break;
+            case R.id.view_toolbar_center_back:
+                finish();
                 break;
         }
     }

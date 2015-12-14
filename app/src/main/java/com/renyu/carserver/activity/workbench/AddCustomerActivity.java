@@ -298,6 +298,10 @@ public class AddCustomerActivity extends BaseActivity {
             showToast("请填写联系电话");
             return;
         }
+        if (addcustomer_phonenum.getText().toString().length()<11) {
+            showToast("手机号码格式错误，请重新填写");
+            return;
+        }
         if (cityIds.equals("")) {
             showToast("请选择所在地区");
             return;
@@ -360,6 +364,10 @@ public class AddCustomerActivity extends BaseActivity {
         }
         if (pic4.equals("")) {
             showToast("请添加门头照片照片");
+            return;
+        }
+        if (!addcustomer_creditline.getText().toString().equals("")) {
+            showToast("初始化授信额度不能为空");
             return;
         }
         HashMap<String, String> params= ParamUtils.getSignParams("app.account.sysservice.xiuliuser.add", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");

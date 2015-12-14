@@ -14,7 +14,7 @@
             android:textColor="@android:color/black"
             android:gravity="right"
             android:textSize="16sp"
-            android:text="客户名称："/>
+            android:text="会员名称："/>
         <EditText
             android:id="@+id/senior_custom"
             android:layout_marginRight="20dip"
@@ -24,6 +24,8 @@
             android:padding="5dip"
             android:textSize="13sp"
             android:layout_marginLeft="10dip"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:background="@drawable/rectangle_corner_black"/>
     </LinearLayout>
     <LinearLayout
@@ -46,6 +48,8 @@
             android:gravity="center_vertical"
             android:padding="5dip"
             android:textSize="13sp"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_marginLeft="10dip"
             android:background="@drawable/rectangle_corner_black"/>
     </LinearLayout>
@@ -69,6 +73,7 @@
             android:gravity="center_vertical"
             android:padding="5dip"
             android:textSize="13sp"
+            android:imeOptions="actionNext"
             android:inputType="number"
             android:layout_marginLeft="10dip"
             android:background="@drawable/rectangle_corner_black"/>
@@ -127,6 +132,7 @@
             android:textSize="13sp"
             android:layout_marginLeft="10dip"
             android:inputType="number"
+            android:imeOptions="actionNext"
             android:background="@drawable/rectangle_corner_black" />
         <EditText
             android:id="@+id/senior_price2"
@@ -137,6 +143,7 @@
             android:textSize="13sp"
             android:layout_marginLeft="5dip"
             android:inputType="number"
+            android:imeOptions="actionNext"
             android:background="@drawable/rectangle_corner_black" />
     </LinearLayout>
     <LinearLayout
