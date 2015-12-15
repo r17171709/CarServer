@@ -32,6 +32,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
         if (!ParamUtils.getLogin(SplashActivity.this).get("name").equals("")&&!ParamUtils.getLogin(SplashActivity.this).get("password").equals("")) {

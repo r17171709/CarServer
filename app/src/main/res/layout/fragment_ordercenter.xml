@@ -33,19 +33,31 @@
                     android:drawableLeft="@mipmap/ic_search"
                     android:background="@drawable/rectangle_background_lightgray"/>
             </LinearLayout>
-            <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/ordercenter_swipy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:direction="both">
-                <ListView
-                    android:id="@+id/ordercenter_lv"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/ordercenter_emptyview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="无相关搜索"
+                    android:textColor="@android:color/black"/>
+                <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/ordercenter_swipy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:direction="both">
+                    <ListView
+                        android:id="@+id/ordercenter_lv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                </ListView>
-            </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
+                    </ListView>
+                </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
+            </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
             android:id="@+id/ordercenter_change_layout"

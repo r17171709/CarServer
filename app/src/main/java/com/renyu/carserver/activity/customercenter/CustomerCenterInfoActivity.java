@@ -77,6 +77,12 @@ public class CustomerCenterInfoActivity extends BaseActivity {
     ImageView customercenterinfo_shop_photo;
     @Bind(R.id.customercenterinfo_legalpersonid)
     EditText customercenterinfo_legalpersonid;
+    @Bind(R.id.customercenterinfo_creditline)
+    EditText customercenterinfo_creditline;
+    @Bind(R.id.customercenterinfo_email)
+    EditText customercenterinfo_email;
+    @Bind(R.id.customercenterinfo_zipcode)
+    EditText customercenterinfo_zipcode;
 
     CustomerModel model=null;
     String cityIds="";
@@ -312,6 +318,10 @@ public class CustomerCenterInfoActivity extends BaseActivity {
         }
         if (customercenterinfo_company.getText().toString().equals("")) {
             showToast("请填写单位全称");
+            return;
+        }
+        if (customercenterinfo_creditline.getText().toString().equals("")) {
+            showToast("初始化授信额度不能为空");
             return;
         }
         if (pic1.equals("")) {

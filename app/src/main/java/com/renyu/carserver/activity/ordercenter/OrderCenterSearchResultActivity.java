@@ -54,6 +54,8 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
     OrderCenterAdapter adapter=null;
     @Bind(R.id.ordercenter_layout)
     LinearLayout ordercenter_layout;
+    @Bind(R.id.ordercenter_emptyview)
+    TextView ordercenter_emptyview;
 
     ArrayList<ParentOrderModel> shopModels=null;
 
@@ -223,6 +225,8 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
                     if (model==null) {
                         shopModels.clear();
                         adapter.notifyDataSetChanged();
+                        ordercenter_emptyview.setVisibility(View.VISIBLE);
+                        ordercenter_swipy.setVisibility(View.GONE);
                     } else if (model instanceof String) {
                         showToast((String) model);
                     } else {

@@ -126,7 +126,7 @@ public class OrderCenterFragment extends BaseFragment {
                     view_ordercenter_item_text.setText("待审核");
                     break;
                 case 3:
-                    view_ordercenter_item_text.setText("代发货");
+                    view_ordercenter_item_text.setText("待发货");
                     break;
                 case 4:
                     view_ordercenter_item_text.setText("已发货");
@@ -459,6 +459,7 @@ public class OrderCenterFragment extends BaseFragment {
                         if (page_no==1) {
                             shopModels.clear();
                             adapter.notifyDataSetChanged();
+                            getNumber();
                         }
                     } else if (model instanceof String) {
                         showToast((String) model);

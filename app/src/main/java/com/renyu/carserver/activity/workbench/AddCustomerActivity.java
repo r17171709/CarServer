@@ -366,7 +366,7 @@ public class AddCustomerActivity extends BaseActivity {
             showToast("请添加门头照片照片");
             return;
         }
-        if (!addcustomer_creditline.getText().toString().equals("")) {
+        if (addcustomer_creditline.getText().toString().equals("")) {
             showToast("初始化授信额度不能为空");
             return;
         }
