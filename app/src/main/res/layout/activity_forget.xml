@@ -68,7 +68,7 @@
                 android:layout_width="170dip"
                 android:layout_height="40dip"
                 android:textColor="@android:color/white"
-                android:text="发送密码到绑定手机"/>
+                android:text="重置密码"/>
             <Button
                 android:id="@+id/forget_back"
                 android:layout_width="wrap_content"

@@ -86,7 +86,7 @@ public class CreditLineActivity extends BaseActivity {
     }
 
     private void initViews() {
-        view_toolbar_center_title.setText("平台授信");
+        view_toolbar_center_title.setText("授信额度");
         view_toolbar_center_back.setVisibility(View.VISIBLE);
         createline_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

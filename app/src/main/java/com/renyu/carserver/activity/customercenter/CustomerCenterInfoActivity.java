@@ -324,22 +324,6 @@ public class CustomerCenterInfoActivity extends BaseActivity {
             showToast("初始化授信额度不能为空");
             return;
         }
-        if (pic1.equals("")) {
-            showToast("请添加身份证正面照片");
-            return;
-        }
-        if (pic2.equals("")) {
-            showToast("请添加身份证背面照片");
-            return;
-        }
-        if (pic3.equals("")) {
-            showToast("请添加营业执照照片");
-            return;
-        }
-        if (pic4.equals("")) {
-            showToast("请添加门头照片照片");
-            return;
-        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.xiuliuser.update", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("account_name", customercenterinfo_name.getText().toString());
         params.put("area", cityIds);

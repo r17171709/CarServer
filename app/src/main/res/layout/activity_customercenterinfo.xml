@@ -360,6 +360,7 @@
                         android:padding="5dip"
                         android:textSize="13sp"
                         android:inputType="number"
+                        android:text="0"
                         android:layout_marginLeft="10dip"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>

@@ -49,7 +49,7 @@ public class ClientsReviewAdapter extends RecyclerView.Adapter<ClientsReviewAdap
         area+=models.get(position).getRepairdepot_address();
         holder.adapter_clientsreview_address.setText("地址："+area);
         if (models.get(position).getAppove_status()==1) {
-            holder.adapter_clientsreview_state.setText("待审批");
+            holder.adapter_clientsreview_state.setText("审核中");
             holder.adapter_clientsreview_recommit.setVisibility(View.GONE);
         }
         else if (models.get(position).getAppove_status()==2) {

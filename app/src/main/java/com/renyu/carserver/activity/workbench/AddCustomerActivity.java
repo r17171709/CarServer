@@ -363,7 +363,7 @@ public class AddCustomerActivity extends BaseActivity {
             return;
         }
         if (pic4.equals("")) {
-            showToast("请添加门头照片照片");
+            showToast("请添加门头照片");
             return;
         }
         if (addcustomer_creditline.getText().toString().equals("")) {

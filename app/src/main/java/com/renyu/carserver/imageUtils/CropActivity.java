@@ -30,8 +30,8 @@ public class CropActivity extends BaseActivity {
 	TextView view_toolbar_center_title;
 	@Bind(R.id.view_toolbar_center_back)
 	ImageView view_toolbar_center_back;
-	@Bind(R.id.view_toolbar_center_next)
-	ImageView view_toolbar_center_next;
+	@Bind(R.id.view_toolbar_center_text_next)
+	TextView view_toolbar_center_text_next;
 	@Bind(R.id.cropImg)
 	CropImageView mCropImage=null;
 	Bitmap bmp=null;
@@ -54,8 +54,8 @@ public class CropActivity extends BaseActivity {
 	
 	private void init() {
 		view_toolbar_center_title.setText("剪裁");
-		view_toolbar_center_next.setVisibility(View.VISIBLE);
-		view_toolbar_center_next.setImageResource(R.mipmap.ic_crop);
+		view_toolbar_center_text_next.setVisibility(View.VISIBLE);
+		view_toolbar_center_text_next.setText("完成");
 		view_toolbar_center_back.setVisibility(View.VISIBLE);
 		mCropImage.setFixedAspectRatio(true);
 		mCropImage.setImageBitmap(bmp);
@@ -110,10 +110,10 @@ public class CropActivity extends BaseActivity {
 		return file.getPath();
 	}
 
-	@OnClick({R.id.view_toolbar_center_next, R.id.view_toolbar_center_back})
+	@OnClick({R.id.view_toolbar_center_text_next, R.id.view_toolbar_center_back})
 	public void onClick(View view) {
 		switch (view.getId()) {
-			case R.id.view_toolbar_center_next:
+			case R.id.view_toolbar_center_text_next:
 				crop();
 				break;
 			case R.id.view_toolbar_center_back:

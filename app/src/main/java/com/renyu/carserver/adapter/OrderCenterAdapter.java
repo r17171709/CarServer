@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -122,6 +123,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
@@ -278,6 +280,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
@@ -371,6 +374,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
@@ -466,6 +470,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon5_red);
@@ -551,6 +556,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
@@ -645,6 +651,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon7_red);
@@ -732,6 +739,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon8_red);
@@ -835,6 +843,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon9_red);
@@ -921,6 +930,7 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
                     cmb.setPrimaryClip(clip);
+                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon10_red);

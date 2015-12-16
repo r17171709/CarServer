@@ -85,11 +85,11 @@ public class MainFragment extends BaseFragment {
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon1);
                     break;
                 case 1:
-                    main_middle_gridlayout_item_name.setText("平台授信");
+                    main_middle_gridlayout_item_name.setText("授信额度");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon2);
                     break;
                 case 2:
-                    main_middle_gridlayout_item_name.setText("平台授信\n变更查询");
+                    main_middle_gridlayout_item_name.setText("授信额度\n变更查询");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon3);
                     break;
                 case 3:

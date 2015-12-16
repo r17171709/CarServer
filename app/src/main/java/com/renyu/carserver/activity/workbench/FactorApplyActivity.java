@@ -261,13 +261,11 @@ public class FactorApplyActivity extends BaseActivity {
         if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
             params.put("repair_name", repairdepot_name);
         }
-        else {
-            params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
-        }
+        params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         if (applytime!=0) {
             params.put("applytime", ""+applytime);
         }
-        params.put("state", ""+state);
+        params.put("status", ""+state);
         httpHelper.commonPostRequest(ParamUtils.api, params, null, new OKHttpHelper.RequestListener() {
             @Override
             public void onSuccess(String string) {

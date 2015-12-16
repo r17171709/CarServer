@@ -40,9 +40,7 @@ public class ForgetActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.forget_sendphone:
-                if (!TextUtils.isEmpty(forget_phone.getText().toString())&&!TextUtils.isEmpty(forget_name.getText().toString())) {
-                    forget();
-                }
+                forget();
                 break;
             case R.id.forget_back:
                 finish();

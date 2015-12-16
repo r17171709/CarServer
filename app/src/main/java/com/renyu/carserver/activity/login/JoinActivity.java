@@ -177,6 +177,50 @@ public class JoinActivity extends BaseActivity {
     }
 
     private void join() {
+        if (join_name.getText().toString().equals("")) {
+            showToast("服务商名称不能为空");
+            return;
+        }
+        if (cityIds.equals("")) {
+            showToast("所在地区不能为空");
+            return;
+        }
+        if (join_address.getText().toString().equals("")) {
+            showToast("详细地址不能为空");
+            return;
+        }
+        if (join_businesslicense.getText().toString().equals("")) {
+            showToast("营业执照号不能为空");
+            return;
+        }
+        if (join_contact.getText().toString().equals("")) {
+            showToast("联系人不能为空");
+            return;
+        }
+        if (join_phonenum.getText().toString().equals("")) {
+            showToast("手机号码不能为空");
+            return;
+        }
+        if (join_phonenum.getText().toString().length()<11) {
+            showToast("手机号码必须为11位");
+            return;
+        }
+        if (legalperson.getText().toString().equals("")) {
+            showToast("法人姓名不能为空");
+            return;
+        }
+        if (idnumber.getText().toString().equals("")) {
+            showToast("法人身份证号不能为空");
+            return;
+        }
+        if (idnumber.getText().toString().length()<18) {
+            showToast("法人身份证号必须18位");
+            return;
+        }
+        if (lastAvatar.equals("")) {
+            showToast("请添加营业执照照片照片");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.apply", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("shop_name", join_name.getText().toString());
         params.put("area", cityIds);
