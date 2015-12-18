@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.renyu.carserver.R;
-import com.renyu.carserver.activity.login.AreaActivity;
 import com.renyu.carserver.base.BaseActivity;
 import com.renyu.carserver.commons.CommonUtils;
 import com.renyu.carserver.commons.OKHttpHelper;
@@ -53,19 +51,19 @@ public class MyDataActivity extends BaseActivity {
     @Bind(R.id.mydata_avatar)
     CircleImageView mydata_avatar;
     @Bind(R.id.mydata_name)
-    EditText mydata_name;
+    TextView mydata_name;
     @Bind(R.id.mydata_contactperson)
-    EditText mydata_contactperson;
+    TextView mydata_contactperson;
     @Bind(R.id.mydata_mobile)
-    EditText mydata_mobile;
+    TextView mydata_mobile;
     @Bind(R.id.mydata_area)
     TextView mydata_area;
     @Bind(R.id.mydata_address)
-    EditText mydata_address;
+    TextView mydata_address;
     @Bind(R.id.mydata_legal)
-    EditText mydata_legal;
+    TextView mydata_legal;
     @Bind(R.id.mydata_bussinesscode)
-    EditText mydata_bussinesscode;
+    TextView mydata_bussinesscode;
 
     String lastAvatar="";
     String cityIds="";
@@ -94,16 +92,9 @@ public class MyDataActivity extends BaseActivity {
         getMyData();
     }
 
-    @OnClick({R.id.mydata_commit, R.id.mydata_area, R.id.mydata_avatar, R.id.view_toolbar_center_back})
+    @OnClick({R.id.mydata_avatar, R.id.view_toolbar_center_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.mydata_commit:
-                updateMyData();
-                break;
-            case R.id.mydata_area:
-                Intent intent=new Intent(MyDataActivity.this, AreaActivity.class);
-                startActivityForResult(intent, ParamUtils.RESULT_AREA);
-                break;
             case R.id.mydata_avatar:
                 if (!lastAvatar.equals("")) {
                     File file=new File(lastAvatar);
@@ -166,16 +157,7 @@ public class MyDataActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==ParamUtils.RESULT_AREA&&resultCode==RESULT_OK) {
-            cityIds=data.getExtras().getString("value");
-            cityNames="";
-            String[] values=data.getExtras().getString("value").split(",");
-            for (int i=0;i<values.length;i++) {
-                cityNames+=CommonUtils.getCityInfo(values[i]);
-            }
-            mydata_area.setText(cityNames);
-        }
-        else if(requestCode==ParamUtils.takecamera_result&&resultCode==RESULT_OK) {
+        if(requestCode==ParamUtils.takecamera_result&&resultCode==RESULT_OK) {
             String filePath=data.getExtras().getString("path");
             cropImage(filePath);
         }
@@ -215,6 +197,8 @@ public class MyDataActivity extends BaseActivity {
             //刷新头像
             ImageLoader.getInstance().displayImage("file://"+filePath, mydata_avatar);
             lastAvatar=filePath;
+
+            updateMyData();
         }
     }
 
@@ -228,19 +212,12 @@ public class MyDataActivity extends BaseActivity {
             return;
         }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.user.update", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
-        params.put("shop_name", mydata_name.getText().toString());
-        params.put("contact_tel", mydata_mobile.getText().toString());
-        params.put("area", cityIds);
-        params.put("shop_addr", mydata_address.getText().toString());
-        params.put("contact_person", mydata_contactperson.getText().toString());
-        params.put("shopuser_name", mydata_legal.getText().toString());
-        params.put("business_encoding", mydata_bussinesscode.getText().toString());
         params.put("shop_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         HashMap<String, File> filesMap=new HashMap<>();
         if (!lastAvatar.equals("")) {
             filesMap.put("head_photo", new File(lastAvatar));
         }
-        httpHelper.uploadFile(filesMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
+        httpHelper.asyncUpload(filesMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {
                 showDialog("提示", "正在提交");

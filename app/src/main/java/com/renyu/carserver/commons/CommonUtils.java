@@ -164,6 +164,11 @@ public class CommonUtils {
         return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
     }
 
+    /**
+     * 得到屏幕宽度
+     * @param context
+     * @return
+     */
     public static int getScreenWidth(Context context) {
         WindowManager manager= (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm=new DisplayMetrics();

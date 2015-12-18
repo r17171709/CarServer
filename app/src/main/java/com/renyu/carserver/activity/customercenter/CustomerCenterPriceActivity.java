@@ -119,7 +119,7 @@ public class CustomerCenterPriceActivity extends BaseActivity {
         params.put("reg_address", customercenterprice_reg_address.getText().toString());
         params.put("user_id", ""+model.getUser_id());
         HashMap<String, File> fileHashMap=new HashMap<>();
-        httpHelper.uploadFile(fileHashMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
+        httpHelper.asyncUpload(fileHashMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {
                 showDialog("提示", "正在更新");

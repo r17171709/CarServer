@@ -69,6 +69,10 @@ public class MyFeedbackActivity extends BaseActivity {
     }
 
     private void feedback() {
+        if (feedback_edit.getText().toString().equals("")) {
+            showToast("请输入留言内容");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.feedback.add", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         params.put("question", feedback_edit.getText().toString());

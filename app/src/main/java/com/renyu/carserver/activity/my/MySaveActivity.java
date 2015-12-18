@@ -95,6 +95,18 @@ public class MySaveActivity extends BaseActivity {
     }
 
     private void passportSave() {
+        if (mysave_password.getText().toString().equals("")) {
+            showToast("请输入原始密码");
+            return;
+        }
+        if (mysave_newpass.getText().toString().equals("")) {
+            showToast("请输入修改后的密码");
+            return;
+        }
+        if (mysave_repeatnewpass.getText().toString().equals("")) {
+            showToast("请再次输入修改后的密码");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.passport", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         params.put("old_pwd", mysave_password.getText().toString());

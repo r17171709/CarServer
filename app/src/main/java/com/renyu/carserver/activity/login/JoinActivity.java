@@ -233,7 +233,7 @@ public class JoinActivity extends BaseActivity {
         params.put("areaframe", cityIds);
         HashMap<String, File> filesMap=new HashMap<>();
         filesMap.put("business_photo", new File(lastAvatar));
-        httpHelper.uploadFile(filesMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
+        httpHelper.asyncUpload(filesMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {
                 showDialog("提示", "正在申请加盟");

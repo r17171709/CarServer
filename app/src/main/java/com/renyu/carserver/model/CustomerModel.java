@@ -14,7 +14,7 @@ public class CustomerModel implements Serializable {
     private String bank_name;
     private String areaframe;
     private String corporation_codeId_photo;
-    private int init_amount;
+    private String init_amount;
     private String lang;
     private String reg_ip;
     private String shop_photo;
@@ -92,7 +92,7 @@ public class CustomerModel implements Serializable {
         this.corporation_codeId_photo = corporation_codeId_photo;
     }
 
-    public void setInit_amount(int init_amount) {
+    public void setInit_amount(String init_amount) {
         this.init_amount = init_amount;
     }
 
@@ -300,7 +300,7 @@ public class CustomerModel implements Serializable {
         return corporation_codeId_photo;
     }
 
-    public int getInit_amount() {
+    public String getInit_amount() {
         return init_amount;
     }
 

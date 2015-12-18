@@ -135,6 +135,9 @@ public class CustomerCenterInfoActivity extends BaseActivity {
         customercenterinfo_legalperson.setText(model.getCorporation());
         customercenterinfo_legalpersonid.setText(model.getCorporation_codeId());
         customercenterinfo_businesslicense.setText(model.getBusiness_encoding());
+        customercenterinfo_creditline.setText(model.getInit_amount());
+        customercenterinfo_email.setText(model.getEmail());
+        customercenterinfo_zipcode.setText(model.getPostcode());
         ImageLoader.getInstance().displayImage(model.getBusiness_photo(), customercenterinfo_idphoto_1, getAvatarDisplayImageOptions());
         ImageLoader.getInstance().displayImage(model.getCorporation_codeId_photo(), customercenterinfo_idphoto_2, getAvatarDisplayImageOptions());
         ImageLoader.getInstance().displayImage(model.getShop_photo(), customercenterinfo_businesslicense_photo, getAvatarDisplayImageOptions());
@@ -334,6 +337,9 @@ public class CustomerCenterInfoActivity extends BaseActivity {
         params.put("business_encoding", customercenterinfo_businesslicense.getText().toString());
         params.put("contact_person", customercenterinfo_contact.getText().toString());
         params.put("repairdepot_name", customercenterinfo_company.getText().toString());
+        params.put("init_amount", customercenterinfo_creditline.getText().toString());
+        params.put("email", customercenterinfo_email.getText().toString());
+        params.put("postcode", customercenterinfo_zipcode.getText().toString());
         params.put("user_id", ""+model.getUser_id());
         HashMap<String, File> fileHashMap=new HashMap<>();
         if (!pic1.equals("")) {
@@ -348,7 +354,7 @@ public class CustomerCenterInfoActivity extends BaseActivity {
         if (!pic4.equals("")) {
             fileHashMap.put("shop_photo_new", new File(pic4));
         }
-        httpHelper.uploadFile(fileHashMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
+        httpHelper.asyncUpload(fileHashMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {
                 showDialog("提示", "正在更新");

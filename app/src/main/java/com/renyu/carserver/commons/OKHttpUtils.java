@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -100,7 +99,7 @@ public class OKHttpUtils {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                if (response.isSuccessful()) {
+                if (response!=null && response.isSuccessful()) {
                     if (successListener != null) {
                         successListener.onResponse(response);
                     }
@@ -133,23 +132,42 @@ public class OKHttpUtils {
         get(url, new HashMap<String, String>());
     }
 
-    public void post(String url, HashMap<String, String> params, HashMap<String, String> headers, final OnSuccessListener successListener, final OnErrorListener errorListener) {
-        FormEncodingBuilder builder=new FormEncodingBuilder();
-        Iterator<Map.Entry<String, String>> params_it=params.entrySet().iterator();
+    /**
+     * post数据准备
+     * @param url
+     * @param params
+     * @param headers
+     * @return
+     */
+    private Call postPrepare(String url, HashMap<String, String> params, HashMap<String, String> headers) {
+        FormEncodingBuilder builder = new FormEncodingBuilder();
+        Iterator<Map.Entry<String, String>> params_it = params.entrySet().iterator();
         while (params_it.hasNext()) {
-            Map.Entry<String, String> params_en= params_it.next();
+            Map.Entry<String, String> params_en = params_it.next();
             builder.add(params_en.getKey(), params_en.getValue());
         }
-        Request.Builder req_builder=new Request.Builder();
-        if (headers!=null&&headers.size()>0) {
-            Iterator<Map.Entry<String, String>> header_it=headers.entrySet().iterator();
+        Request.Builder req_builder = new Request.Builder();
+        if (headers != null && headers.size() > 0) {
+            Iterator<Map.Entry<String, String>> header_it = headers.entrySet().iterator();
             while (header_it.hasNext()) {
-                Map.Entry<String, String> header_en=header_it.next();
+                Map.Entry<String, String> header_en = header_it.next();
                 req_builder.addHeader(header_en.getKey(), header_en.getValue());
             }
         }
-        Request request=req_builder.url(url).tag(url).post(builder.build()).build();
-        Call call=client.newCall(request);
+        Request request = req_builder.url(url).tag(url).post(builder.build()).build();
+        return client.newCall(request);
+    }
+
+    /**
+     * post请求
+     * @param url
+     * @param params
+     * @param headers
+     * @param successListener
+     * @param errorListener
+     */
+    public void asyncPost(String url, HashMap<String, String> params, HashMap<String, String> headers, final OnSuccessListener successListener, final OnErrorListener errorListener) {
+        Call call=postPrepare(url, params, headers);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -173,43 +191,28 @@ public class OKHttpUtils {
         });
     }
 
-    public void post(String url, HashMap<String, String> params, OnSuccessListener successListener, OnErrorListener errorListener) {
-        post(url, params, null, successListener, errorListener);
+    public void asyncPost(String url, HashMap<String, String> params, OnSuccessListener successListener, OnErrorListener errorListener) {
+        asyncPost(url, params, null, successListener, errorListener);
     }
 
-    public void post(String url, HashMap<String, String> params, HashMap<String, String> headers, OnSuccessListener successListener) {
-        post(url, params, headers, successListener, null);
+    public void asyncPost(String url, HashMap<String, String> params, HashMap<String, String> headers, OnSuccessListener successListener) {
+        asyncPost(url, params, headers, successListener, null);
     }
 
-    public void post(String url, HashMap<String, String> params, OnSuccessListener successListener) {
-        post(url, params, successListener, null);
+    public void asyncPost(String url, HashMap<String, String> params, OnSuccessListener successListener) {
+        asyncPost(url, params, successListener, null);
     }
 
-    public void post(String url, HashMap<String, String> params, HashMap<String, String> headers) {
-        post(url, params, headers, null);
+    public void asyncPost(String url, HashMap<String, String> params, HashMap<String, String> headers) {
+        asyncPost(url, params, headers, null);
     }
 
-    public void post(String url, HashMap<String, String> params) {
-        post(url, params, new HashMap<String, String>());
+    public void asyncPost(String url, HashMap<String, String> params) {
+        asyncPost(url, params, new HashMap<String, String>());
     }
 
     public Response syncPost(String url, HashMap<String, String> params, HashMap<String, String> headers) {
-        FormEncodingBuilder builder=new FormEncodingBuilder();
-        Iterator<Map.Entry<String, String>> params_it=params.entrySet().iterator();
-        while (params_it.hasNext()) {
-            Map.Entry<String, String> params_en= params_it.next();
-            builder.add(params_en.getKey(), params_en.getValue());
-        }
-        Request.Builder req_builder=new Request.Builder();
-        if (headers!=null&&headers.size()>0) {
-            Iterator<Map.Entry<String, String>> header_it=headers.entrySet().iterator();
-            while (header_it.hasNext()) {
-                Map.Entry<String, String> header_en=header_it.next();
-                req_builder.addHeader(header_en.getKey(), header_en.getValue());
-            }
-        }
-        Request request=req_builder.url(url).tag(url).post(builder.build()).build();
-        Call call=client.newCall(request);
+        Call call=postPrepare(url, params, headers);
         try {
             Response response=call.execute();
             if (!response.isSuccessful()) {
@@ -226,6 +229,13 @@ public class OKHttpUtils {
         return syncPost(url, params, null);
     }
 
+    /**
+     * 下载
+     * @param url
+     * @param dirPath
+     * @param downloadListener
+     * @param progressListener
+     */
     public void download(final String url, final String dirPath, final OnDownloadListener downloadListener, final ProgressListener progressListener) {
         OkHttpClient client2=client.clone();
         Request request=new Request.Builder().tag(url).url(url).build();
@@ -255,7 +265,7 @@ public class OKHttpUtils {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                if (response.isSuccessful()) {
+                if (response!=null && response.isSuccessful()) {
                     InputStream is = response.body().byteStream();
                     File file = null;
                     if (url.indexOf("?") != -1) {
@@ -324,7 +334,14 @@ public class OKHttpUtils {
         }
     }
 
-    public void upload(String url, HashMap<String, String> params, HashMap<String, File> files, final OnSuccessListener successListener, final OnErrorListener errorListener) {
+    /**
+     * 上传参数准备
+     * @param url
+     * @param params
+     * @param files
+     * @return
+     */
+    private Call uploadPrepare(String url, HashMap<String, String> params, HashMap<String, File> files) {
         OkHttpClient client2=client.clone();
         MultipartBuilder multipartBuilder = new MultipartBuilder();
         multipartBuilder.type(MultipartBuilder.FORM);
@@ -340,8 +357,8 @@ public class OKHttpUtils {
         }
         /**
          * 遍历paths中所有图片绝对路径到builder，并约定key如“upload”作为后台接受多张图片的key
-            for (String path : paths) {
-            builder.addFormDataPart("upload", null, RequestBody.create(MEDIA_TYPE_PNG, new File(path)));
+         for (String path : paths) {
+         builder.addFormDataPart("upload", null, RequestBody.create(MEDIA_TYPE_PNG, new File(path)));
          */
         RequestBody formBody = multipartBuilder.build();
         Request request = new Request.Builder()
@@ -349,7 +366,20 @@ public class OKHttpUtils {
                 .tag(url)
                 .post(formBody)
                 .build();
-        client2.newCall(request).enqueue(new Callback() {
+        return client2.newCall(request);
+    }
+
+    /**
+     * 异步上传
+     * @param url
+     * @param params
+     * @param files
+     * @param successListener
+     * @param errorListener
+     */
+    public void asyncUpload(String url, HashMap<String, String> params, HashMap<String, File> files, final OnSuccessListener successListener, final OnErrorListener errorListener) {
+        Call call=uploadPrepare(url, params, files);
+        call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
                 if (errorListener != null) {
@@ -359,7 +389,7 @@ public class OKHttpUtils {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                if (response.isSuccessful()) {
+                if (response!=null && response.isSuccessful()) {
                     if (successListener != null) {
                         successListener.onResponse(response);
                     }
@@ -371,6 +401,24 @@ public class OKHttpUtils {
                 }
             }
         });
+    }
+
+    /**
+     * 同步上传
+     * @param url
+     * @param params
+     * @param files
+     * @return
+     */
+    public Response syncUpload(String url, HashMap<String, String> params, HashMap<String, File> files) {
+        Call call=uploadPrepare(url, params, files);
+        try {
+            Response response=call.execute();
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void cancel(String tag) {

@@ -264,33 +264,42 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     }
 
     private Size determineBestPreviewSize(Camera.Parameters parameters) {
-        return determineBestSize(parameters.getSupportedPreviewSizes(), PREVIEW_SIZE_MAX_WIDTH);
+        return getCurrentScreenSize(parameters.getSupportedPreviewSizes());
     }
 
     private Size determineBestPictureSize(Camera.Parameters parameters) {
-        return determineBestSize(parameters.getSupportedPictureSizes(), PICTURE_SIZE_MAX_WIDTH);
+        return getCurrentScreenSize(parameters.getSupportedPictureSizes());
     }
 
-    private Size determineBestSize(List<Size> sizes, int widthThreshold) {
-        Size bestSize = null;
-        Size size;
-        int numOfSizes = sizes.size();
-        for (int i = 0; i < numOfSizes; i++) {
-            size = sizes.get(i);
-            boolean isDesireRatio = (size.width / 16) == (size.height / 9);
-            boolean isBetterSize = (bestSize == null) || size.width > bestSize.width;
-
-            if (isDesireRatio && isBetterSize) {
-                bestSize = size;
+    /**
+     * 获得最接近频幕宽度的尺寸
+     * @param sizeList
+     * @return
+     */
+    private Size getCurrentScreenSize(List<Size> sizeList) {
+        if (sizeList != null && sizeList.size() > 0) {
+            int screenWidth = CommonUtils.getScreenWidth(getActivity());
+            int[] arry = new int[sizeList.size()];
+            int temp = 0;
+            for (Size size : sizeList) {
+                arry[temp++] = Math.abs(size.width - screenWidth);
             }
+            temp = 0;
+            int index = 0;
+            for (int i = 0; i < arry.length; i++) {
+                if (i == 0) {
+                    temp = arry[i];
+                    index = 0;
+                } else {
+                    if (arry[i] < temp) {
+                        index = i;
+                        temp = arry[i];
+                    }
+                }
+            }
+            return sizeList.get(index);
         }
-
-        if (bestSize == null) {
-            Log.d(TAG, "cannot find the best camera size");
-            return sizes.get(sizes.size() - 1);
-        }
-
-        return bestSize;
+        return null;
     }
 
     private void restartPreview() {

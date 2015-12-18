@@ -386,12 +386,15 @@ public class AddCustomerActivity extends BaseActivity {
         params.put("bank_account", addcustomer_cardnum.getText().toString());
         params.put("contact_phone", addcustomer_phonenum2.getText().toString());
         params.put("reg_address", addcustomer_reg_address.getText().toString());
+        params.put("init_amount", addcustomer_creditline.getText().toString());
+        params.put("email", addcustomer_email.getText().toString());
+        params.put("postcode", addcustomer_zipcode.getText().toString());
         HashMap<String, File> fileHashMap=new HashMap<>();
         fileHashMap.put("business_photo", new File(pic1));
         fileHashMap.put("corporation_codeId_photo", new File(pic2));
         fileHashMap.put("shop_photo", new File(pic3));
         fileHashMap.put("shop_photo_new", new File(pic4));
-        httpHelper.uploadFile(fileHashMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
+        httpHelper.asyncUpload(fileHashMap, ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {
                 showDialog("提示", "正在添加修理厂");

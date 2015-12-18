@@ -40,7 +40,7 @@ public class OKHttpHelper {
         if (startListener!=null) {
             startListener.onStart();
         }
-        OKHttpUtils.getInstance().post(url, params, new OKHttpUtils.OnSuccessListener() {
+        OKHttpUtils.getInstance().asyncPost(url, params, new OKHttpUtils.OnSuccessListener() {
             @Override
             public void onResponse(Response response) {
                 try {
@@ -78,6 +78,10 @@ public class OKHttpHelper {
                 });
             }
         });
+    }
+
+    public Response syncPostRequest(String url, HashMap<String, String> params) {
+        return OKHttpUtils.getInstance().syncPost(url, params);
     }
 
     /**
@@ -130,11 +134,11 @@ public class OKHttpHelper {
         });
     }
 
-    public void uploadFile(HashMap<String, File> files, String url, HashMap<String, String> params, final StartListener startListener, final RequestListener requestListener) {
+    public void asyncUpload(HashMap<String, File> files, String url, HashMap<String, String> params, final StartListener startListener, final RequestListener requestListener) {
         if (startListener!=null) {
             startListener.onStart();
         }
-        OKHttpUtils.getInstance().upload(url, params, files, new OKHttpUtils.OnSuccessListener() {
+        OKHttpUtils.getInstance().asyncUpload(url, params, files, new OKHttpUtils.OnSuccessListener() {
             @Override
             public void onResponse(Response response) {
                 try {
@@ -172,6 +176,10 @@ public class OKHttpHelper {
                 });
             }
         });
+    }
+
+    public Response syncUpload(HashMap<String, File> files, String url, HashMap<String, String> params) {
+        return OKHttpUtils.getInstance().syncUpload(url, params, files);
     }
 
     public void downloadFile(String url, String dirPath, final RequestListener requestListener, final ProgressListener progressListener) {

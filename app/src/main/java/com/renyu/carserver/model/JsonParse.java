@@ -128,6 +128,9 @@ public class JsonParse {
                     model.setBank_account(ParamUtils.converNull(jsonObject.getString("bank_account")));
                     model.setContact_phone(jsonObject.getString("contact_phone"));
                     model.setReg_address(ParamUtils.converNull(jsonObject.getString("reg_address")));
+                    model.setInit_amount(ParamUtils.converNull(jsonObject.getString("init_amount")));
+                    model.setEmail(ParamUtils.converNull(jsonObject.getString("email")));
+                    model.setPostcode(ParamUtils.converNull(jsonObject.getString("postcode")));
                     models.add(model);
                 }
                 return models;
