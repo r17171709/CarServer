@@ -151,6 +151,7 @@ public class CustomerCenterFragment extends BaseFragment {
         params.put("service_id", ""+ParamUtils.getLoginModel(getActivity()).getShop_id());
         params.put("page_no", ""+page_no);
         params.put("page_size", "20");
+        params.put("appove_status", "2");
         if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
             params.put("repairdepot_name", repairdepot_name);
         }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.renyu.carserver.R;
-import com.renyu.carserver.activity.MainActivity;
 import com.renyu.carserver.base.BaseActivity;
 import com.renyu.carserver.commons.OKHttpHelper;
 import com.renyu.carserver.commons.ParamUtils;

@@ -322,6 +322,10 @@ public class AddCustomerActivity extends BaseActivity {
             showToast("请填写身份证号码");
             return;
         }
+        if (addcustomer_legalpersonid.getText().toString().length()<18) {
+            showToast("身份证号码必须为18位");
+            return;
+        }
         if (addcustomer_name.getText().toString().equals("")) {
             showToast("请填写会员名");
             return;

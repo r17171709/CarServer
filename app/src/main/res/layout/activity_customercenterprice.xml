@@ -22,12 +22,6 @@
                 android:textSize="16sp"
                 android:text="联系电话："/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:layout_marginLeft="5dip"
-                android:textColor="@android:color/holo_red_dark"/>
-            <EditText
                 android:id="@+id/customercenterprice_phonenum2"
                 android:layout_marginRight="20dip"
                 android:layout_width="match_parent"
@@ -35,7 +29,7 @@
                 android:gravity="center_vertical"
                 android:padding="5dip"
                 android:textSize="13sp"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="10dip"
                 android:inputType="number"
                 android:textColor="#999999"
                 android:background="@drawable/rectangle_corner_black"/>
@@ -53,12 +47,6 @@
                 android:textSize="16sp"
                 android:text="税务登记号："/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:layout_marginLeft="5dip"
-                android:textColor="@android:color/holo_red_dark"/>
-            <EditText
                 android:id="@+id/customercenterprice_taxnum"
                 android:layout_marginRight="20dip"
                 android:layout_width="match_parent"
@@ -66,7 +54,7 @@
                 android:gravity="center_vertical"
                 android:padding="5dip"
                 android:textSize="13sp"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="10dip"
                 android:inputType="number"
                 android:textColor="#999999"
                 android:background="@drawable/rectangle_corner_black"/>
@@ -84,12 +72,6 @@
                 android:textSize="16sp"
                 android:text="企业住所："/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:layout_marginLeft="5dip"
-                android:textColor="@android:color/holo_red_dark"/>
-            <EditText
                 android:id="@+id/customercenterprice_reg_address"
                 android:layout_marginRight="20dip"
                 android:layout_width="match_parent"
@@ -97,7 +79,7 @@
                 android:gravity="center_vertical"
                 android:padding="5dip"
                 android:textSize="13sp"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="10dip"
                 android:textColor="#999999"
                 android:background="@drawable/rectangle_corner_black"/>
         </LinearLayout>
@@ -114,12 +96,6 @@
                 android:textSize="16sp"
                 android:text="开户银行："/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:layout_marginLeft="5dip"
-                android:textColor="@android:color/holo_red_dark"/>
-            <EditText
                 android:id="@+id/customercenterprice_bank"
                 android:layout_marginRight="20dip"
                 android:layout_width="match_parent"
@@ -127,7 +103,7 @@
                 android:gravity="center_vertical"
                 android:padding="5dip"
                 android:textSize="13sp"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="10dip"
                 android:inputType="number"
                 android:textColor="#999999"
                 android:background="@drawable/rectangle_corner_black"/>
@@ -145,12 +121,6 @@
                 android:textSize="16sp"
                 android:text="账号："/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:layout_marginLeft="5dip"
-                android:textColor="@android:color/holo_red_dark"/>
-            <EditText
                 android:id="@+id/customercenterprice_cardnum"
                 android:layout_marginRight="20dip"
                 android:layout_width="match_parent"
@@ -158,20 +128,10 @@
                 android:gravity="center_vertical"
                 android:padding="5dip"
                 android:textSize="13sp"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="10dip"
                 android:inputType="number"
                 android:textColor="#999999"
                 android:background="@drawable/rectangle_corner_black"/>
         </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/customercenterprice_commit"
-        android:layout_width="200dip"
-        android:layout_height="40dip"
-        android:layout_marginTop="50dip"
-        android:layout_marginBottom="20dip"
-        android:text="提交审核"
-        android:layout_gravity="center"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rectangle_background_red"/>
 </LinearLayout>

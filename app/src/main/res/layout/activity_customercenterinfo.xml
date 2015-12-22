@@ -52,12 +52,6 @@
                         android:textSize="16sp"
                         android:text="会员名："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_name"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -65,7 +59,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:textColor="#999999"
                         android:background="@drawable/rectangle_corner_black" />
                 </LinearLayout>
@@ -82,12 +76,6 @@
                         android:textSize="16sp"
                         android:text="联系人："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_contact"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -95,7 +83,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:textColor="#999999"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
@@ -112,12 +100,6 @@
                         android:textSize="16sp"
                         android:text="手机号码："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_phonenum"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -125,7 +107,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:maxLength="11"
                         android:inputType="number"
                         android:textColor="#999999"
@@ -144,12 +126,6 @@
                         android:textSize="16sp"
                         android:text="所在地区："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <TextView
                         android:id="@+id/customercenterinfo_area"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -157,7 +133,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:textColor="#999999"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
@@ -174,12 +150,6 @@
                         android:textSize="16sp"
                         android:text="详细地址："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_address"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -187,7 +157,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:textColor="#999999"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
@@ -204,12 +174,6 @@
                         android:textSize="16sp"
                         android:text="会员全称："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_company"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -217,7 +181,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:textColor="#999999"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
@@ -235,12 +199,6 @@
                         android:textSize="16sp"
                         android:text="营业执照号："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_businesslicense"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -248,7 +206,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:inputType="number"
                         android:textColor="#999999"
                         android:background="@drawable/rectangle_corner_black"/>
@@ -266,17 +224,11 @@
                         android:gravity="right"
                         android:textSize="16sp"
                         android:text="营业执照："/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
                     <ImageView
                         android:id="@+id/customercenterinfo_businesslicense_photo"
                         android:layout_width="80dip"
                         android:layout_height="80dip"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:src="@mipmap/ic_launcher" />
                 </LinearLayout>
                 <LinearLayout
@@ -293,12 +245,6 @@
                         android:textSize="16sp"
                         android:text="法人/经营者\n姓名："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_legalperson"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -307,7 +253,7 @@
                         android:gravity="center_vertical"
                         android:padding="5dip"
                         android:textSize="13sp"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
                 <LinearLayout
@@ -324,12 +270,6 @@
                         android:textSize="16sp"
                         android:text="身份证号码："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_legalpersonid"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -339,7 +279,7 @@
                         android:padding="5dip"
                         android:textSize="13sp"
                         android:maxLength="18"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
                 <LinearLayout
@@ -355,17 +295,11 @@
                         android:gravity="right"
                         android:textSize="16sp"
                         android:text="身份证正面："/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
                     <ImageView
                         android:id="@+id/customercenterinfo_idphoto_1"
                         android:layout_width="80dip"
                         android:layout_height="80dip"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:src="@mipmap/ic_launcher" />
                 </LinearLayout>
                 <LinearLayout
@@ -381,17 +315,11 @@
                         android:gravity="right"
                         android:textSize="16sp"
                         android:text="身份证背面："/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
                     <ImageView
                         android:id="@+id/customercenterinfo_idphoto_2"
                         android:layout_width="80dip"
                         android:layout_height="80dip"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:src="@mipmap/ic_launcher" />
                 </LinearLayout>
                 <LinearLayout
@@ -407,17 +335,11 @@
                         android:gravity="right"
                         android:textSize="16sp"
                         android:text="门头照片："/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
                     <ImageView
                         android:id="@+id/customercenterinfo_shop_photo"
                         android:layout_width="80dip"
                         android:layout_height="80dip"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:src="@mipmap/ic_launcher"/>
                 </LinearLayout>
                 <LinearLayout
@@ -434,12 +356,6 @@
                         android:textSize="16sp"
                         android:text="初始化\n授信额度："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_creditline"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -449,7 +365,7 @@
                         android:textSize="13sp"
                         android:inputType="number"
                         android:text="0"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
                 <LinearLayout
@@ -466,13 +382,6 @@
                         android:textSize="16sp"
                         android:text="邮箱："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:visibility="invisible"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_email"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -481,7 +390,7 @@
                         android:padding="5dip"
                         android:textSize="13sp"
                         android:inputType="number"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
                 <LinearLayout
@@ -499,13 +408,6 @@
                         android:textSize="16sp"
                         android:text="邮政编码："/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:visibility="invisible"
-                        android:layout_marginLeft="5dip"
-                        android:textColor="@android:color/holo_red_dark"/>
-                    <EditText
                         android:id="@+id/customercenterinfo_zipcode"
                         android:layout_marginRight="20dip"
                         android:layout_width="match_parent"
@@ -514,20 +416,10 @@
                         android:padding="5dip"
                         android:textSize="13sp"
                         android:inputType="number"
-                        android:layout_marginLeft="5dip"
+                        android:layout_marginLeft="10dip"
                         android:background="@drawable/rectangle_corner_black"/>
                 </LinearLayout>
             </LinearLayout>
-            <Button
-                android:id="@+id/customercenterinfo_next"
-                android:layout_width="200dip"
-                android:layout_height="40dip"
-                android:layout_marginTop="50dip"
-                android:layout_marginBottom="20dip"
-                android:text="提交审核"
-                android:textColor="@android:color/white"
-                android:background="@drawable/rectangle_background_red"
-                android:layout_gravity="center" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

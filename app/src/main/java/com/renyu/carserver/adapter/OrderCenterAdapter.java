@@ -39,7 +39,6 @@ public class OrderCenterAdapter extends BaseAdapter {
     public final static int TYPE_RECEIVED=4;
     public final static int TYPE_FINISH=5;
     public final static int TYPE_CANCEL=6;
-    public final static int TYPE_RETURN=7;
     public final static int TYPE_CLOSE=8;
 
     Context context=null;
@@ -60,6 +59,7 @@ public class OrderCenterAdapter extends BaseAdapter {
         void getTag(String tag);
         void showChange(int position);
         void cancel(int position);
+        void returnControl(String oid, boolean flag);
     }
 
     @Override
@@ -572,6 +572,7 @@ public class OrderCenterAdapter extends BaseAdapter {
             drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
             holder.ordercenterpending_state.setCompoundDrawables(drawable, null, null, null);            holder.adapter_ordercenterpending_detail.removeAllViews();
             for (int i=0;i<models.get(position).getModels().size();i++) {
+                final int i_=i;
                 View view=LayoutInflater.from(context).inflate(R.layout.adapter_ordercenterpending_child, parent, false);
                 ImageView ordercenterpending_child_image= (ImageView) view.findViewById(R.id.ordercenterpending_child_image);
                 ImageLoader.getInstance().displayImage(models.get(position).getModels().get(i).getPic_path(), ordercenterpending_child_image, getGoodsImageOptions());
@@ -596,15 +597,33 @@ public class OrderCenterAdapter extends BaseAdapter {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
                 }
                 TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
+                LinearLayout ordercenterpending_child_return= (LinearLayout) view.findViewById(R.id.ordercenterpending_child_return);
                 if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
                     ordercenterpending_child_state.setText("退货中");
+                    ordercenterpending_child_return.setVisibility(View.VISIBLE);
                 }
                 else if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_BUYER_RETURN_GOODS")) {
                     ordercenterpending_child_state.setText("已退货");
+                    ordercenterpending_child_return.setVisibility(View.GONE);
                 }
                 else if (models.get(position).getModels().get(i).getAftersales_status().equals("SELLER_REFUSE_BUYER")) {
                     ordercenterpending_child_state.setText("已驳回");
+                    ordercenterpending_child_return.setVisibility(View.GONE);
                 }
+                TextView ordercenterpending_child_forbid= (TextView) view.findViewById(R.id.ordercenterpending_child_forbid);
+                ordercenterpending_child_forbid.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.returnControl(models.get(position).getModels().get(i_).getOid(), false);
+                    }
+                });
+                TextView ordercenterpending_child_commit= (TextView) view.findViewById(R.id.ordercenterpending_child_commit);
+                ordercenterpending_child_commit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.returnControl(models.get(position).getModels().get(i_).getOid(), true);
+                    }
+                });
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -794,109 +813,6 @@ public class OrderCenterAdapter extends BaseAdapter {
             }
             holder.adapter_ordercenterpending_cancel.setVisibility(View.GONE);
         }
-        else if (getItemViewType(position)==TYPE_RETURN) {
-            OrderCenterReturnHolder holder=null;
-            if (convertView==null) {
-                holder=new OrderCenterReturnHolder();
-                convertView= LayoutInflater.from(context).inflate(R.layout.adapter_ordercentertobepaid, parent, false);
-                holder.ordercentertobepaid_state= (TextView) convertView.findViewById(R.id.ordercenterpending_state);
-                holder.ordercentertobepaid_tid= (TextView) convertView.findViewById(R.id.ordercenterpending_tid);
-                holder.adapter_ordercentertobepaid_detail= (LinearLayout) convertView.findViewById(R.id.adapter_ordercentertobepaid_detail);
-                holder.ordercentertobepaid_num= (TextView) convertView.findViewById(R.id.ordercentertobepaid_num);
-                holder.adapter_ordercentertobepaid_commit= (TextView) convertView.findViewById(R.id.adapter_ordercentertobepaid_commit);
-                holder.adapter_ordercentertobepaid_cancel= (TextView) convertView.findViewById(R.id.adapter_ordercentertobepaid_cancel);
-                holder.ordercentertobepaid_price= (TextView) convertView.findViewById(R.id.ordercentertobepaid_price);
-                holder.ordercentertobepaid_copy= (TextView) convertView.findViewById(R.id.ordercentertobepaid_copy);
-                convertView.setTag(holder);
-            }
-            else {
-                holder= (OrderCenterReturnHolder) convertView.getTag();
-            }
-            holder.adapter_ordercentertobepaid_commit.setText("同意");
-            holder.adapter_ordercentertobepaid_commit.setVisibility(View.VISIBLE);
-            holder.adapter_ordercentertobepaid_commit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-            holder.adapter_ordercentertobepaid_cancel.setText("拒绝");
-            holder.adapter_ordercentertobepaid_cancel.setVisibility(View.VISIBLE);
-            holder.adapter_ordercentertobepaid_cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-            holder.ordercentertobepaid_tid.setText(models.get(position).getTid());
-            holder.ordercentertobepaid_state.setText("退货");
-            holder.ordercentertobepaid_num.setText("共" + models.get(position).getItemnum() + "件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercentertobepaid_price.setText("0");
-            }
-            else {
-                holder.ordercentertobepaid_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
-            }
-            holder.ordercentertobepaid_copy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("value",models.get(position).getTid());
-                    cmb.setPrimaryClip(clip);
-                    Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
-                }
-            });
-            Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon9_red);
-            drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
-            holder.ordercentertobepaid_state.setCompoundDrawables(drawable, null, null, null);
-            for (int i=0;i<models.get(position).getModels().size();i++) {
-                View view=LayoutInflater.from(context).inflate(R.layout.adapter_ordercenterpending_child, parent, false);
-                ImageView ordercenterpending_child_image= (ImageView) view.findViewById(R.id.ordercenterpending_child_image);
-                ImageLoader.getInstance().displayImage(models.get(position).getModels().get(i).getPic_path(), ordercenterpending_child_image, getGoodsImageOptions());
-                TextView ordercenterpending_child_title= (TextView) view.findViewById(R.id.ordercenterpending_child_title);
-                ordercenterpending_child_title.setText(models.get(position).getModels().get(i).getTitle());
-                TextView ordercenterpending_child_sec_title= (TextView) view.findViewById(R.id.ordercenterpending_child_sec_title);
-                ordercenterpending_child_sec_title.setText(models.get(position).getModels().get(i).getSpec_nature_info());
-                TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
-                ordercenterpending_child_num.setText("x"+models.get(position).getModels().get(i).getNum());
-                TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
-                }
-                else {
-                    ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
-                }
-                TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
-                }
-                else {
-                    ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
-                }
-                TextView ordercenterpending_child_state= (TextView) view.findViewById(R.id.ordercenterpending_child_state);
-                if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_SELLER_AGREE")) {
-                    ordercenterpending_child_state.setText("退货中");
-                }
-                else if (models.get(position).getModels().get(i).getAftersales_status().equals("WAIT_BUYER_RETURN_GOODS")) {
-                    ordercenterpending_child_state.setText("已退货");
-                }
-                else if (models.get(position).getModels().get(i).getAftersales_status().equals("SELLER_REFUSE_BUYER")) {
-                    ordercenterpending_child_state.setText("已驳回");
-                }
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(context, OrderCenterDetailActivity.class);
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("model", models.get(position));
-                        intent.putExtras(bundle);
-                        context.startActivity(intent);
-                    }
-                });
-                holder.adapter_ordercentertobepaid_detail.addView(view);
-            }
-            holder.adapter_ordercentertobepaid_detail.removeAllViews();
-        }
         else if (getItemViewType(position)==TYPE_CLOSE) {
             OrderCenterCloseHolder holder=null;
             if (convertView==null) {
@@ -1015,7 +931,7 @@ public class OrderCenterAdapter extends BaseAdapter {
             return TYPE_CLOSE;
         }
         else {
-            return TYPE_RETURN;
+            return 100;
         }
     }
 

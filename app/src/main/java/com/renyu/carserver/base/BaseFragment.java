@@ -45,6 +45,7 @@ public abstract class BaseFragment extends Fragment {
     public void showToast(String text) {
         Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
     }
+
     public void showDialog(String title, String message) {
         pd=ProgressDialog.show(getActivity(), title, message);
     }

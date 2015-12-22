@@ -124,6 +124,11 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
             public void cancel(int position) {
                 cancelTrade(position);
             }
+
+            @Override
+            public void returnControl(String oid, boolean flag) {
+                refundCheck(oid, flag);
+            }
         });
         ordercenter_lv.setAdapter(adapter);
         ordercenter_lv.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -323,6 +328,41 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
         params.put("oid", oid);
         params.put("tid", tid);
         params.put("price", price);
+        httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
+            @Override
+            public void onStart() {
+                showDialog("提示", "正在提交");
+            }
+        }, new OKHttpHelper.RequestListener() {
+            @Override
+            public void onSuccess(String string) {
+                Log.d("OrderCenterFragment", string);
+                dismissDialog();
+                if (JsonParse.getResultValue(string)!=null) {
+                    showToast(JsonParse.getResultValue(string));
+                    if (JsonParse.getResultInt(string)==0) {
+                        loadOrderCenter();
+                    }
+                }
+                else {
+                    showToast("未知错误");
+                }
+            }
+
+            @Override
+            public void onError() {
+                dismissDialog();
+
+                showToast(getResources().getString(R.string.network_error));
+            }
+        });
+    }
+
+    private void refundCheck(String oid, boolean flag) {
+        HashMap<String, String> params= ParamUtils.getSignParams("app.user.order.refundCheck", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
+        params.put("check_result", String.valueOf(flag));
+        params.put("oid", oid);
         httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {
