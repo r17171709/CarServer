@@ -47,6 +47,8 @@
                             android:padding="5dip"
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
                     <LinearLayout
@@ -76,6 +78,8 @@
                             android:padding="5dip"
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
                     <LinearLayout
@@ -106,6 +110,7 @@
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
                             android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:maxLength="11"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -164,6 +169,8 @@
                             android:gravity="center_vertical"
                             android:padding="5dip"
                             android:textSize="13sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -193,6 +200,8 @@
                             android:gravity="center_vertical"
                             android:padding="5dip"
                             android:textSize="13sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -224,6 +233,7 @@
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
                             android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
                     <LinearLayout
@@ -279,6 +289,8 @@
                             android:gravity="center_vertical"
                             android:padding="5dip"
                             android:textSize="13sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -311,6 +323,8 @@
                             android:textSize="13sp"
                             android:maxLength="18"
                             android:layout_marginLeft="5dip"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
                     <LinearLayout
@@ -419,6 +433,7 @@
                             android:padding="5dip"
                             android:textSize="13sp"
                             android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:text="0"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
@@ -451,6 +466,8 @@
                             android:gravity="center_vertical"
                             android:padding="5dip"
                             android:textSize="13sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -484,6 +501,7 @@
                             android:padding="5dip"
                             android:textSize="13sp"
                             android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -532,6 +550,7 @@
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
                             android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
                     <LinearLayout
@@ -562,6 +581,7 @@
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
                             android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
                     <LinearLayout
@@ -590,6 +610,8 @@
                             android:gravity="center_vertical"
                             android:padding="5dip"
                             android:textSize="13sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -619,6 +641,8 @@
                             android:gravity="center_vertical"
                             android:padding="5dip"
                             android:textSize="13sp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:layout_marginLeft="5dip"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
@@ -650,6 +674,7 @@
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
                             android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:background="@drawable/rectangle_corner_black"/>
                     </LinearLayout>
                 </LinearLayout>

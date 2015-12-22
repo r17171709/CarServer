@@ -88,6 +88,7 @@ public class MyDataActivity extends BaseActivity {
         view_toolbar_center_image.setImageResource(R.mipmap.logo_red);
         view_toolbar_center_back.setVisibility(View.VISIBLE);
         view_toolbar_center_back.setImageResource(R.mipmap.ic_back_gray);
+        ImageLoader.getInstance().displayImage(ParamUtils.getLoginModel(this).getHead_photo(), mydata_avatar, getAvatarDisplayImageOptions());
 
         getMyData();
     }

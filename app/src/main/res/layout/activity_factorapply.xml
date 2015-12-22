@@ -58,6 +58,12 @@
             android:gravity="center"
             android:text="已处理"/>
     </LinearLayout>
+    <View
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip">
+
+    </View>
     <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/factorapply_swipy"

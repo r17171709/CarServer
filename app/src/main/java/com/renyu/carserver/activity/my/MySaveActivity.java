@@ -35,9 +35,9 @@ public class MySaveActivity extends BaseActivity {
     @Bind(R.id.mysave_name)
     TextView mysave_name;
     @Bind(R.id.mysave_tel)
-    EditText mysave_tel;
+    TextView mysave_tel;
     @Bind(R.id.mysave_password)
-    TextView mysave_password;
+    EditText mysave_password;
     @Bind(R.id.mysave_newpass)
     EditText mysave_newpass;
     @Bind(R.id.mysave_repeatnewpass)
@@ -64,18 +64,11 @@ public class MySaveActivity extends BaseActivity {
         mysave_tel.setText(ParamUtils.getLoginModel(this).getLogin_phone());
     }
 
-    @OnClick({R.id.view_toolbar_center_back, R.id.mysave_tel_change, R.id.mysave_password_change, R.id.mysave_save})
+    @OnClick({R.id.view_toolbar_center_back, R.id.mysave_save})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.view_toolbar_center_back:
                 finish();
-                break;
-            case R.id.mysave_tel_change:
-                mysave_tel.setEnabled(true);
-                break;
-            case R.id.mysave_password_change:
-                mysave_newpass.setEnabled(true);
-                mysave_repeatnewpass.setEnabled(true);
                 break;
             case R.id.mysave_save:
                 passportSave();

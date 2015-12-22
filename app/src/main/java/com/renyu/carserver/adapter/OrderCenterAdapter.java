@@ -4,6 +4,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -155,6 +157,10 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercentertobepaid_child_num= (TextView) view.findViewById(R.id.ordercentertobepaid_child_num);
                 ordercentertobepaid_child_num.setText("x" + models.get(position).getModels().get(i).getNum());
                 TextView ordercentertobepaid_child_normalprice= (TextView) view.findViewById(R.id.ordercentertobepaid_child_normalprice);
+                Paint paint=ordercentertobepaid_child_normalprice.getPaint();
+                paint.setColor(Color.RED);
+                paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+                ordercentertobepaid_child_normalprice.setPaintFlags(paint.getFlags());
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercentertobepaid_child_normalprice.setText("0");
                 }
@@ -307,6 +313,10 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
                 ordercenterpending_child_num.setText("x" + models.get(position).getModels().get(i).getNum());
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
+                Paint paint=ordercenterpending_child_normalprice.getPaint();
+                paint.setColor(Color.RED);
+                paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+                ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercenterpending_child_normalprice.setText("0");
                 }
@@ -401,6 +411,10 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
                 ordercenterpending_child_num.setText("x"+models.get(position).getModels().get(i).getNum());
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
+                Paint paint=ordercenterpending_child_normalprice.getPaint();
+                paint.setColor(Color.RED);
+                paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+                ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercenterpending_child_normalprice.setText("0");
                 }
@@ -488,6 +502,10 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
                 ordercenterpending_child_num.setText("x"+models.get(position).getModels().get(i).getNum());
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
+                Paint paint=ordercenterpending_child_normalprice.getPaint();
+                paint.setColor(Color.RED);
+                paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+                ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercenterpending_child_normalprice.setText("0");
                 }
@@ -570,7 +588,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             }
             Drawable drawable=ContextCompat.getDrawable(context, R.mipmap.order_icon6_red);
             drawable.setBounds(0, 0, drawable.getMinimumWidth() / 2, drawable.getMinimumHeight() / 2);
-            holder.ordercenterpending_state.setCompoundDrawables(drawable, null, null, null);            holder.adapter_ordercenterpending_detail.removeAllViews();
+            holder.ordercenterpending_state.setCompoundDrawables(drawable, null, null, null);
+            holder.adapter_ordercenterpending_detail.removeAllViews();
             for (int i=0;i<models.get(position).getModels().size();i++) {
                 final int i_=i;
                 View view=LayoutInflater.from(context).inflate(R.layout.adapter_ordercenterpending_child, parent, false);
@@ -583,6 +602,8 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
                 ordercenterpending_child_num.setText("x"+models.get(position).getModels().get(i).getNum());
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
+                ordercenterpending_child_normalprice.getPaint().setColor(Color.RED);
+                ordercenterpending_child_normalprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercenterpending_child_normalprice.setText("0");
                 }
@@ -688,6 +709,10 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
                 ordercenterpending_child_num.setText("x"+models.get(position).getModels().get(i).getNum());
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
+                Paint paint=ordercenterpending_child_normalprice.getPaint();
+                paint.setColor(Color.RED);
+                paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+                ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercenterpending_child_normalprice.setText("0");
                 }
@@ -776,6 +801,10 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
                 ordercenterpending_child_num.setText("x"+models.get(position).getModels().get(i).getNum());
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
+                Paint paint=ordercenterpending_child_normalprice.getPaint();
+                paint.setColor(Color.RED);
+                paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+                ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercenterpending_child_normalprice.setText("0");
                 }
@@ -864,6 +893,10 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_num= (TextView) view.findViewById(R.id.ordercenterpending_child_num);
                 ordercenterpending_child_num.setText("x"+models.get(position).getModels().get(i).getNum());
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
+                Paint paint=ordercenterpending_child_normalprice.getPaint();
+                paint.setColor(Color.RED);
+                paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+                ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
                 if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
                     ordercenterpending_child_normalprice.setText("0");
                 }

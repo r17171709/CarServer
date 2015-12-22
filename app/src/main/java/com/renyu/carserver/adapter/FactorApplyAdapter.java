@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.renyu.carserver.R;
 import com.renyu.carserver.commons.CommonUtils;
-import com.renyu.carserver.commons.ParamUtils;
 import com.renyu.carserver.model.FactoryApplyModel;
 
 import java.util.ArrayList;
@@ -78,8 +77,6 @@ public class FactorApplyAdapter extends RecyclerView.Adapter<FactorApplyAdapter.
     }
 
     public class FactorApplyHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.adapter_factoryapplytime)
-        TextView adapter_factoryapplytime;
         @Bind(R.id.adapter_factoryapplyinfo)
         TextView adapter_factoryapplyinfo;
         @Bind(R.id.adapter_factoryapplystate)

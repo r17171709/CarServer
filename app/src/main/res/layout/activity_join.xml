@@ -297,7 +297,7 @@
                             android:textSize="13sp"
                             android:layout_marginLeft="5dip"
                             android:maxLength="18"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:imeOptions="actionDone"
                             android:textColor="#999999"
                             android:background="@drawable/rectangle_corner_black"/>

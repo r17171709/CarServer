@@ -44,7 +44,7 @@ public class CreditLineAdapter extends RecyclerView.Adapter<CreditLineAdapter.Cr
     @Override
     public void onBindViewHolder(CreditLineHolder holder, final int position) {
         holder.adapter_credit_name.setText(models.get(position).getRepairdepot_name());
-        holder.adapter_credit_platforminfo.setText("自授信总额："+models.get(position).getInit_amount()+"    余额："+models.get(position).getAmount());
+        holder.adapter_credit_platforminfo.setText("平台授信总额："+models.get(position).getInit_amount()+"    余额："+models.get(position).getAmount());
         holder.adapter_credit_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

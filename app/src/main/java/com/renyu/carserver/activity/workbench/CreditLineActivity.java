@@ -211,6 +211,10 @@ public class CreditLineActivity extends BaseActivity {
     }
 
     public void update(String user_id, String current, String apply) {
+        if (apply.equals("")) {
+            showToast("请填写变更后的授信额度数值");
+            return;
+        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.appamountmodify", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("user_id", user_id);
         params.put("serviceid", ""+ParamUtils.getLoginModel(this).getShop_id());
