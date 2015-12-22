@@ -63,15 +63,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="已通过"/>
-            <TextView
-                android:id="@+id/adapter_clientsreview_recommit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:padding="5dip"
-                android:textColor="@android:color/holo_red_dark"
-                android:background="@drawable/rectangle_corner_red"
-                android:text="重新提交"/>
         </LinearLayout>
     </LinearLayout>
     <View

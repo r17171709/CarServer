@@ -517,6 +517,10 @@ public class OrderCenterFragment extends BaseFragment {
                 price+=shopModels.get(position).getModels().get(i).getEdit_price();
             }
         }
+        if (price.equals("")) {
+            showToast("请输入改价后的价格");
+            return;
+        }
         final String oid_=oid;
         final String price_=price;
         params.put("oid", oid);

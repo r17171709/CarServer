@@ -203,15 +203,14 @@ public class MyDataActivity extends BaseActivity {
     }
 
     public void updateMyData() {
-        if (mydata_mobile.getText().toString().equals("")) {
-            showToast("请填写联系电话");
-            return;
-        }
-        if (mydata_mobile.getText().toString().length()<11) {
-            showToast("手机号码格式错误，请重新填写");
-            return;
-        }
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.user.update", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        params.put("shop_name", mydata_name.getText().toString());
+        params.put("contact_tel", mydata_mobile.getText().toString());
+        params.put("area", cityIds);
+        params.put("shop_addr", mydata_address.getText().toString());
+        params.put("contact_person", mydata_contactperson.getText().toString());
+        params.put("shopuser_name", mydata_legal.getText().toString());
+        params.put("business_encoding", mydata_bussinesscode.getText().toString());
         params.put("shop_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         HashMap<String, File> filesMap=new HashMap<>();
         if (!lastAvatar.equals("")) {

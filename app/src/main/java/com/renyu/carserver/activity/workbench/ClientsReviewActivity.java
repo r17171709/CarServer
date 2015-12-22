@@ -108,18 +108,8 @@ public class ClientsReviewActivity extends BaseActivity {
         });
         clientsreview_rv.setHasFixedSize(true);
         clientsreview_rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter_left=new ClientsReviewAdapter(this, models_left, new ClientsReviewAdapter.OnReCheckStateListener() {
-            @Override
-            public void recheck(int position) {
-
-            }
-        });
-        adapter_right=new ClientsReviewAdapter(this, models_right, new ClientsReviewAdapter.OnReCheckStateListener() {
-            @Override
-            public void recheck(int position) {
-                recheckState(models_right.get(position).getUser_id(), position);
-            }
-        });
+        adapter_left=new ClientsReviewAdapter(this, models_left);
+        adapter_right=new ClientsReviewAdapter(this, models_right);
         clientsreview_examining.performClick();
         clientsreview_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

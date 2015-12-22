@@ -24,12 +24,9 @@ public class ClientsReviewAdapter extends RecyclerView.Adapter<ClientsReviewAdap
     Context context=null;
     ArrayList<ClientsReviewModel> models=null;
 
-    OnReCheckStateListener listener=null;
-
-    public ClientsReviewAdapter(Context context, ArrayList<ClientsReviewModel> models, OnReCheckStateListener listener) {
+    public ClientsReviewAdapter(Context context, ArrayList<ClientsReviewModel> models) {
         this.context=context;
         this.models=models;
-        this.listener=listener;
     }
 
     @Override
@@ -40,7 +37,6 @@ public class ClientsReviewAdapter extends RecyclerView.Adapter<ClientsReviewAdap
 
     @Override
     public void onBindViewHolder(ClientsReviewHolder holder, int position) {
-        final int position_=position;
         holder.adapter_clientsreview_info.setText(models.get(position).getRepairdepot_name()+"  "+models.get(position).getContact_person()+"  "+models.get(position).getContact_tel());
         String area="";
         for (int i=0;i<models.get(position).getAreaframe().split("/").length;i++) {
@@ -50,24 +46,13 @@ public class ClientsReviewAdapter extends RecyclerView.Adapter<ClientsReviewAdap
         holder.adapter_clientsreview_address.setText("地址："+area);
         if (models.get(position).getAppove_status()==1) {
             holder.adapter_clientsreview_state.setText("审核中");
-            holder.adapter_clientsreview_recommit.setVisibility(View.GONE);
         }
         else if (models.get(position).getAppove_status()==2) {
             holder.adapter_clientsreview_state.setText("已通过");
-            holder.adapter_clientsreview_recommit.setVisibility(View.GONE);
         }
         else if (models.get(position).getAppove_status()==3) {
             holder.adapter_clientsreview_state.setText("未通过");
-            holder.adapter_clientsreview_recommit.setVisibility(View.VISIBLE);
         }
-        holder.adapter_clientsreview_recommit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (models.get(position_).getAppove_status()==3) {
-
-                }
-            }
-        });
     }
 
     @Override
@@ -83,16 +68,10 @@ public class ClientsReviewAdapter extends RecyclerView.Adapter<ClientsReviewAdap
         TextView adapter_clientsreview_address;
         @Bind(R.id.adapter_clientsreview_state)
         TextView adapter_clientsreview_state;
-        @Bind(R.id.adapter_clientsreview_recommit)
-        TextView adapter_clientsreview_recommit;
 
         public ClientsReviewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
-
-    public interface OnReCheckStateListener {
-        void recheck(int position);
     }
 }
