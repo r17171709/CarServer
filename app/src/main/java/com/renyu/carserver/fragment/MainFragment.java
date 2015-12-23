@@ -1,5 +1,6 @@
 package com.renyu.carserver.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.renyu.carserver.R;
@@ -14,13 +16,16 @@ import com.renyu.carserver.activity.workbench.AddCustomerActivity;
 import com.renyu.carserver.activity.workbench.ClientsReviewActivity;
 import com.renyu.carserver.activity.workbench.CreditLineActivity;
 import com.renyu.carserver.activity.workbench.FactorApplyActivity;
-import com.renyu.carserver.activity.workbench.MessageCenterActivity;
 import com.renyu.carserver.activity.workbench.SalesNotificationActivity;
 import com.renyu.carserver.activity.workbench.SearchCreditLineActivity;
 import com.renyu.carserver.activity.workbench.ShareActivity;
 import com.renyu.carserver.base.BaseFragment;
 import com.renyu.carserver.commons.CommonUtils;
+import com.renyu.carserver.commons.OKHttpHelper;
 import com.renyu.carserver.commons.ParamUtils;
+import com.renyu.carserver.model.JsonParse;
+
+import java.util.HashMap;
 
 import butterknife.Bind;
 
@@ -35,6 +40,20 @@ public class MainFragment extends BaseFragment {
     GridLayout main_middle_gridlayout;
     TextView main_top_gridlayout_num1=null;
     TextView main_top_gridlayout_num2=null;
+    RelativeLayout main_top_layout;
+
+    JumpListener listener=null;
+
+    public interface JumpListener {
+        void changeFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        listener=(JumpListener) context;
+    }
 
     @Override
     public int initContentView() {
@@ -59,6 +78,13 @@ public class MainFragment extends BaseFragment {
                 main_top_gridlayout_title.setText("今日订单数");
                 main_top_gridlayout_num1= (TextView) view.findViewById(R.id.main_top_gridlayout_num);
                 main_top_gridlayout_num1.setText(ParamUtils.getLoginModel(getActivity()).getCount());
+                main_top_layout= (RelativeLayout) view.findViewById(R.id.main_top_layout);
+                main_top_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.changeFragment();
+                    }
+                });
             }
             else if (i==1) {
                 main_top_gridlayout_title.setText("今日成交额");
@@ -189,5 +215,33 @@ public class MainFragment extends BaseFragment {
                 return;
         }
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        updateNum();
+    }
+
+    private void updateNum() {
+        httpHelper.cancel(ParamUtils.api);
+        HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.user.ordercount", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        params.put("serviceid", ""+ParamUtils.getLoginModel(getActivity()).getShop_id());
+        httpHelper.commonPostRequest(ParamUtils.api, params, null, new OKHttpHelper.RequestListener() {
+            @Override
+            public void onSuccess(String string) {
+                HashMap<String, String> map= JsonParse.getTodayInfo(string);
+                if (map!=null) {
+                    main_top_gridlayout_num1.setText(map.get("count"));
+                    main_top_gridlayout_num2.setText(map.get("sum"));
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 }

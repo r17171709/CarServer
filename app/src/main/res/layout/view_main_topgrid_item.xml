@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="60dip"
     android:gravity="center"
+    android:id="@+id/main_top_layout"
     android:background="@drawable/rectangle_black">
     <TextView
         android:id="@+id/main_top_gridlayout_title"

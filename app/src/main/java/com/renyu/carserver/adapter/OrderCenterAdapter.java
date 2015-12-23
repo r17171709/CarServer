@@ -128,8 +128,8 @@ public class OrderCenterAdapter extends BaseAdapter {
                     Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
                 }
             });
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercentertobepaid_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercentertobepaid_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercentertobepaid_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -161,16 +161,16 @@ public class OrderCenterAdapter extends BaseAdapter {
                 paint.setColor(Color.RED);
                 paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 ordercentertobepaid_child_normalprice.setPaintFlags(paint.getFlags());
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercentertobepaid_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercentertobepaid_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercentertobepaid_child_normalprice.setText("" + df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 final TextView ordercentertobepaid_child_finalprice= (TextView) view.findViewById(R.id.ordercentertobepaid_child_finalprice);
                 ordercentertobepaid_child_finalprice.setTag("ordercentertobepaid_child_finalprice_" + position + "_" + i);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercentertobepaid_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercentertobepaid_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercentertobepaid_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
@@ -206,8 +206,8 @@ public class OrderCenterAdapter extends BaseAdapter {
                         ordercentertobepaid_child_commitsync.setVisibility(View.GONE);
 
                         if (!ordercentertobepaid_child_finalprice_edit.getText().toString().equals("")) {
-                            if ((int) Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())==0) {
-                                ordercentertobepaid_child_finalprice.setText("0");
+                            if (Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())<1) {
+                                ordercentertobepaid_child_finalprice.setText(ordercentertobepaid_child_finalprice_edit.getText().toString());
                             }
                             else {
                                 ordercentertobepaid_child_finalprice.setText(""+df.format(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())));
@@ -228,8 +228,8 @@ public class OrderCenterAdapter extends BaseAdapter {
                         ordercentertobepaid_child_commitsync.setVisibility(View.GONE);
 
                         if (!ordercentertobepaid_child_finalprice_edit.getText().toString().equals("")) {
-                            if ((int) Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())==0) {
-                                ordercentertobepaid_child_finalprice.setText("0");
+                            if (Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())<1) {
+                                ordercentertobepaid_child_finalprice.setText(ordercentertobepaid_child_finalprice_edit.getText().toString());
                             }
                             else {
                                 ordercentertobepaid_child_finalprice.setText(""+df.format(Double.parseDouble(ordercentertobepaid_child_finalprice_edit.getText().toString())));
@@ -292,8 +292,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
             holder.ordercenterpending_state.setText("待审核");
             holder.ordercenterpending_num.setText("共" + models.get(position).getItemnum() + "件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercenterpending_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercenterpending_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -317,15 +317,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                 paint.setColor(Color.RED);
                 paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercenterpending_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercenterpending_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
@@ -390,8 +390,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
             holder.ordercenterpending_state.setText("待发货");
             holder.ordercenterpending_num.setText("共"+models.get(position).getItemnum()+"件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercenterpending_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercenterpending_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -415,15 +415,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                 paint.setColor(Color.RED);
                 paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercenterpending_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercenterpending_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
@@ -472,8 +472,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
             holder.ordercenterpending_state.setText("已发货");
             holder.ordercenterpending_num.setText("共" + models.get(position).getItemnum() + "件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercenterpending_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercenterpending_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -506,15 +506,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                 paint.setColor(Color.RED);
                 paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercenterpending_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercenterpending_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
@@ -580,8 +580,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
             holder.ordercenterpending_state.setText("已收货");
             holder.ordercenterpending_num.setText("共"+models.get(position).getItemnum()+"件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercenterpending_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercenterpending_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -604,15 +604,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                 TextView ordercenterpending_child_normalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_normalprice);
                 ordercenterpending_child_normalprice.getPaint().setColor(Color.RED);
                 ordercenterpending_child_normalprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercenterpending_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercenterpending_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
@@ -679,8 +679,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
             holder.ordercenterpending_state.setText("已完成");
             holder.ordercenterpending_num.setText("共" + models.get(position).getItemnum() + "件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercenterpending_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercenterpending_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -713,15 +713,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                 paint.setColor(Color.RED);
                 paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercenterpending_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercenterpending_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
@@ -771,8 +771,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
             holder.ordercenterpending_state.setText("已取消");
             holder.ordercenterpending_num.setText("共" + models.get(position).getItemnum() + "件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercenterpending_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercenterpending_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -805,15 +805,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                 paint.setColor(Color.RED);
                 paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercenterpending_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercenterpending_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));
@@ -863,8 +863,8 @@ public class OrderCenterAdapter extends BaseAdapter {
             holder.ordercenterpending_tid.setText(models.get(position).getTid());
             holder.ordercenterpending_state.setText("已关闭");
             holder.ordercenterpending_num.setText("共" + models.get(position).getItemnum() + "件商品");
-            if ((int) Double.parseDouble(models.get(position).getTotal_fee())==0) {
-                holder.ordercenterpending_price.setText("0");
+            if (Double.parseDouble(models.get(position).getTotal_fee())<1) {
+                holder.ordercenterpending_price.setText(models.get(position).getTotal_fee());
             }
             else {
                 holder.ordercenterpending_price.setText(""+df.format(Double.parseDouble(models.get(position).getTotal_fee())));
@@ -897,15 +897,15 @@ public class OrderCenterAdapter extends BaseAdapter {
                 paint.setColor(Color.RED);
                 paint.setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
                 ordercenterpending_child_normalprice.setPaintFlags(paint.getFlags());
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getOld_price())==0) {
-                    ordercenterpending_child_normalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getOld_price())<1) {
+                    ordercenterpending_child_normalprice.setText(models.get(position).getModels().get(i).getOld_price());
                 }
                 else {
                     ordercenterpending_child_normalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getOld_price())));
                 }
                 TextView ordercenterpending_child_finalprice= (TextView) view.findViewById(R.id.ordercenterpending_child_finalprice);
-                if ((int) Double.parseDouble(models.get(position).getModels().get(i).getPrice())==0) {
-                    ordercenterpending_child_finalprice.setText("0");
+                if (Double.parseDouble(models.get(position).getModels().get(i).getPrice())<1) {
+                    ordercenterpending_child_finalprice.setText(models.get(position).getModels().get(i).getPrice());
                 }
                 else {
                     ordercenterpending_child_finalprice.setText(""+df.format(Double.parseDouble(models.get(position).getModels().get(i).getPrice())));

@@ -17,7 +17,11 @@ import com.renyu.carserver.activity.my.MyFeedbackActivity;
 import com.renyu.carserver.activity.my.MySaveActivity;
 import com.renyu.carserver.activity.my.MyStatementActivity;
 import com.renyu.carserver.base.BaseFragment;
+import com.renyu.carserver.commons.OKHttpHelper;
 import com.renyu.carserver.commons.ParamUtils;
+import com.renyu.carserver.model.JsonParse;
+
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -67,6 +71,7 @@ public class MyFragment extends BaseFragment {
         else {
             ImageLoader.getInstance().displayImage(ParamUtils.getLoginModel(getActivity()).getHead_photo(), my_avatar, getAvatarDisplayImageOptions());
         }
+        updateNum();
     }
 
     @OnClick({R.id.my_income_save_layout, R.id.my_income_statement_layout, R.id.my_income_feedback_layout, R.id.my_income_data_layout, R.id.myincomedata_loginout})
@@ -107,5 +112,27 @@ public class MyFragment extends BaseFragment {
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .build();
+    }
+
+    private void updateNum() {
+        httpHelper.cancel(ParamUtils.api);
+        HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.user.ordercount", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
+        params.put("serviceid", ""+ParamUtils.getLoginModel(getActivity()).getShop_id());
+        httpHelper.commonPostRequest(ParamUtils.api, params, null, new OKHttpHelper.RequestListener() {
+            @Override
+            public void onSuccess(String string) {
+                HashMap<String, String> map= JsonParse.getTodayInfo(string);
+                if (map!=null) {
+                    my_curmonthincome.setText(map.get("curMonthIncome"));
+                    my_deposit.setText(map.get("deposit"));
+                    my_receive_num.setText(map.get("lastMonthIncome"));
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 }

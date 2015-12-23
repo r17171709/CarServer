@@ -634,7 +634,7 @@ public class OrderCenterFragment extends BaseFragment {
                     int TRADE_CANCEL=Integer.parseInt(map.get("TRADE_CANCEL"));
                     int TRADE_CLOSED=Integer.parseInt(map.get("TRADE_CLOSED"));
                     int AFTERSALES=Integer.parseInt(map.get("AFTERSALES"));
-                    int all=WAIT_CONFRIM+WAIT_APPROVE+DELIVER_GOODS+WAIT_GOODS+RECEIVE_GOODS+TRADE_FINISHED+TRADE_CANCEL+TRADE_CLOSED+AFTERSALES;
+                    int all=WAIT_CONFRIM+WAIT_APPROVE+DELIVER_GOODS+WAIT_GOODS+RECEIVE_GOODS+TRADE_FINISHED+TRADE_CANCEL+TRADE_CLOSED;
                     showHideIndicator(all, numTextViews.get(0));
                     showHideIndicator(WAIT_CONFRIM, numTextViews.get(1));
                     showHideIndicator(WAIT_APPROVE, numTextViews.get(2));
@@ -708,5 +708,13 @@ public class OrderCenterFragment extends BaseFragment {
                 showToast(getResources().getString(R.string.network_error));
             }
         });
+    }
+
+    public void jump() {
+        page_no=1;
+        isNeedLoad=true;
+        ordercenter_edittext.setText("");
+        hide(ordercenter_edittext);
+        changeChoice(0);
     }
 }

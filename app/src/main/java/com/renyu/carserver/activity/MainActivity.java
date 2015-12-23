@@ -28,7 +28,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainFragment.JumpListener {
 
     @Bind(R.id.main_image1)
     ImageView main_image1;
@@ -222,5 +222,14 @@ public class MainActivity extends BaseActivity {
         valueAnimator.setDuration(1000);
         valueAnimator.setInterpolator(new AccelerateInterpolator());
         valueAnimator.start();
+    }
+
+    @Override
+    public void changeFragment() {
+        Fragment toFragment = getSupportFragmentManager().findFragmentByTag("two");
+        if (toFragment!=null) {
+            ((OrderCenterFragment) toFragment).jump();
+        }
+        switchFragment("two");
     }
 }

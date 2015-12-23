@@ -52,6 +52,31 @@ public class JsonParse {
     }
 
     /**
+     * 个人中心以及首页数据刷新
+     * @param string
+     * @return
+     */
+    public static HashMap<String, String> getTodayInfo(String string) {
+        HashMap<String, String> map=new HashMap<>();
+        if (getResultInt(string)==0) {
+            try {
+                JSONObject object=new JSONObject(string);
+                JSONObject result=object.getJSONObject("result");
+                JSONObject data=result.getJSONObject("data");
+                map.put("deposit", data.getString("deposit"));
+                map.put("curMonthIncome", data.getString("curMonthIncome"));
+                map.put("lastMonthIncome", data.getString("lastMonthIncome"));
+                map.put("count", data.getString("count"));
+                map.put("sum", data.getString("sum"));
+                return map;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    /**
      * 获取登录信息
      * @param string
      * @return
