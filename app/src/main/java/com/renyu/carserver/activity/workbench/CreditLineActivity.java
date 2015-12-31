@@ -172,6 +172,7 @@ public class CreditLineActivity extends BaseActivity {
         HashMap<String, String> params= ParamUtils.getSignParams("app.sysservice.appamountlist", "28062e40a8b27e26ba3be45330ebcb0133bc1d1cf03e17673872331e859d2cd4");
         params.put("page_no", ""+page_no);
         params.put("page_size", "20");
+        params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         if (repairdepot_name!=null&&!repairdepot_name.equals("")) {
             params.put("repairdepot_name", repairdepot_name);
         }

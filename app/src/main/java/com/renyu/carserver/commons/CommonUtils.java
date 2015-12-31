@@ -257,10 +257,9 @@ public class CommonUtils {
     public static String getScalePicturePathName(String filePath) {
         try {
             BitmapFactory.Options opts=new BitmapFactory.Options();
-            opts.inJustDecodeBounds=true;
             //此时返回bitmap为空
-            Bitmap bitmap=BitmapFactory.decodeFile(filePath, opts);
-            opts.inJustDecodeBounds=false;
+            opts.inJustDecodeBounds=true;
+            BitmapFactory.decodeFile(filePath, opts);
             int srcWidth=opts.outWidth;
             int srcHeight=opts.outHeight;
             //图片格式不正确
@@ -272,19 +271,19 @@ public class CommonUtils {
                 return filePath;
             }
             // 缩放比例
-            double ratio=4;
+            double ratio=2;
             // 设置输出宽度、高度
             BitmapFactory.Options newOpts=new BitmapFactory.Options();
             newOpts.inSampleSize=(int) (ratio);
             newOpts.inJustDecodeBounds=false;
             // 减少对Aphla通道
             newOpts.inPreferredConfig = Bitmap.Config.RGB_565;
-            newOpts.outWidth=(int) (srcWidth*ratio);
-            newOpts.outHeight=(int) (srcHeight*ratio);
-            Matrix matrix=new Matrix();;
+            newOpts.outWidth=(int) (srcWidth/ratio);
+            newOpts.outHeight=(int) (srcHeight/ratio);
+            Matrix matrix=new Matrix();
             matrix.postRotate(readPictureDegree(filePath));
             // 创建新的图片
-            bitmap=BitmapFactory.decodeFile(filePath, newOpts);
+            Bitmap bitmap=BitmapFactory.decodeFile(filePath, newOpts);
             bitmap=Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             //生成新图片
