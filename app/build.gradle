@@ -47,7 +47,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.github.orangegangsters:swipy:1.2.0@aar'
+    compile 'com.github.orangegangsters:swipy:1.2.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.edmodo:cropper:1.0.1'
     compile project(':module_photoview')

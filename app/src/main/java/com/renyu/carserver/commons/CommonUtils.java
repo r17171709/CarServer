@@ -41,7 +41,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -451,7 +453,6 @@ public class CommonUtils {
         }
     }
 
-
     /**
      * 获取省份信息
      */
@@ -536,5 +537,12 @@ public class CommonUtils {
         cs.close();
         db.close();
         return parentId;
+    }
+
+    public static String getTimeFormat(int time) {
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=new Date();
+        date.setTime(Long.parseLong(time+"000"));
+        return dateFormat.format(date);
     }
 }

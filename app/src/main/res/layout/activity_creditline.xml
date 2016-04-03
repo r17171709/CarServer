@@ -33,7 +33,7 @@
             android:id="@+id/createline_swipy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:direction="both">
+            app:srl_direction="both">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/createline_rv"
                 android:layout_width="match_parent"

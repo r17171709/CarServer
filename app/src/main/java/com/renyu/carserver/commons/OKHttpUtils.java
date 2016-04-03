@@ -40,6 +40,8 @@ public class OKHttpUtils {
 
     static CookieManager manager=null;
 
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     private OKHttpUtils() {
         client=new OkHttpClient();
         client.setConnectTimeout(5, TimeUnit.SECONDS);
@@ -48,6 +50,7 @@ public class OKHttpUtils {
         manager=new CookieManager();
         manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
         client.setCookieHandler(manager);
+//        setCertificates();
     }
 
     public interface OnDownloadListener {
@@ -158,6 +161,12 @@ public class OKHttpUtils {
         return client.newCall(request);
     }
 
+    private Call postJsonPrepare(String url, String json) {
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder().url(url).post(body).build();
+        return client.newCall(request);
+    }
+
     /**
      * post请求
      * @param url
@@ -238,6 +247,9 @@ public class OKHttpUtils {
      */
     public void download(final String url, final String dirPath, final OnDownloadListener downloadListener, final ProgressListener progressListener) {
         OkHttpClient client2=client.clone();
+        client2.setConnectTimeout(10, TimeUnit.SECONDS);
+        client2.setReadTimeout(10, TimeUnit.SECONDS);
+        client2.setWriteTimeout(10, TimeUnit.SECONDS);
         Request request=new Request.Builder().tag(url).url(url).build();
         final ProgressListener listener=new ProgressListener() {
             @Override
@@ -264,33 +276,39 @@ public class OKHttpUtils {
             }
 
             @Override
-            public void onResponse(Response response) throws IOException {
-                if (response!=null && response.isSuccessful()) {
-                    InputStream is = response.body().byteStream();
-                    File file = null;
-                    if (url.indexOf("?") != -1) {
-                        String url_ = url.substring(0, url.indexOf("?"));
-                        file = new File(dirPath + File.separator + url_.substring(url_.lastIndexOf("/") + 1));
+            public void onResponse(Response response) {
+                try {
+                    if (response!=null && response.isSuccessful()) {
+                        InputStream is = response.body().byteStream();
+                        File file = null;
+                        if (url.indexOf("?") != -1) {
+                            String url_ = url.substring(0, url.indexOf("?"));
+                            file = new File(dirPath + File.separator + url_.substring(url_.lastIndexOf("/") + 1));
+                        } else {
+                            file = new File(dirPath + File.separator + url.substring(url.lastIndexOf("/") + 1));
+                        }
+                        if (file.exists()) {
+                            file.delete();
+                        } else {
+                            file.createNewFile();
+                        }
+                        FileOutputStream fos = new FileOutputStream(file);
+                        int count = 0;
+                        byte[] buffer = new byte[1024];
+                        while ((count = is.read(buffer)) != -1) {
+                            fos.write(buffer, 0, count);
+                        }
+                        is.close();
+                        fos.close();
+                        downloadListener.onSuccess(file.getPath());
                     } else {
-                        file = new File(dirPath + File.separator + url.substring(url.lastIndexOf("/") + 1));
+                        downloadListener.onError();
                     }
-                    if (file.exists()) {
-                        file.delete();
-                    } else {
-                        file.createNewFile();
-                    }
-                    FileOutputStream fos = new FileOutputStream(file);
-                    int count = 0;
-                    byte[] buffer = new byte[1024];
-                    while ((count = is.read(buffer)) != -1) {
-                        fos.write(buffer, 0, count);
-                    }
-                    is.close();
-                    fos.close();
-                    downloadListener.onSuccess(file.getPath());
-                } else {
+                } catch (Exception e) {
+                    e.printStackTrace();
                     downloadListener.onError();
                 }
+
             }
         });
     }
@@ -343,6 +361,9 @@ public class OKHttpUtils {
      */
     private Call uploadPrepare(String url, HashMap<String, String> params, HashMap<String, File> files) {
         OkHttpClient client2=client.clone();
+        client2.setConnectTimeout(10, TimeUnit.SECONDS);
+        client2.setReadTimeout(10, TimeUnit.SECONDS);
+        client2.setWriteTimeout(10, TimeUnit.SECONDS);
         MultipartBuilder multipartBuilder = new MultipartBuilder();
         multipartBuilder.type(MultipartBuilder.FORM);
         Iterator<Map.Entry<String, String>> params_it=params.entrySet().iterator();
@@ -350,16 +371,16 @@ public class OKHttpUtils {
             Map.Entry<String, String> params_en= params_it.next();
             multipartBuilder.addFormDataPart(params_en.getKey(), params_en.getValue());
         }
-        Iterator<Map.Entry<String, File>> file_it=files.entrySet().iterator();
-        while (file_it.hasNext()) {
-            Map.Entry<String, File> entry=file_it.next();
-            multipartBuilder.addFormDataPart(entry.getKey(), entry.getValue().getName(), RequestBody.create(MediaType.parse("application/octet-stream"), entry.getValue()));
-        }
         /**
          * 遍历paths中所有图片绝对路径到builder，并约定key如“upload”作为后台接受多张图片的key
          for (String path : paths) {
          builder.addFormDataPart("upload", null, RequestBody.create(MEDIA_TYPE_PNG, new File(path)));
          */
+        Iterator<Map.Entry<String, File>> file_it=files.entrySet().iterator();
+        while (file_it.hasNext()) {
+            Map.Entry<String, File> entry=file_it.next();
+            multipartBuilder.addFormDataPart(entry.getKey(), entry.getValue().getName(), RequestBody.create(MediaType.parse("application/octet-stream"), entry.getValue()));
+        }
         RequestBody formBody = multipartBuilder.build();
         Request request = new Request.Builder()
                 .url(url)
@@ -423,5 +444,17 @@ public class OKHttpUtils {
 
     public void cancel(String tag) {
         client.cancel(tag);
+    }
+
+    /**
+     * HTTPS相关
+     * @param certificates
+     *
+     * 这里可以设置证书CER_12306
+     * setCertificates(new InputStream[]{new Buffer().writeUtf8(CER_12306).inputStream()});
+     */
+    public void setCertificates(InputStream... certificates) {
+        //默认信任全部证书
+        client.setSslSocketFactory(HttpsUtils.getSslSocketFactory(certificates, null, null));
     }
 }

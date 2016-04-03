@@ -49,7 +49,7 @@
                     android:id="@+id/ordercenter_swipy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:direction="both">
+                    app:srl_direction="both">
                     <ListView
                         android:id="@+id/ordercenter_lv"
                         android:layout_width="match_parent"

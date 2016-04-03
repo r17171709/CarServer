@@ -4,10 +4,17 @@
     android:layout_height="match_parent"
     android:background="#efefef">
     <include layout="@layout/view_navigationview"></include>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/messagecenter_rv"
+    <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/messagecenter_swipy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:srl_direction="both">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/messagecenter_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+    </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
 </LinearLayout>

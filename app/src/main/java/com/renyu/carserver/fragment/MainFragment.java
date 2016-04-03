@@ -16,6 +16,7 @@ import com.renyu.carserver.activity.workbench.AddCustomerActivity;
 import com.renyu.carserver.activity.workbench.ClientsReviewActivity;
 import com.renyu.carserver.activity.workbench.CreditLineActivity;
 import com.renyu.carserver.activity.workbench.FactorApplyActivity;
+import com.renyu.carserver.activity.workbench.MessageCenterActivity;
 import com.renyu.carserver.activity.workbench.SalesNotificationActivity;
 import com.renyu.carserver.activity.workbench.SearchCreditLineActivity;
 import com.renyu.carserver.activity.workbench.ShareActivity;
@@ -107,7 +108,7 @@ public class MainFragment extends BaseFragment {
             ImageView main_middle_gridlayout_item_image= (ImageView) view.findViewById(R.id.main_middle_gridlayout_item_image);
             switch (i) {
                 case 0:
-                    main_middle_gridlayout_item_name.setText("消息中心");
+                    main_middle_gridlayout_item_name.setText("站内信");
                     main_middle_gridlayout_item_image.setImageResource(R.mipmap.ic_workplate_icon1);
                     break;
                 case 1:
@@ -171,8 +172,8 @@ public class MainFragment extends BaseFragment {
         Intent intent=null;
         switch (position) {
             case 0:
-                return;
-//                intent=new Intent(getActivity(), MessageCenterActivity.class);
+                intent=new Intent(getActivity(), MessageCenterActivity.class);
+                break;
             case 1:
                 intent=new Intent(getActivity(), CreditLineActivity.class);
                 break;

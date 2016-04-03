@@ -173,7 +173,6 @@ public class LoginActivity extends BaseActivity {
                         dismissDialog();
                     }
                 }
-
             }
 
             @Override

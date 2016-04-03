@@ -213,6 +213,7 @@ public class OrderCenterSearchResultActivity extends BaseActivity {
             params.put("fee_start", getIntent().getExtras().getString("senior_price1"));
             params.put("fee_end", getIntent().getExtras().getString("senior_price2"));
         }
+        params.put("service_id", ""+ParamUtils.getLoginModel(this).getShop_id());
         httpHelper.commonPostRequest(ParamUtils.api, params, new OKHttpHelper.StartListener() {
             @Override
             public void onStart() {

@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/view_navigationview"></include>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:gravity="center"
+        android:background="#efefef"
         android:layout_height="60dip">
         <EditText
-            android:id="@+id/searchcreateline_edit"
+            android:id="@+id/messagesend__edittext"
             android:layout_width="match_parent"
             android:layout_height="40dip"
             android:layout_marginLeft="50dip"
@@ -23,15 +23,14 @@
             android:drawableLeft="@mipmap/ic_search"
             android:background="@drawable/rectangle_background_lightgray"/>
     </LinearLayout>
-    <include layout="@layout/adapter_searchcreditlineheader"></include>
     <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/searchcreateline_swipy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/messagesend_swipy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:srl_direction="both">
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/searchcreateline_rv"
+            android:id="@+id/salesnotification_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

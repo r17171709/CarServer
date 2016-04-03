@@ -24,9 +24,7 @@ public class ParamUtils {
     public static String api="http://120.26.139.82/b2b2c/public/index.php/api";
 
     public final static int RESULT_AREA=10000;
-    public static final int RESULT_WEIXIN = 1000;
-    public static final int RESULT_QQLOGIN = 1001;
-    public static final int RESULT_WEIBOLOGIN = 1002;
+    public final static int RESULT_MESSAGECHOICE=10001;
     public static final int RESULT_CARSERVER = 1003;
     public static final int RESULT_CARCLIENT = 1004;
     public static final int RESULT_CARWEIXIN = 1005;

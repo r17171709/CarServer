@@ -39,6 +39,7 @@
         <activity android:name=".activity.workbench.ClientsReviewActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.workbench.SalesNotificationActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.workbench.ShareActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.SendMessageActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.customercenter.CustomerCenterInfoActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.customercenter.CustomerCenterPriceActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.customercenter.CustomerCenterPriceListActivity" android:screenOrientation="portrait"></activity>
@@ -51,6 +52,7 @@
         <activity android:name=".activity.my.MyStatementDetailActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.my.MyFeedbackActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.my.MyDataActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.workbench.MessageChoiceActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".imageUtils.ImagePreviewActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".imageUtils.CameraBeforeActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".imageUtils.CropActivity" android:screenOrientation="portrait"></activity>

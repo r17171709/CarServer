@@ -507,4 +507,36 @@ public class JsonParse {
             return getErrorValue(string);
         }
     }
+
+    /**
+     * 获取站内信
+     * @param string
+     * @return
+     */
+    public static ArrayList<MessageModel> getMessageLists(String string) {
+        ArrayList<MessageModel> models=new ArrayList<>();
+        try {
+            JSONObject object=new JSONObject(string);
+            JSONObject result=object.getJSONObject("result");
+            JSONObject data=result.getJSONObject("data");
+            JSONArray data1=data.getJSONArray("data");
+            for (int i=0;i<data1.length();i++) {
+                JSONObject object1=data1.getJSONObject(i);
+                MessageModel model=new MessageModel();
+                model.setNotice_id(object1.getInt("notice_id"));
+                model.setFrom_id(object1.getString("from_id"));
+                model.setTo_id(object1.getString("to_id"));
+                model.setType(object1.getString("type"));
+                model.setTitle(object1.getString("title"));
+                model.setContent(object1.getString("content"));
+                model.setCreate_time(object1.getInt("create_time"));
+                model.setStatus(object1.getString("status"));
+                model.setUser_name(object1.getString("user_name"));
+                models.add(model);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return models;
+    }
 }

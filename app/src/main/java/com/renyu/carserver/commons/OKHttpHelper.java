@@ -26,7 +26,7 @@ public class OKHttpHelper {
     }
 
     public interface ProgressListener {
-        void updateprogress(int progress);
+        void updateprogress(int progress, long bytesRead, long contentLength);
     }
 
     /**
@@ -45,7 +45,7 @@ public class OKHttpHelper {
             public void onResponse(Response response) {
                 try {
                     String string = response.body().string();
-                    Observable.just(string).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                    Observable.just(string).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                         @Override
                         public void call(String s) {
                             if (requestListener != null) {
@@ -55,7 +55,7 @@ public class OKHttpHelper {
                     });
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Observable.just("").subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                    Observable.just("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                         @Override
                         public void call(String s) {
                             if (requestListener != null) {
@@ -68,7 +68,7 @@ public class OKHttpHelper {
         }, new OKHttpUtils.OnErrorListener() {
             @Override
             public void onFailure() {
-                Observable.just("").subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                Observable.just("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
                         if (requestListener != null) {
@@ -99,7 +99,7 @@ public class OKHttpHelper {
             public void onResponse(Response response) {
                 try {
                     String string = response.body().string();
-                    Observable.just(string).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                    Observable.just(string).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                         @Override
                         public void call(String s) {
                             if (requestListener != null) {
@@ -109,7 +109,7 @@ public class OKHttpHelper {
                     });
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Observable.just("").subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                    Observable.just("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                         @Override
                         public void call(String s) {
                             if (requestListener != null) {
@@ -122,7 +122,7 @@ public class OKHttpHelper {
         }, new OKHttpUtils.OnErrorListener() {
             @Override
             public void onFailure() {
-                Observable.just("").subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                Observable.just("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
                         if (requestListener != null) {
@@ -143,7 +143,7 @@ public class OKHttpHelper {
             public void onResponse(Response response) {
                 try {
                     String string = response.body().string();
-                    Observable.just(string).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                    Observable.just(string).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                         @Override
                         public void call(String s) {
                             if (requestListener != null) {
@@ -153,7 +153,7 @@ public class OKHttpHelper {
                     });
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Observable.just("").subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                    Observable.just("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                         @Override
                         public void call(String s) {
                             if (requestListener != null) {
@@ -166,7 +166,7 @@ public class OKHttpHelper {
         }, new OKHttpUtils.OnErrorListener() {
             @Override
             public void onFailure() {
-                Observable.just("").subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                Observable.just("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
                         if (requestListener != null) {
@@ -186,7 +186,7 @@ public class OKHttpHelper {
         OKHttpUtils.getInstance().download(url, dirPath, new OKHttpUtils.OnDownloadListener() {
             @Override
             public void onSuccess(String filePath) {
-                Observable.just(filePath).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                Observable.just(filePath).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
                         if (requestListener != null) {
@@ -198,7 +198,7 @@ public class OKHttpHelper {
 
             @Override
             public void onError() {
-                Observable.just("").subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
+                Observable.just("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
                         if (requestListener != null) {
@@ -215,7 +215,7 @@ public class OKHttpHelper {
 //                System.out.println(done);
 //                Log.d("OKHttpHelper", (100 * bytesRead) / contentLength + " " + done);
                 if (progressListener!=null) {
-                    progressListener.updateprogress((int) ((100 * bytesRead) / contentLength));
+                    progressListener.updateprogress((int) ((100 * bytesRead) / contentLength), bytesRead, contentLength);
                 }
             }
         });
